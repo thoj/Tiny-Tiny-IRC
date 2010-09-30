@@ -209,6 +209,15 @@ table.loginForm2 .innerLoginCell {
 	position : relative;
 }
 
+#tabs-list li div {
+	overflow : hidden;
+	margin-right : 5px;
+}
+
+#tabs-list li div.indented {
+	padding-left : 10px;
+}
+
 #tabs-list li.attention {
 	color : red;
 }
