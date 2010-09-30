@@ -71,7 +71,7 @@ function create_tab_if_needed(chan, connection_id, tab_type) {
 				"tab_type=\"" + tab_type + "\" " +
 				"connection_id=\"" + connection_id + "\" " +
 		  		"onclick=\"change_tab(this)\">" + cimg +
-				caption + "</li>";
+				"<div>" + caption + "</div></li>";
 
 			tab += "<ul class=\"sub-tabs\" id=\"" + tab_list_id + "\"></ul>";
 
@@ -91,7 +91,7 @@ function create_tab_if_needed(chan, connection_id, tab_type) {
 				"tab_type=\"" + tab_type + "\" " +
 				"connection_id=\"" + connection_id + "\" " +
 		  		"onclick=\"change_tab(this)\">" + img +
-				"&nbsp;&nbsp;" + caption + "</li>";
+				"<div class=\"indented\">" +  caption + "</div></li>";
 
 			console.log("creating tab: " + tab_id + " " + tab_type);
 
