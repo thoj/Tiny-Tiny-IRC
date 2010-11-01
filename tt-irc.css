@@ -762,3 +762,11 @@ button, input, select {
 .away {
 	color : gray;
 }
+
+span.underline {
+	text-decoration : underline;
+}
+
+span.italic {
+	font-style : italic;
+}
