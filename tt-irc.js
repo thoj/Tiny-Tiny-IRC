@@ -820,9 +820,8 @@ function format_message(row_class, param, connection_id) {
 			param.message = param.message.replace(/\(oo\)/g,
 					"<img src='images/piggie_icon.png' alt='(oo)'>");
 
-			if (!param.message.match(/:\/\//)) 
-				param.message = param.message.replace(/_(.*?)_/g,
-						"<span class=\"underline\">$1</span>");
+			param.message = param.message.replace(/(^| )_(.*?)_( |$)/g,
+					"$1<span class=\"underline\">$2</span>$3");
 
 //			param.message = param.message.replace(/(OO)/g,
 //					"<img src='images/piggie.png' alt='(oo)'>");
