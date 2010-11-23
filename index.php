@@ -1,6 +1,4 @@
 <?php
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 	require_once "functions.php"; 
 	require_once "sessions.php";
 	require_once "sanity_check.php";
@@ -27,7 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="tt-irc.css?<?php echo $dt_add ?>"/>
 
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-		
+
 	<script type="text/javascript" charset="utf-8" src="localized_js.php?<?php echo $dt_add ?>"></script>
 	<script type="text/javascript" src="lib/prototype.js"></script>
 	<script type="text/javascript" src="lib/scriptaculous/scriptaculous.js?load=effects,dragdrop,controls"></script>
@@ -122,8 +120,6 @@
 			| <a href="logout.php"><?php echo __('Logout') ?></a>
 	<?php } ?>
 
-	| <a href="#" onclick="toggle_debug()">Debug</a>
-
 	</div>
 
 	<img src="<?php echo theme_image($link, 'images/logo.png') ?>" alt="Tiny Tiny IRC"/>	
@@ -167,6 +163,14 @@
 
 	<div id="userlist">
 		<div id="userlist-inner"><ul id="userlist-list"></ul></div>
+
+		<?php if (CONSUMER_KEY != '' && twitter_configured($link)) { ?>
+
+		<div title="<?php echo __('Tweet selected text') ?>" 
+			id="tweet-button"><button href="#" 
+				onclick="tweet_selection()"><?php echo __('Tweet') ?></button></div>
+
+		<?php } ?>
 	</div>
 
 	<div id="nick" onclick="change_nick()"></div>

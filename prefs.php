@@ -30,6 +30,32 @@
 
 	}
 
+	function twitter_editor($link) {
+
+		$is_registered = twitter_configured($link);
+
+	?> <div id="infoBoxTitle"><?php echo __("Register with Twitter") ?></div>
+	<div class="infoBoxContents">
+		<div id="mini-notice" style='display : none'>&nbsp;</div>
+
+		<div class="dlgSec"><?php echo __('Authentication') ?></div>
+
+		<?php if (!$is_registered) {
+			echo __("You'll need to register with Twitter.com before you'll be able to send tweets from Tiny Tiny IRC.");
+		} else {
+			echo __("You have been successfully registered with Twitter.com..");
+		} ?><p>
+
+		<div class="dlgButtons">
+			<button onclick="window.location.href = 'twitter.php?op=register'">
+				<?php echo __("Register with Twitter.com") ?></button>
+			<button type="submit" onclick="show_prefs()"><?php echo __('Go back') ?></button></div>
+		</div>
+
+	</div>
+
+	<?php
+	}
 
 	function print_servers($link, $id) {
 		$result = db_query($link, "SELECT ttirc_servers.*,
@@ -322,6 +348,15 @@
 
 			<label class="fixed">&nbsp;</label>
 			<a href="#" onclick="configure_notifications()"><?php echo __('Configure desktop notifications') ?></a>
+
+			<?php if (CONSUMER_KEY != '') { ?>
+
+			<br clear='left'/>
+
+			<label class="fixed">&nbsp;</label>
+			<a href="#" onclick="configure_twitter()"><?php echo __('Register with Twitter') ?></a>
+
+			<?php } ?>
 
 		</div>
 

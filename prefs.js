@@ -335,6 +335,22 @@ function configure_notifications() {
 	}
 }
 
+function configure_twitter() {
+	try {
+
+		save_prefs(function (obj) {
+			new Ajax.Request("backend.php", {
+			parameters: "?op=prefs-edit-twitter",
+			onComplete: function (transport) {
+				infobox_callback2(transport);
+			} });
+		});
+
+	} catch (e) {
+		exception_error("configure_notifications", e);
+	}
+}
+
 function save_notifications(callback) {
 	try {
 		var query = Form.serialize("prefs_notify_form");

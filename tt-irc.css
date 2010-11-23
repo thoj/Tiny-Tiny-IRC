@@ -521,15 +521,13 @@ pre {
 
 #log span.timestamp {
 	color : gray;
-	margin-right : 0.5em;
 }
 
 #log span.pvt-sender, #log span.pvt-sender-out {
 	color : black;
-	margin-right : 0.5em;
 }
 
-#log span.pvt-sender:before {
+/* #log span.pvt-sender:before {
 	content: "-";
 	color : green;
 }
@@ -547,20 +545,23 @@ pre {
 #log span.pvt-sender-out:after {
 	color : green;
 	content: "<";
-}
+} */
 
 #log span.sender {
 	color : green;
-	margin-right : 0.5em;
 }
 
-#log span.sender:before {
+/* #log span.sender:before {
 	content: "<";
 	color : blue;
 }
 
 #log span.sender:after {
 	content: ">";
+	color : blue;
+} */
+
+#log .lt, #log .gt {
 	color : blue;
 }
 
@@ -675,6 +676,22 @@ textarea.user-css {
 	padding : 0px;
 }
 
+textarea.tweet-text {
+	width : 100%;
+	height : 50px;
+	border : 1px solid #99d67a;
+	background-color : white;
+	padding : 0px;
+}
+
+textarea.tweet-snippet {
+	width : 100%;
+	height : 100px;
+	border : 1px solid #99d67a;
+	background-color : white;
+	padding : 0px;
+}
+
 ul.container {
 	height : 100px;
 	overflow : auto;
@@ -769,4 +786,16 @@ span.underline {
 
 span.italic {
 	font-style : italic;
+}
+
+div#tweet-button {
+	text-align : center;
+}
+
+div#tweet-button a {
+	background : white;
+	border : 1px solid #88b0f0;
+	padding : 2px 4px 2px 4px;
+	font-size : 11px;
+	color : black;
 }

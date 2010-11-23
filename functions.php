@@ -1,8 +1,17 @@
 <?php
+	if (defined('E_DEPRECATED')) {
+		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+	} else {
+		error_reporting(E_ALL & ~E_NOTICE);
+	}
+
 	require_once "config.php";
 	require_once "version.php";
 	require_once "message_types.php";
 	require_once "db-prefs.php";
+
+	require_once "lib/ShortUrl.php";
+	require_once "lib/twitteroauth/twitteroauth.php";
 
 	define('SINGLE_USER_MODE', false);
 
@@ -447,9 +456,7 @@
 
 	function file_is_locked($filename) {
 		if (function_exists('flock')) {
-			error_reporting(0);
-			$fp = fopen(LOCK_DIRECTORY . "/$filename", "r");
-			error_reporting(DEFAULT_ERROR_LEVEL);
+			$fp = @fopen(LOCK_DIRECTORY . "/$filename", "r");
 			if ($fp) {
 				if (flock($fp, LOCK_EX | LOCK_NB)) {
 					flock($fp, LOCK_UN);
@@ -706,8 +713,6 @@
 
 		global $ERRORS;
 
-		error_reporting(0);
-
 		$error_code = 0;
 		$schema_version = get_schema_version($link);
 
@@ -725,8 +730,6 @@
 		if (db_escape_string("testTEST") != "testTEST") {
 			$error_code = 12;
 		}
-
-		error_reporting (DEFAULT_ERROR_LEVEL);
 
 		$result = db_query($link, "SELECT value FROM ttirc_system WHERE
 			key = 'MASTER_RUNNING'");
@@ -937,5 +940,117 @@
 			"notify_events" => $notify_events);
 
 		return $rv;
+	}
+
+	function get_self_url_prefix() {
+		$url_path = "";
+	
+		if ($_SERVER['HTTPS'] != "on") {
+			$url_path = "http://";
+		} else {
+			$url_path = "https://";
+		}
+
+		$url_path .= $_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
+
+		return $url_path;
+
+	}
+
+	function create_snippet($link, $text) {
+		$text = db_escape_string($text);
+
+		$key = db_escape_string(sha1(uniqid(rand(), true)));
+
+		$result = db_query($link, "INSERT INTO ttirc_snippets (snippet, owner_uid, created, key)
+			VALUES ('$text', '".$_SESSION['uid']."', NOW(), '$key')");
+
+		return $key;
+
+	}
+
+	function twitter_dialog($link, $text) {
+
+		if (mb_strlen($text, 'utf-8') > 140) {
+			$key = create_snippet($link, $text);
+			$shorturl = new ShortUrl();
+			$snippet_url = $shorturl->create(get_self_url_prefix() . '/snippet.php?key=' . $key, 'isgd');
+			$tweet = truncate_string($text, 90) . " $snippet_url";
+		} else {
+			$tweet = $text;
+		}
+	
+		$counter = 140 - mb_strlen($tweet, 'utf-8');
+
+		?>
+		<div id="infoBoxTitle"><?php echo __("Send Tweet") ?></div>
+		<div class="infoBoxContents">
+			<div id="mini-notice" style='display : none'>&nbsp;</div>
+	
+			<form id="new_tweet_form" onsubmit="return false;">
+	
+			<input type="hidden" name="op" value="send-tweet"/>
+
+			<div class="dlgSec"><?php echo __("Your tweet:") ?></div>
+
+			<textarea onkeyup="tweet_update_counter(this)" name="text" class="tweet-text"><?php echo $tweet ?></textarea><p>
+
+			<?php if ($snippet_url) { ?>
+
+			<div class="dlgSec"><?php echo __("Full IRC snippet:") ?></div>
+			<textarea disabled="1" class="tweet-snippet"><?php echo $text ?></textarea><p>
+
+			<?php } ?>
+
+			<div class="dlgButtons">
+				<div style='float : left'>
+					<input id="tweet-dlg-counter" disabled="1" name="counter" value="<?php echo $counter ?>">
+				</div>
+				<button type="submit" onclick="tweet_selection_do()"><?php echo __('Tweet this!') ?></button>
+				<button type="submit" onclick="close_infobox()"><?php echo __('Cancel') ?></button></div>
+			</div>
+	
+			</form>
+	
+		</div>
+	
+		<?php
+
+	}
+
+	function truncate_string($str, $max_len) {
+		if (mb_strlen($str, "utf-8") > $max_len - 3) {
+			return trim(mb_substr($str, 0, $max_len, "utf-8")) . "...";
+		} else {
+			return $str;
+		}
+	}
+
+	function twitter_send_update($link, $text) {
+
+		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users 
+			WHERE id = ".$_SESSION['uid']);
+
+		$access_token = json_decode(db_fetch_result($result, 0, 'twitter_oauth'), true);
+
+		if ($access_token) {
+	
+			/* Create a TwitterOauth object with consumer/user tokens. */
+			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+			$connection->post('statuses/update', array('status' => $text));
+
+			return true;
+		}
+
+		return false;
+	}
+
+	function twitter_configured($link) {
+		$result = db_query($link, "SELECT COUNT(*) AS cid FROM ttirc_users
+			WHERE twitter_oauth IS NOT NULL AND twitter_oauth != '' AND
+			id = " . $_SESSION['uid']);
+	
+		return db_fetch_result($result, 0, "cid") != 0;
 	}
 ?>
