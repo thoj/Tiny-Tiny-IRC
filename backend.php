@@ -1,6 +1,4 @@
 <?php
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 	/* remove ill effects of magic quotes */
 
 	if (get_magic_quotes_gpc()) {
@@ -16,9 +14,9 @@
 		$_REQUEST = array_map('stripslashes_deep', $_REQUEST);
 	}
 
+	require_once "functions.php"; 
 	require_once "sessions.php";
 	require_once "db-prefs.php";
-	require_once "functions.php"; 
 	require_once "sanity_check.php";
 	require_once "version.php"; 
 	require_once "config.php";
@@ -441,6 +439,22 @@
 
 		set_pref($link, "NOTIFY_ON", $notify_events);
 
+		break;
+
+	case "prefs-edit-twitter":
+		twitter_editor($link);
+		break;
+
+	case "tweet-dlg":
+		$text = $_REQUEST['text'];
+
+		twitter_dialog($link, $text);
+		break;
+
+	case "send-tweet":
+		$text = $_REQUEST['text'];
+
+		print json_encode(array("status" => (int) twitter_send_update($link, $text)));
 		break;
 
 	}

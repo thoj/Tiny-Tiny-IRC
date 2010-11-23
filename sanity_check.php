@@ -1,8 +1,8 @@
 <?php
 	require_once "functions.php";
 
-	define('SCHEMA_VERSION', 2);
-	define('EXPECTED_CONFIG_VERSION', 1);
+	define('SCHEMA_VERSION', 3);
+	define('EXPECTED_CONFIG_VERSION', 2);
 
 	$err_msg = ""; 
 

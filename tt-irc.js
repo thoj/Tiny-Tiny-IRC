@@ -263,8 +263,9 @@ function handle_update(transport) {
 		if (!get_selected_tab()) {
 			change_tab(get_all_tabs()[0]);
 		}
-	
-		update_buffer();
+
+		if (prev_last_id != last_id)
+			update_buffer();
 
 		if (prev_last_id == last_id && update_delay_max == 0) {
 			if (delay < 3000) delay += 500;
@@ -297,7 +298,7 @@ function update(init) {
 	  		
 		if (init) query += "&init=" + init;
 
-		console.log("request update..." + query + " last: " + last_update);
+//		console.log("request update..." + query + " last: " + last_update);
 
 		timeout_id = window.setTimeout("timeout()", 
 			(update_delay_max * 1000) + 10000);
@@ -309,7 +310,7 @@ function update(init) {
 			window.clearTimeout(update_id);
 			if (!handle_update(transport)) return;
 
-			console.log("update done, next update in " + delay + " ms");
+//			console.log("update done, next update in " + delay + " ms");
 
 			update_id = window.setTimeout("update()", delay);
 		} });
@@ -805,11 +806,9 @@ function format_message(row_class, param, connection_id) {
 
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
 				param.ts + 
-				"<span class='invisible'>&lt;</span>" +
-				"</span><span title=\""+nick_ext_info+"\" " +
+				"</span> <span class='lt'>-</span><span title=\""+nick_ext_info+"\" " +
 				"class='"+sender_class+"' "+color+">" +
-				param.sender + "</span>" +
-				"<span class='invisible'>&gt;&nbsp;</span>" +
+				param.sender + "</span><span class='gt'>-</span> " +
 				"<span class='message'>" + 
 				param.message + "</span>";
 
@@ -828,11 +827,9 @@ function format_message(row_class, param, connection_id) {
 
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
 				param.ts + 
-				"<span class='invisible'>&lt;</span>" +
-				"</span><span title=\""+nick_ext_info+"\" " +
+				"</span> <span class='lt'>&lt;</span><span title=\""+nick_ext_info+"\" " +
 				"class='sender' "+color+">" +
-				param.sender + "</span>" +
-				"<span class='invisible'>&gt;&nbsp;</span>" +
+				param.sender + "</span><span class='gt'>&gt;</span> " +
 				"<span class='message'>" + 
 				param.message + "</span>";
 		} else {
@@ -1916,4 +1913,57 @@ function find_tab(connection_id, channel) {
 	}
 }
 
+function tweet_selection() {
+	try {
+		var sel = window.getSelection();
 
+		show_spinner();
+
+		new Ajax.Request("backend.php", {
+		parameters: "?op=tweet-dlg&text=" + param_escape(sel),
+		onComplete: function (transport) {
+			infobox_callback2(transport);
+			hide_spinner();
+		} });
+
+	} catch (e) {
+		exception_error("tweet_selection", e);
+	}
+}
+
+function tweet_update_counter(textarea) {
+	try {
+		$("tweet-dlg-counter").value = textarea.value.length;
+	} catch (e) {
+		exception_error("tweet_update_counter", e);
+	}
+}
+
+function tweet_selection_do() {
+	try {
+		var query = Form.serialize("new_tweet_form");
+		var text = document.forms['new_tweet_form'].text.value.strip();
+
+		if (text.length > 140) {
+			alert(__("Your message is too long."));	
+			return;
+		}
+
+		if (text.length == 0) {
+			alert(__("Your message is too short."));	
+			return;
+		}
+
+		show_spinner();
+
+		new Ajax.Request("backend.php", {
+		parameters: query,
+		onComplete: function (transport) {
+			close_infobox();
+			hide_spinner();
+		} });
+
+	} catch (e) {
+		exception_error("tweet_selection", e);
+	}
+}

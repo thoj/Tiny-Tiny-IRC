@@ -42,7 +42,12 @@
 	// Should be less than maximum script lifetime configured in your HTTPD
 	// 0 disables the functionality.
 
-	define('CONFIG_VERSION', 1);
+	define('CONSUMER_KEY', '');
+	define('CONSUMER_SECRET', '');
+	// Your OAuth instance authentication information for Twitter, visit
+	// http://twitter.com/oauth_clients to register your instance.
+
+	define('CONFIG_VERSION', 2);
 
 	// vim:ft=php
 ?>

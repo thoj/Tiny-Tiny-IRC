@@ -1,3 +1,4 @@
+drop table ttirc_snippets;
 drop table ttirc_user_prefs;
 drop table ttirc_settings_profiles;
 drop table ttirc_prefs;
@@ -30,6 +31,7 @@ create table ttirc_users (id serial not null primary key,
 	heartbeat timestamp default null,
 	quit_message varchar(120) not null default '',
 	realname varchar(120) not null,
+	twitter_oauth text default null,
 	created timestamp default null);
 
 insert into ttirc_users (login,pwd_hash,access_level, nick, realname, email, quit_message) values ('admin', 'SHA1:5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 10, 'test', 'Admin User', 'test@localhost', 'My hovercraft is full of eels');
@@ -129,7 +131,13 @@ create index ttirc_sessions_expire_index on ttirc_sessions(expire);
 
 create function SUBSTRING_FOR_DATE(timestamp, int, int) RETURNS text AS 'SELECT SUBSTRING(CAST($1 AS text), $2, $3)' LANGUAGE 'sql';
 
+create table ttirc_snippets(id serial not null primary key,
+	key varchar(200) not null,
+	snippet text not null,
+	created timestamp not null,
+	owner_uid integer not null references ttirc_users(id) on delete cascade);
+
 create table ttirc_version (schema_version int not null);
 
-insert into ttirc_version values (2);
+insert into ttirc_version values (3);
 

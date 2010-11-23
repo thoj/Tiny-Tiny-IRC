@@ -32,6 +32,7 @@ create table ttirc_users (id integer not null primary key auto_increment,
 	heartbeat datetime default null,
 	quit_message varchar(120) not null default '',
 	realname varchar(120) not null,
+	twitter_oauth longtext default null,
 	created datetime default null) TYPE=InnoDB;
 
 insert into ttirc_users (login,pwd_hash,access_level, nick, realname, email, quit_message) values ('admin', 'SHA1:5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 10, 'test', 'Admin User', 'test@localhost', 'My hovercraft is full of eels');
@@ -131,5 +132,5 @@ create index ttirc_sessions_expire_index on ttirc_sessions(expire);
 
 create table ttirc_version (schema_version integer not null) TYPE=InnoDB;
 
-insert into ttirc_version values (2);
+insert into ttirc_version values (3);
 
