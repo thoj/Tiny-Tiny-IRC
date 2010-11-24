@@ -1069,10 +1069,21 @@
 
 			$params = array("count" => 10, 'trim_user' => 0);
 
-			if ($_SESSION['twitter_last_id'])
+#			if ($_SESSION['twitter_last_id'])
+#				$params['since_id'] = $_SESSION['twitter_last_id'];
+#			else
+#				$params['count'] = 1;
+
+			$result = db_query($link, "SELECT twitter_last_id FROM ttirc_users
+				WHERE id = " . $_SESSION['uid']);
+
+			$since_id = db_fetch_result($result, 0, 'twitter_last_id');
+
+			if ($since_id) {
 				$params['since_id'] = $_SESSION['twitter_last_id'];
-			else
-				$params['count'] = 1;
+			} else {
+				$params['counte'] = 1;
+			}
 
 			$result = $connection->get('statuses/friends_timeline', $params);
 
@@ -1083,17 +1094,20 @@
 
 				foreach ($result as $line) {
 
-					if ($_SESSION['twitter_last_id']) {
+					if ($since_id) {
 						$message = 'TWITTER_MSG:' . $line['id_str'] . 
 							':' . $line['user']['screen_name'] . ':' . $line['text'];
 
 						push_message($link, $connection_id, '---', $message,
 							true, MSGT_EVENT, $line['user']['screen_name']);
-
+	
 						++$lines;
 					}
 
-					$_SESSION['twitter_last_id'] = $line['id_str'];
+					$id_str = db_escape_string($line['id_str']);
+
+					db_query($link, "UPDATE ttirc_users 
+						SET twitter_last_id = '$id_str' WHERE id = " . $_SESSION['uid']);
 				}
 			}
 			
