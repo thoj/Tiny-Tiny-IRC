@@ -17,7 +17,7 @@ drop table if exists ttirc_system;
 
 create table ttirc_system(id integer not null primary key auto_increment,
 	param varchar(120) not null,
-	value text) TYPE=InnoDB;
+	value text) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_system (param, value) values ('MASTER_RUNNING', '');
 insert into ttirc_system (param, value) values ('MASTER_HEARTBEAT', '');
@@ -33,7 +33,7 @@ create table ttirc_users (id integer not null primary key auto_increment,
 	quit_message varchar(120) not null default '',
 	realname varchar(120) not null,
 	twitter_oauth longtext default null,
-	created datetime default null) TYPE=InnoDB;
+	created datetime default null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_users (login,pwd_hash,access_level, nick, realname, email, quit_message) values ('admin', 'SHA1:5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 10, 'test', 'Admin User', 'test@localhost', 'My hovercraft is full of eels');
 
@@ -53,14 +53,14 @@ create table ttirc_connections(id integer not null primary key auto_increment,
 	connect_cmd text not null,
 	nick varchar(120) not null default '',
 	last_sent_id integer not null default 0,
-	owner_uid integer not null references ttirc_users(id) ON DELETE CASCADE) TYPE=InnoDB;
+	owner_uid integer not null references ttirc_users(id) ON DELETE CASCADE) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_connections (title,owner_uid,autojoin,encoding,auto_connect,userhosts,connect_cmd) values ('GBU', 1, '#test', 'koi8-r', true, '', '');
 
 create table ttirc_servers(id integer not null primary key auto_increment,
 	connection_id integer not null references ttirc_connections(id) ON DELETE CASCADE,
 	server varchar(120) not null,
-	port integer not null) TYPE=InnoDB;
+	port integer not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_servers (connection_id, server, port) values (1, 'irc.volgo-balt.ru', 6667);
 
@@ -71,7 +71,7 @@ create table ttirc_channels(id integer not null primary key auto_increment,
 	topic_owner varchar(120) not null default '',
 	topic_set datetime not null,
 	chan_type integer not null default 0,
-	nicklist text not null) TYPE=InnoDB;
+	nicklist text not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 create table ttirc_messages(id integer not null primary key auto_increment,
 	ts datetime not null,
@@ -80,17 +80,17 @@ create table ttirc_messages(id integer not null primary key auto_increment,
 	message_type integer not null default 0,
 	sender varchar(120) not null,
 	channel varchar(120) not null,
-	connection_id integer not null references ttirc_connections(id) ON DELETE CASCADE) TYPE=InnoDB;
+	connection_id integer not null references ttirc_connections(id) ON DELETE CASCADE) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 create table ttirc_prefs_types (id integer not null primary key, 
-	type_name varchar(100) not null) TYPE=InnoDB;
+	type_name varchar(100) not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_prefs_types (id, type_name) values (1, 'bool');
 insert into ttirc_prefs_types (id, type_name) values (2, 'string');
 insert into ttirc_prefs_types (id, type_name) values (3, 'integer');
 
 create table ttirc_prefs_sections (id integer not null primary key, 
-	section_name varchar(100) not null) TYPE=InnoDB;
+	section_name varchar(100) not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_prefs_sections (id, section_name) values (1, 'General');
 insert into ttirc_prefs_sections (id, section_name) values (2, 'Interface');
@@ -102,7 +102,7 @@ create table ttirc_prefs (pref_name varchar(250) not null primary key,
 	short_desc text not null,
 	help_text text not null,
 	access_level integer not null default 0,
-	def_value text not null) TYPE=InnoDB;
+	def_value text not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_prefs (pref_name,type_id,def_value,short_desc,section_id,help_text) values('USER_THEME', 2, '0', '', 1, '');
 
@@ -114,23 +114,29 @@ insert into ttirc_prefs (pref_name,type_id,def_value,short_desc,section_id) valu
 
 create table ttirc_settings_profiles(id integer not null primary key auto_increment,
 	title varchar(250) not null,
-	owner_uid integer not null references ttirc_users(id) on delete cascade) TYPE=InnoDB;
+	owner_uid integer not null references ttirc_users(id) on delete cascade) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 create table ttirc_user_prefs (
 	owner_uid integer not null references ttirc_users(id) ON DELETE CASCADE,
 	pref_name varchar(250) not null references ttirc_prefs(pref_name) ON DELETE CASCADE,
 	profile integer references ttirc_settings_profiles(id) ON DELETE CASCADE,
-	value text not null) TYPE=InnoDB;
+	value text not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 create index ttirc_user_prefs_owner_uid_index on ttirc_user_prefs(owner_uid);
 
 create table ttirc_sessions (id varchar(250) unique not null primary key,
 	data text,	
-	expire integer not null) TYPE=InnoDB;
+	expire integer not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 create index ttirc_sessions_expire_index on ttirc_sessions(expire);
 
-create table ttirc_version (schema_version integer not null) TYPE=InnoDB;
+create table ttirc_snippets(id integer not null primary key auto_increment,
+	key varchar(200) not null,
+	snippet longtext not null,
+	created datetime not null,
+	owner_uid integer not null references ttirc_users(id) on delete cascade) TYPE=InnoDB DEFAULT CHARSET=UTF8;
+
+create table ttirc_version (schema_version integer not null) TYPE=InnoDB DEFAULT CHARSET=UTF8;
 
 insert into ttirc_version values (3);
 

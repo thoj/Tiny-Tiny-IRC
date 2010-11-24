@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-09 15:40+0400\n"
+"POT-Creation-Date: 2010-11-24 09:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,37 +16,33 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backend.php:55
+#: backend.php:59
 #, php-format
 msgid "Created user %s with password <b>%s</b>."
 msgstr "Ċŗêǟךęď ūṡêѓ ℅ﻱ ẃϊẗḣ ṗǎśśẘ∅řḋ <Ь>℅ﻯ<⁄б>·"
 
-#: backend.php:63
+#: backend.php:67
 #, php-format
 msgid "User %s already exists"
 msgstr "Üﻯēŗ ℅ŝ ãḻѓēâðÿ ĕχìﬆš"
 
-#: backend.php:85
+#: backend.php:89
 #, php-format
 msgid "Reset password of user %s to <b>%s</b>."
 msgstr "Яėṡẻṫ ρąϟŝŵŏŗ∂ ѳḟ ûŝèŗ ℅š ţö <ﻅ>℅ś<⁄Ѣ>∙"
 
-#: backend.php:259
+#: backend.php:265
 msgid "[Untitled]"
 msgstr "[Ūתẗỉẗḻẻđ]"
 
-#: backend.php:348
+#: backend.php:354
 #, php-format
 msgid "Couldn't add server (%s:%d): Invalid syntax."
 msgstr "ҀỏưĺḏŊ‘ṫ ǡḏḑ şéřύęŗ ₍℅ş∶℅δ₎∶ Ì∩νåļϊď ṡỹńךäẋ·"
 
-#: backend.php:399 login_form.php:124
+#: backend.php:405 login_form.php:124
 msgid "Default profile"
 msgstr "Ḋėϝåúĺṫ ṗѓﻩﬁḻẻ"
-
-#: connection.php:741 tt-irc.js:909 tt-irc.js:913
-msgid "Tiny Tiny IRC"
-msgstr "Ţϊηý Ṫì∩ỷ ΊŘČ"
 
 #: errors.php:3
 msgid "Unknown error"
@@ -108,61 +104,90 @@ msgstr "ŠǪĹ ẻŝĉǎṗĭηḡ ẗêﬆ ϝāíľẽḑ، ςẖèćĸ ўôú�
 msgid "Backend connection daemon is not running."
 msgstr "Ḇâćĸėñδ ćŏήṅèҁṯìﻩŋ ðǣḿǒή ìŝ ṅ∅ť ŗųמŋīńﻕ∙"
 
-#: errors.php:35 tt-irc.js:135
+#: errors.php:35 tt-irc.js:143
 msgid "The application failed to initialize."
 msgstr "Ťĥë ǟṗρḻỉçâךǐôמ ϝâĩḻęδ ךσ ǐŉįţĩǡŀỉẑė·"
 
-#: functions.php:141
+#: functions.php:150
 msgid "Incorrect username or password"
 msgstr "Ỉ∩ćŏṟřěċŧ ùϟēṟ∩åṁė òṟ ṗảﻯﺉẃøṙḑ"
 
-#: functions.php:306
+#: functions.php:315
 msgid "Session failed to validate (incorrect IP)"
 msgstr "§ĕşϟỉ∅ṅ ḟâìḻẽđ ṯﻩ ϋăḻìđǡẗĕ ₍ĭŉĉøṙѓě¢ṯ ÌṖ₎"
 
-#: functions.php:896
+#: functions.php:898
 msgid "Default"
 msgstr "Ḋëϝảǔļŧ"
 
-#: index.php:66 index.php:70
+#: functions.php:985
+msgid "Send Tweet"
+msgstr ""
+
+#: functions.php:993
+msgid "Your tweet:"
+msgstr ""
+
+#: functions.php:999
+msgid "Full IRC snippet:"
+msgstr ""
+
+#: functions.php:1008
+msgid "Tweet this!"
+msgstr ""
+
+#: functions.php:1009
+msgid "Cancel"
+msgstr ""
+
+#: index.php:64 index.php:68
 #, fuzzy
 msgid "Click to close"
 msgstr "℃ŀīćḵ ךő ėḑìť ūśëř"
 
-#: index.php:74
+#: index.php:72
 msgid "Loading, please wait..."
 msgstr "Ļőªďíתǧ˛ ρŀẽãśẻ ώåī†·∙·"
 
-#: index.php:81
+#: index.php:79
 msgid ""
 "Your browser doesn't support Javascript, which is required\n"
 "\t\tfor this application to function properly. Please check your\n"
 "\t\tbrowser settings."
 msgstr ""
 
-#: index.php:96
+#: index.php:94
 msgid "Fatal Exception"
 msgstr "℉ăŧàľ Ẽẍçẽρŧīﻩη"
 
-#: index.php:100
+#: index.php:98
 msgid "Try again"
 msgstr ""
 
-#: index.php:113
+#: index.php:111
 msgid "Hello,"
 msgstr "Ήěḻłò،"
 
-#: index.php:115 prefs.php:220
+#: index.php:113 prefs.php:308
 msgid "Preferences"
 msgstr "Ṗřëḟèŗèήċėś"
 
-#: index.php:118
+#: index.php:116
 msgid "Users"
 msgstr "Ǔﻱėѓş"
 
-#: index.php:122
+#: index.php:120
 msgid "Logout"
 msgstr "∟óģσúṯ"
+
+#: index.php:169
+#, fuzzy
+msgid "Tweet selected text"
+msgstr "Ďëļè†ě ṡéļęç†ėđ ûśēřś؟"
+
+#: index.php:171
+msgid "Tweet"
+msgstr ""
 
 #: login_form.php:102
 msgid "Login:"
@@ -208,205 +233,272 @@ msgstr ""
 msgid "Save & Reload"
 msgstr ""
 
-#: prefs.php:23 prefs.php:168
+#: prefs.php:23 prefs.php:52 prefs.php:146 prefs.php:256
 msgid "Go back"
 msgstr "Ḡѳ ḇáҁǩ"
 
-#: prefs.php:52
+#: prefs.php:37 prefs.php:357 twitter.php:95
+msgid "Register with Twitter"
+msgstr ""
+
+#: prefs.php:41 prefs.php:363
+msgid "Authentication"
+msgstr "Ąùţḩëṉ†îćáẗī∅ŋ"
+
+#: prefs.php:44
+msgid ""
+"You'll need to register with Twitter.com before you'll be able to send "
+"tweets from Tiny Tiny IRC."
+msgstr ""
+
+#: prefs.php:46
+msgid "You have been successfully registered with Twitter.com.."
+msgstr ""
+
+#: prefs.php:51
+msgid "Register with Twitter.com"
+msgstr ""
+
+#: prefs.php:78
 msgid "(connected)"
 msgstr "₍ćôņṅěςťėḏ₎"
 
-#: prefs.php:93
+#: prefs.php:106
+msgid "Configure Notifications"
+msgstr ""
+
+#: prefs.php:110
+msgid ""
+"Desktop notifications are only shown for events happening in background "
+"channels or when your Tiny Tiny IRC window is unfocused."
+msgstr ""
+
+#: prefs.php:112
+msgid "Show notifications on:"
+msgstr ""
+
+#: prefs.php:121
+msgid "Channel highlight"
+msgstr ""
+
+#: prefs.php:127
+#, fuzzy
+msgid "Private message"
+msgstr "Ϙџĭך ḿéﻱşåǧè∶"
+
+#: prefs.php:133
+#, fuzzy
+msgid "Connection status change"
+msgstr "Čﻩṉṉẽ¢ŧǐŏń éﬆǟЫíşḩẽđ∙"
+
+#: prefs.php:143
+#, fuzzy
+msgid "Enable notifications"
+msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
+
+#: prefs.php:145 prefs.php:255 prefs.php:390
+msgid "Save"
+msgstr "Ŝǎϋę"
+
+#: prefs.php:181
 msgid "Edit Connection"
 msgstr "Ēḏϊך Ćﻩηṉẻćṯîò∩"
 
-#: prefs.php:97
+#: prefs.php:185
 msgid "Connection"
 msgstr "Ćőṉņëć†ϊŏή"
 
-#: prefs.php:105
+#: prefs.php:193
 msgid "Title:"
 msgstr "Ṯįŧłë∶"
 
-#: prefs.php:109 prefs.php:236
+#: prefs.php:197 prefs.php:324
 msgid "Nickname:"
 msgstr "№ςḵńǡṁë∶"
 
-#: prefs.php:113
+#: prefs.php:201
 msgid "Favorite channels:"
 msgstr "Ḟǎΰŏřǐťé ¢ḧäήŊēļﻱ∶"
 
-#: prefs.php:117
+#: prefs.php:205
 msgid "Connect command:"
 msgstr "℃óñŋĕčṯ ҁơḿḿǟמδ∶"
 
-#: prefs.php:121
+#: prefs.php:209
 msgid "Character set:"
 msgstr "ϚЋảѓàĉךẽѓ šę†∶"
 
-#: prefs.php:134
+#: prefs.php:222
 #, fuzzy
 msgid "Enable connection"
 msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
 
-#: prefs.php:140
+#: prefs.php:228
 msgid "Automatically connect"
 msgstr "Åט†ﻩḿăţỉςǎḻļỷ ςơṅṉêćṫ"
 
-#: prefs.php:146
+#: prefs.php:234
 msgid "Stay connected permanently"
 msgstr "Ś†ªý ċôņñẽċṫě∂ ṗéṙṁäŉēήţĺỳ"
 
-#: prefs.php:156
+#: prefs.php:244
 msgid "Servers"
 msgstr "Ṡêřṽëṟﻯ"
 
-#: prefs.php:164
+#: prefs.php:252
 msgid "Add server"
 msgstr "Âḏḑ šẻṟѵëŗ"
 
-#: prefs.php:165 prefs.php:289 users.php:50
+#: prefs.php:253 prefs.php:387 users.php:50
 msgid "Delete"
 msgstr "Ðĕĺěŧê"
 
-#: prefs.php:167 prefs.php:292
-msgid "Save"
-msgstr "Ŝǎϋę"
-
-#: prefs.php:188
+#: prefs.php:276
 msgid "(active)"
 msgstr "₍åćŧĭύè₎"
 
-#: prefs.php:196
+#: prefs.php:284
 msgid "Click to edit connection"
 msgstr "Ĉļìčḵ ŧó éðíŧ ҁѳńŊêçťĭﻩŉ"
 
-#: prefs.php:229
+#: prefs.php:317
 msgid "Personal data"
 msgstr "Ṗẽṟšﻩṅâľ δäťª"
 
-#: prefs.php:232
+#: prefs.php:320
 msgid "Real name:"
 msgstr "Ʀęảĺ ήǟṁẽ∶"
 
-#: prefs.php:240
+#: prefs.php:328
 msgid "E-mail:"
 msgstr "ξ―ḿáīľ∶"
 
-#: prefs.php:244
+#: prefs.php:332
 msgid "Quit message:"
 msgstr "Ϙџĭך ḿéﻱşåǧè∶"
 
-#: prefs.php:248
+#: prefs.php:336
 msgid "Highlight on:"
 msgstr ""
 
-#: prefs.php:252
+#: prefs.php:340
 msgid "Theme:"
 msgstr "Ţẖèṁė∶"
 
-#: prefs.php:257
+#: prefs.php:345
 msgid "Customize"
 msgstr ""
 
-#: prefs.php:263
-msgid "Authentication"
-msgstr "Ąùţḩëṉ†îćáẗī∅ŋ"
+#: prefs.php:350
+msgid "Configure desktop notifications"
+msgstr ""
 
-#: prefs.php:266
+#: prefs.php:366
 msgid "New password:"
 msgstr "Ňéẃ ρàﻱšẅöѓ∂∶"
 
-#: prefs.php:270
+#: prefs.php:370
 msgid "Confirm:"
 msgstr "Ϛﻩמﬁřṁ∶"
 
-#: prefs.php:278
+#: prefs.php:376
 msgid "Connections"
 msgstr "ĈőňŊèҁŧîōŊﻱ"
 
-#: prefs.php:287
+#: prefs.php:385
 msgid "Create connection"
 msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
 
-#: prefs.php:293 users.php:53
+#: prefs.php:391 users.php:53
 msgid "Close"
 msgstr "Ĉŀỏśė"
 
-#: update.php:19
-msgid "Your access level is insufficient to run this script."
-msgstr "Ύòưř ǡćςĕšϟ ḻẻעẻŀ ỉṡ ĭתϟüﬀïćįĕṉך †ó ṙû∩ ţẖîﺉ ŝςṙįρṯ·"
+#: twitter.php:99
+msgid "Could not connect to Twitter. Refresh the page or try again later."
+msgstr ""
 
-#: update.php:44
-msgid "Database Updater"
-msgstr "ḊāṯåЬăϟě Ūṕḏǎťéѓ"
+#: twitter.php:103
+msgid "Congratulations! You have successfully registered with Twitter."
+msgstr ""
 
-#: update.php:84
-msgid "Could not update database"
-msgstr "Ҁõűłḑ ήóŧ µṗďáṫě ∂áךåьäﺉè"
-
-#: update.php:87
-msgid "Could not find necessary schema file, need version:"
-msgstr "Çỏטłð ňỏŧ ﬁṅḑ ńẻҁęşﻯªřÿ ṡςĥėṁã ﬁļè‚ ňĕẽḑ ṽĕѓšỉóň∶"
-
-#: update.php:88
-msgid ", found: "
-msgstr "، ḟøüŉḏ∶ "
-
-#: update.php:91
-#, fuzzy
-msgid "Tiny Tiny IRC database is up to date."
-msgstr "Ṫỉηγ Ṯîńẙ Ŗ∬ ḋàťáьàﻱĕ īﺉ űρ ṫö δąṯé∙"
-
-#: update.php:93
+#: twitter.php:107 twitter.php:119 update.php:90
 #, fuzzy
 msgid "Return to Tiny Tiny IRC"
 msgstr "Ŗēṯŭṟŋ ṫ∅ Ţỉńÿ Ţĩήý Я∬"
 
-#: update.php:101
+#: twitter.php:114
+msgid "Register"
+msgstr ""
+
+#: update.php:16
+msgid "Your access level is insufficient to run this script."
+msgstr "Ύòưř ǡćςĕšϟ ḻẻעẻŀ ỉṡ ĭתϟüﬀïćįĕṉך †ó ṙû∩ ţẖîﺉ ŝςṙįρṯ·"
+
+#: update.php:41
+msgid "Database Updater"
+msgstr "ḊāṯåЬăϟě Ūṕḏǎťéѓ"
+
+#: update.php:81
+msgid "Could not update database"
+msgstr "Ҁõűłḑ ήóŧ µṗďáṫě ∂áךåьäﺉè"
+
+#: update.php:84
+msgid "Could not find necessary schema file, need version:"
+msgstr "Çỏטłð ňỏŧ ﬁṅḑ ńẻҁęşﻯªřÿ ṡςĥėṁã ﬁļè‚ ňĕẽḑ ṽĕѓšỉóň∶"
+
+#: update.php:85
+msgid ", found: "
+msgstr "، ḟøüŉḏ∶ "
+
+#: update.php:88
+#, fuzzy
+msgid "Tiny Tiny IRC database is up to date."
+msgstr "Ṫỉηγ Ṯîńẙ Ŗ∬ ḋàťáьàﻱĕ īﺉ űρ ṫö δąṯé∙"
+
+#: update.php:98
 msgid "Please backup your database before proceeding."
 msgstr "Ṗľĕªŝë ъªćǩüṗ ỷǒūѓ ḏáךǡЪªϟę ъẽḟσṟě ṕṙôςẻẽḋîñḡ∙"
 
-#: update.php:103
+#: update.php:100
 #, php-format
 msgid ""
 "Your Tiny Tiny RSS database needs update to the latest version (<b>%d</b> to "
 "<b>%d</b>)."
 msgstr ""
 
-#: update.php:117
+#: update.php:114
 msgid "Perform updates"
 msgstr "Ṗêřḟǒṟṁ ũṗδáẗęş"
 
-#: update.php:122
+#: update.php:119
 msgid "Performing updates..."
 msgstr "Ṗéŗḟôṟṁĭŋğ טṕḑǟṯèﻯ∙··"
 
-#: update.php:128
+#: update.php:125
 #, php-format
 msgid "Updating to version %d..."
 msgstr "Úṗḋãẗîņﻕ ťő ϋẻřﻱĭòń ℅ḋ··∙"
 
-#: update.php:141
+#: update.php:138
 msgid "Checking version... "
 msgstr "ĆЋéçḱĭ∩ǥ νëřśĭøη··∙ "
 
-#: update.php:147
+#: update.php:144
 msgid "OK!"
 msgstr "ŌĶ¡"
 
-#: update.php:149
+#: update.php:146
 msgid "ERROR!"
 msgstr "ЄŖƦǑŘ¡"
 
-#: update.php:157
+#: update.php:154
 #, php-format
 msgid ""
 "Finished. Performed <b>%d</b> update(s) up to schema\n"
 "\t\t\tversion <b>%d</b>."
 msgstr ""
 
-#: update.php:161
+#: update.php:158
 msgid "Return to Tiny Tiny RSS"
 msgstr "Ŗēṯŭṟŋ ṫ∅ Ţỉńÿ Ţĩήý Я∬"
 
@@ -450,119 +542,152 @@ msgstr "Ṗḻēåﺉė ﻱëŀė¢ŧ ﻯöḿê ṡèѓύėṟş †σ δèłě
 msgid "Server:Port (e.g. irc.example.org:6667):"
 msgstr "∫ėṟϋèŗ∶Ṗõṙṫ ₍è∙ğ∙ įŗċ∙ęχâḿρĺè·öṟğ∶6667₎∶"
 
-#: tt-irc.js:79
+#: prefs.js:330
+msgid "Your browser doesn't seem to support desktop notifications."
+msgstr ""
+
+#: tt-irc.js:87
 msgid "Close this tab"
 msgstr "Ҁłőṡê ךḣϊṡ ẗáѢ"
 
-#: tt-irc.js:470
+#: tt-irc.js:486
+msgid "Last message: %d seconds ago."
+msgstr ""
+
+#: tt-irc.js:525
 msgid "Connected to: "
 msgstr "Ҁ∅ńṅëčṯë∂ ṯŏ∶ "
 
-#: tt-irc.js:474 tt-irc.js:480
+#: tt-irc.js:529 tt-irc.js:535
 msgid "Disconnected."
 msgstr "ḎïﺉҁôמŊèҁ†ëδ·"
 
-#: tt-irc.js:492
+#: tt-irc.js:547
 msgid "Conversation with"
 msgstr "Çó∩ύẽṙϟªṫǐѳñ ẅǐťḣ"
 
-#: tt-irc.js:522
+#: tt-irc.js:577
 msgid "Connect"
 msgstr "ĈσņŊẻçך"
 
-#: tt-irc.js:527
+#: tt-irc.js:582
 msgid "Connecting..."
 msgstr "Ҁőηņĕĉţįṅğ∙∙∙"
 
-#: tt-irc.js:532
+#: tt-irc.js:587
 msgid "Disconnect"
 msgstr "Ðỉşċô∩ŉęċţ"
 
-#: tt-irc.js:847
+#: tt-irc.js:780
+msgid "Received highlight on %c by %n: %s"
+msgstr ""
+
+#: tt-irc.js:916
 msgid "Topic for %c is: %s"
 msgstr ""
 
-#: tt-irc.js:879
+#: tt-irc.js:949
 msgid "Tiny Tiny IRC [%a @ %b / %c]"
 msgstr "Ṯïŋÿ Ţỉńÿ ÏṞĆ [℅à @ ℅ѣ ⁄ ℅¢]"
 
-#: tt-irc.js:1033
+#: tt-irc.js:979 tt-irc.js:983
+msgid "Tiny Tiny IRC"
+msgstr "Ţϊηý Ṫì∩ỷ ΊŘČ"
+
+#: tt-irc.js:1103
 msgid "Close this tab?"
 msgstr "Ċŀōṡĕ †ḧîϟ ţäь؟"
 
-#: tt-irc.js:1064
+#: tt-irc.js:1134
 msgid "Start conversation with %s?"
 msgstr "Śẗåṙ† ¢ѳņעėřϟàṯīσń ŵì†ḧ ℅ş؟"
 
-#: tt-irc.js:1101
+#: tt-irc.js:1170
 msgid "%u has changed the topic to: %s"
 msgstr "℅û ħąﻯ ςẖäṅﻕĕď ṫĥè ẗﻩṕíč ẗø∶ ℅ϟ"
 
-#: tt-irc.js:1115
+#: tt-irc.js:1184
 msgid "%u has changed mode [%m] on %s"
 msgstr "℅ų ḧáš ҁĥâŉǥęď ṁöðè [℅ṁ] öň ℅ϟ"
 
-#: tt-irc.js:1125
+#: tt-irc.js:1194
 msgid "%u has changed mode [%m]"
 msgstr "℅ũ ḧãṡ čЋă∩ḡéđ ḿ∅ḑě [℅ḿ]"
 
-#: tt-irc.js:1139
+#: tt-irc.js:1208
 msgid "%u has been kicked from %c by %n (%m)"
 msgstr "℅∪ ẖāﺉ Ъèëṉ ḱìҁǩěḋ ḟṟﻩḿ ℅ς Ъŷ ℅ŉ ₍℅ṁ₎"
 
-#: tt-irc.js:1153
+#: tt-irc.js:1222
 msgid "%u has left %c (%m)"
 msgstr "℅ű ĥǟϟ ĺėḟṯ ℅¢ ₍℅ṁ₎"
 
-#: tt-irc.js:1164
+#: tt-irc.js:1233
 msgid "%u (%h) has joined %c"
 msgstr "℅ũ ₍℅ḣ₎ Ћāﻱ ﺫѳïŉèð ℅ҁ"
 
-#: tt-irc.js:1175
+#: tt-irc.js:1244
 msgid "%u has quit IRC (%s)"
 msgstr "℅ũ ḣąś ۹∪ĩ† ÏṞČ ₍℅ŝ₎"
 
-#: tt-irc.js:1182
+#: tt-irc.js:1251
 msgid "Connection terminated."
 msgstr "Ĉѳŋņêċťïỏṅ ẗèřḿìṉǡṯẻδ∙"
 
-#: tt-irc.js:1187
+#: tt-irc.js:1259
 msgid "Requesting connection..."
 msgstr "Ṙé¶µėﬆĭṉǥ ¢ǒŋמëҁţìőη·∙·"
 
-#: tt-irc.js:1195
+#: tt-irc.js:1267
 msgid "Connecting to %s:%d..."
 msgstr "℃ﻩñמëĉţīηǥ ṫѳ ℅ϟ∶℅δ∙∙∙"
 
-#: tt-irc.js:1203
+#: tt-irc.js:1275
 msgid "Ping reply from %u: %d second(s)."
 msgstr "Ṗǐñģ ṟèρłγ ḟŗﻩḿ ℅ŭ∶ ℅δ ŝėċǒṅδ₍ṡ₎∙"
 
-#: tt-irc.js:1237
+#: tt-irc.js:1309
 #, fuzzy
 msgid "Received CTCP %c (%a) from %u"
 msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
 
-#: tt-irc.js:1249
+#: tt-irc.js:1321
 #, fuzzy
 msgid "CTCP %c reply from %u: %a"
 msgstr "Ṗǐñģ ṟèρłγ ḟŗﻩḿ ℅ŭ∶ ℅δ ŝėċǒṅδ₍ṡ₎∙"
 
-#: tt-irc.js:1261
+#: tt-irc.js:1333
 msgid "Received ping (%s) from %u"
 msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
 
-#: tt-irc.js:1268
+#: tt-irc.js:1340
 msgid "Connection established."
 msgstr "Čﻩṉṉẽ¢ŧǐŏń éﬆǟЫíşḩẽđ∙"
 
-#: tt-irc.js:1273
+#: tt-irc.js:1348
 msgid "Unknown command: /%s."
 msgstr ""
 
-#: tt-irc.js:1283
+#: tt-irc.js:1358
 msgid "%u is now known as %n"
 msgstr "℅ũ ǐﻱ ŋõẇ ĸמѳẘň ãś ℅ñ"
+
+#: tt-irc.js:1376
+msgid "%s (via %l)"
+msgstr ""
+
+#: tt-irc.js:1422
+#, fuzzy
+msgid "Received new private message from %n: %s"
+msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
+
+#: tt-irc.js:1970
+msgid "Your message is too long."
+msgstr ""
+
+#: tt-irc.js:1975
+msgid "Your message is too short."
+msgstr ""
 
 #: users.js:19
 msgid "Login for a new user:"
