@@ -577,6 +577,10 @@ pre {
 	color : gray;
 }
 
+#log span.twitter-msg {
+	color : gray;
+}
+
 ul#userlist-list {
 	list-style-type : none;
 	margin : 0px;
