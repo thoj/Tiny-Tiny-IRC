@@ -1377,6 +1377,8 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%l",
 				"<a target=\"blank\" href=\""+link+"\">Twitter</a>");
 
+			if (!window_active) ++new_messages;
+
 			push_message(connection_id, '---', line, MSGT_BROADCAST);
 			break;
 
