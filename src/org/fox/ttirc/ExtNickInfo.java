@@ -173,9 +173,8 @@ public class ExtNickInfo {
 		Sync();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void Sync() {
-		Map map = new LinkedHashMap();
+		Map<String,JSONArray> map = new LinkedHashMap<String,JSONArray>();
 		Enumeration<String> en = extinfo.keys();
 		
 		while (en.hasMoreElements()) {
