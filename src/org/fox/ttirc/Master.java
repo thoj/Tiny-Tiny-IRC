@@ -20,8 +20,7 @@ public class Master {
 	protected boolean active;
 	protected Hashtable<Integer, ConnectionHandler> connections;
 	protected int idleTimeout = 5*1000;
-	protected boolean useNativeCH = true;
-
+	
 	private String lockDir;
 	private FileLock lock;
 	private FileChannel lockChannel;
@@ -164,7 +163,6 @@ public class Master {
 			if (arg.equals("-node")) prefsNode = args[i+1]; 
 			if (arg.equals("-configure")) needConfigure = true;
 			if (arg.equals("-cleanup")) needCleanup = true;
-			if (arg.equals("-native")) useNativeCH = args[i+1].equals("true");
 			if (arg.equals("-log")) logFileName = args[i+1];
 			if (arg.equals("-version")) needVersion = true;
 		}
@@ -440,18 +438,13 @@ public class Master {
 	    
 	    while (rs.next()) {
 	    	int connectionId = rs.getInt(1);
-	    	
-	    	String useCHType = (useNativeCH == true) ? "NativeConnectionHandler" : "SystemConnectionHandler"; 
-	    		
+	    		    	
 	    	if (!connections.containsKey(connectionId)) {
-	    	  	logger.info("Spawning connection " + connectionId + " using " + useCHType);
+	    	  	logger.info("Spawning connection " + connectionId);
 	    	  	
 	    	  	ConnectionHandler ch;
 	    	  	
-	    	  	if (useNativeCH)	    	  	
-	    	  		ch = new NativeConnectionHandler(connectionId, this);
-	    	  	else
-	    	  		ch = new SystemConnectionHandler(connectionId, this);
+	    		ch = new NativeConnectionHandler(connectionId, this);
 	    	  	
 	    	   	connections.put(connectionId, ch);
 	    	   	
