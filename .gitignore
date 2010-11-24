@@ -3,6 +3,7 @@ messages.pot
 messages.mo
 lib/*.jar
 build.number
+lock/*.lock
 manifest.mf
 backend.jar
 locale/xx_XX/LC_MESSAGES/borkify
