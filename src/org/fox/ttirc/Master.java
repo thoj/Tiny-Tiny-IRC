@@ -534,10 +534,10 @@ public class Master {
 			
 			try {	
 				updateHeartbeat();
-				checkHandlers();		
-				
+				checkHandlers();				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.severe(e.toString());
+				System.exit(5);
 			}
 			
 			try {
