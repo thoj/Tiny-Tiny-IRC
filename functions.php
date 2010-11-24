@@ -1080,9 +1080,9 @@
 			$since_id = db_fetch_result($result, 0, 'twitter_last_id');
 
 			if ($since_id) {
-				$params['since_id'] = $_SESSION['twitter_last_id'];
+				$params['since_id'] = $since_id;
 			} else {
-				$params['counte'] = 1;
+				$params['count'] = 1;
 			}
 
 			$result = $connection->get('statuses/friends_timeline', $params);
