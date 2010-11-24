@@ -180,7 +180,6 @@ public class Master {
 			System.out.println(" -node node         - Use custom preferences node");
 			System.out.println(" -configure         - Display configuration dialog");
 			System.out.println(" -cleanup           - Cleanup data and exit");
-			System.out.println(" -native true/false - Use native (Java-based) connection handler (default: true)");
 			System.out.println(" -log file          - Enable logging to specified file");
 			System.out.println(" -version           - Display version information and exit");
 			System.exit(0);
