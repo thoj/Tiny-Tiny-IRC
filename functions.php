@@ -157,7 +157,8 @@
 				exit;
 			} else {
 				/* bump login timestamp */
-				db_query($link, "UPDATE ttirc_users SET last_login = NOW() WHERE id = " . 
+				db_query($link, "UPDATE ttirc_users SET last_login = NOW(), 
+			  		twitter_last_id = NULL WHERE id = " . 
 					$_SESSION["uid"]);
 
 				if ($_SESSION["language"] && SESSION_COOKIE_LIFETIME > 0) {
