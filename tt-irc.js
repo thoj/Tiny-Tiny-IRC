@@ -5,6 +5,7 @@ var new_messages = 0;
 var new_highlights = 0;
 var delay = 1500;
 var timeout_delay = 3000;
+var twitter_timeout_delay = 60000*10;
 var buffers = [];
 var nicklists = [];
 var li_classes = [];
@@ -19,6 +20,7 @@ var notify_events = [];
 var theme_images = [];
 var update_delay_max = 0;
 
+var twitter_id = false;
 var timeout_id = false;
 var update_id = false;
 
@@ -162,6 +164,8 @@ function init_second_stage(transport) {
 		hide_spinner();
 
 		update(true);
+
+		twitter_id = window.setTimeout("twitter_update()", 10000);
 
 	} catch (e) {
 		exception_error("init_done", e);
@@ -1358,6 +1362,24 @@ function handle_event(li_class, connection_id, line) {
 			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
 
 			break; 
+		case "TWITTER_MSG":
+			var params = line.message.split(":", 3);
+
+			var id = params[1];
+			var name = params[2];
+			var message = line.message.replace(/^TWITTER_MSG:.*?:.*?:/, "");
+
+			var link = "http://twitter.com/" + name + "/statuses/" + id;
+
+			message = "<span class=\"twitter-msg\">" + message + "</span>";
+
+			line.message = __("%s (via %l)").replace("%s", message);
+			line.message = line.message.replace("%l",
+				"<a target=\"blank\" href=\""+link+"\">Twitter</a>");
+
+			push_message(connection_id, '---', line, MSGT_BROADCAST);
+			break;
+
 		}
 
 	} catch (e) {
@@ -1965,5 +1987,29 @@ function tweet_selection_do() {
 
 	} catch (e) {
 		exception_error("tweet_selection", e);
+	}
+}
+
+function twitter_update() {
+	try {
+		console.log('in twitter_update...');
+
+		var tab = get_selected_tab();
+
+		if (tab) {
+			var connection_id = tab.getAttribute('connection_id');
+			var query = "?op=twitter-update&connection=" + connection_id;
+
+			new Ajax.Request("backend.php", {
+				parameters: query,
+				onComplete: function (transport) {
+				
+			} });
+		}
+
+		twitter_id = window.setTimeout("twitter_update()", twitter_timeout_delay);
+
+	} catch (e) {
+		exception_error("twitter_update", e);
 	}
 }

@@ -457,5 +457,10 @@
 		print json_encode(array("status" => (int) twitter_send_update($link, $text)));
 		break;
 
+	case "twitter-update":
+		$connection_id = db_escape_string($_REQUEST["connection"]);
+
+		print json_encode(array("status" => get_twitter_lines($link, $connection_id)));
+		break;
 	}
 ?>

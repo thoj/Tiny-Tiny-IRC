@@ -870,8 +870,7 @@
 		$urls = null;
 
 		$result = preg_replace("/(([a-z]+):\/\/[^ ]+)/i", 
-			"<a target=\"_blank\" onclick=\"return m_c(this)\" onmouseover=\"m_i(this)\" onmouseout=\"m_o(this)\"
-			href=\"\\1\">\\1</a>", $line);
+			"<a target=\"_blank\" onclick=\"return m_c(this)\" onmouseover=\"m_i(this)\" onmouseout=\"m_o(this)\" href=\"\\1\">\\1</a>", $line);
 
 		return $result;
 	}
@@ -1052,5 +1051,55 @@
 			id = " . $_SESSION['uid']);
 	
 		return db_fetch_result($result, 0, "cid") != 0;
+	}
+
+	function get_twitter_lines($link, $connection_id) {
+
+		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users 
+			WHERE id = ".$_SESSION['uid']);
+
+		$access_token = json_decode(db_fetch_result($result, 0, 'twitter_oauth'), true);
+
+		if ($access_token && CONSUMER_KEY != '') {
+	
+			/* Create a TwitterOauth object with consumer/user tokens. */
+			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+			$connection->decode_json = false;
+
+			$params = array("count" => 10, 'trim_user' => 0);
+
+			if ($_SESSION['twitter_last_id'])
+				$params['since_id'] = $_SESSION['twitter_last_id'];
+			else
+				$params['count'] = 1;
+
+			$result = $connection->get('statuses/friends_timeline', $params);
+
+			$lines = 0;
+
+			if ($result) {
+				$result = array_reverse(json_decode($result, true));
+
+				foreach ($result as $line) {
+
+					if ($_SESSION['twitter_last_id']) {
+						$message = 'TWITTER_MSG:' . $line['id_str'] . 
+							':' . $line['user']['screen_name'] . ':' . $line['text'];
+
+						push_message($link, $connection_id, '---', $message,
+							true, MSGT_EVENT, $line['user']['screen_name']);
+
+						++$lines;
+					}
+
+					$_SESSION['twitter_last_id'] = $line['id_str'];
+				}
+			}
+			
+			return $lines;
+		}
+
+		return -1;
 	}
 ?>
