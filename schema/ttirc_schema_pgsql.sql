@@ -32,6 +32,7 @@ create table ttirc_users (id serial not null primary key,
 	quit_message varchar(120) not null default '',
 	realname varchar(120) not null,
 	twitter_oauth text default null,
+	twitter_last_id text default null,
 	created timestamp default null);
 
 insert into ttirc_users (login,pwd_hash,access_level, nick, realname, email, quit_message) values ('admin', 'SHA1:5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 10, 'test', 'Admin User', 'test@localhost', 'My hovercraft is full of eels');
