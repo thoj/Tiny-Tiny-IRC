@@ -157,9 +157,12 @@
 				exit;
 			} else {
 				/* bump login timestamp */
-				db_query($link, "UPDATE ttirc_users SET last_login = NOW(), 
-			  		twitter_last_id = NULL WHERE id = " . 
-					$_SESSION["uid"]);
+
+				if (get_schema_version($link) >= 3) {
+					db_query($link, "UPDATE ttirc_users SET last_login = NOW(), 
+				  		twitter_last_id = NULL WHERE id = " . 
+						$_SESSION["uid"]);
+				}
 
 				if ($_SESSION["language"] && SESSION_COOKIE_LIFETIME > 0) {
 					setcookie("ttirc_lang", $_SESSION["language"], 
