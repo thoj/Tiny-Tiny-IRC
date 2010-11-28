@@ -838,7 +838,7 @@ function format_message(row_class, param, connection_id) {
 				param.message + "</span>";
 		} else {
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
-				param.ts + "</span>" +
+				param.ts + "</span> " +
 				"<span class='sys-message'>" + 
 				param.message + "</span>";
 		}
