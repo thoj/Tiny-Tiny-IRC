@@ -1957,7 +1957,7 @@ function tweet_selection() {
 
 function tweet_update_counter(textarea) {
 	try {
-		$("tweet-dlg-counter").value = textarea.value.length;
+		$("tweet-dlg-counter").value = 140 - textarea.value.length;
 	} catch (e) {
 		exception_error("tweet_update_counter", e);
 	}
