@@ -194,6 +194,11 @@
 			<input name="title" size="30" value="<?php echo $line['title'] ?>">
 			<br clear='left'/>
 
+			<label class='fixed'><?php echo __('Server password:') ?></label>
+			<input name="server_password" size="30" type="password" 
+				value="<?php echo $line['server_password'] ?>">
+			<br clear='left'/>
+
 			<label class="fixed"><?php echo __('Nickname:') ?></label>
 			<input name="nick" size="30" value="<?php echo $line['nick'] ?>">
 			<br clear='left'/>

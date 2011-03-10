@@ -135,6 +135,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 		String email;
 		String realname;
 		String[] autojoin;
+		String pass;
 		
 		if (rs.next()) {
 			nick = rs.getString("normal_nick");
@@ -144,6 +145,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			realname = rs.getString("realname");
 			autojoin = rs.getString("autojoin").split(",");
 			lastSentId = rs.getInt("last_sent_id");
+			pass = rs.getString("server_password");
 		
 			// wtf? no nick?!
 			if (nick.length() == 0) return false;
@@ -182,7 +184,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			ps.close();
 			
 			
-			irc = new IRCConnection(host, port, port, "", nick,	email, realname);
+			irc = new IRCConnection(host, port, port, pass, nick,	email, realname);
 
 			irc.addIRCEventListener(new Listener(connectionId, this, autojoin));
 			irc.setEncoding(encoding);

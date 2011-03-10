@@ -51,6 +51,7 @@ create table ttirc_connections(id serial not null primary key,
 	visible boolean not null default true,
 	userhosts text not null default '',
 	connect_cmd text not null default '',
+	server_password varchar(120) not null default '',
 	nick varchar(120) not null default '',
 	last_sent_id integer not null default 0,
 	owner_uid integer not null references ttirc_users(id) ON DELETE CASCADE);
@@ -140,5 +141,5 @@ create table ttirc_snippets(id serial not null primary key,
 
 create table ttirc_version (schema_version int not null);
 
-insert into ttirc_version values (3);
+insert into ttirc_version values (4);
 

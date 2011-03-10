@@ -261,6 +261,7 @@
 		$permanent = bool_to_sql_bool(db_escape_string($_REQUEST["permanent"]));
 		$connection_id = db_escape_string($_REQUEST["connection_id"]);
 		$visible = bool_to_sql_bool(db_escape_string($_REQUEST["visible"]));
+		$server_password = db_escape_string($_REQUEST["server_password"]);
 
 		if (!$title) $title = __("[Untitled]");
 
@@ -270,6 +271,7 @@
 				autojoin = '$autojoin',
 				connect_cmd = '$connect_cmd',
 				auto_connect = '$auto_connect',
+				server_password = '$server_password',
 				visible = '$visible',
 				nick = '$nick',
 				encoding = '$encoding',
