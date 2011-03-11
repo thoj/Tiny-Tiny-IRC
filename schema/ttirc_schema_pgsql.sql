@@ -54,6 +54,7 @@ create table ttirc_connections(id serial not null primary key,
 	server_password varchar(120) not null default '',
 	nick varchar(120) not null default '',
 	last_sent_id integer not null default 0,
+	use_ssl boolean not null default false,
 	owner_uid integer not null references ttirc_users(id) ON DELETE CASCADE);
 
 insert into ttirc_connections (title,owner_uid,autojoin,encoding,auto_connect) values ('GBU', 1, '#test', 'koi8-r', true);
@@ -141,5 +142,5 @@ create table ttirc_snippets(id serial not null primary key,
 
 create table ttirc_version (schema_version int not null);
 
-insert into ttirc_version values (4);
+insert into ttirc_version values (5);
 

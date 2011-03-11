@@ -262,6 +262,7 @@
 		$connection_id = db_escape_string($_REQUEST["connection_id"]);
 		$visible = bool_to_sql_bool(db_escape_string($_REQUEST["visible"]));
 		$server_password = db_escape_string($_REQUEST["server_password"]);
+		$use_ssl = bool_to_sql_bool(db_escape_string($_REQUEST["use_ssl"]));
 
 		if (!$title) $title = __("[Untitled]");
 
@@ -273,6 +274,7 @@
 				auto_connect = '$auto_connect',
 				server_password = '$server_password',
 				visible = '$visible',
+				use_ssl = '$use_ssl',
 				nick = '$nick',
 				encoding = '$encoding',
 				permanent = '$permanent'

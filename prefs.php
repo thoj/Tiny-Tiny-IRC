@@ -177,6 +177,12 @@
 			$permanent_checked = '';
 		}
 
+		if (sql_bool_to_bool($line['use_ssl'])) {
+			$use_ssl_checked = 'checked';
+		} else {
+			$use_ssl_checked = '';
+		}
+
 	?>
 	<div id="infoBoxTitle"><?php echo __("Edit Connection") ?></div>
 	<div class="infoBoxContents">
@@ -237,6 +243,12 @@
 			<input name="permanent" <?php echo $permanent_checked ?>
 				id="pr_permanent" type="checkbox" value="1">
 				<label for="pr_permanent"><?php echo __('Stay connected permanently') ?>
+					</label>
+			<br clear='left'/>
+
+			<input name="use_ssl" <?php echo $use_ssl_checked ?> 
+				id="pr_use_ssl" type="checkbox" value="1">
+				<label for="pr_use_ssl"><?php echo __('Connect using SSL') ?>
 					</label>
 			<br clear='left'/>
 
