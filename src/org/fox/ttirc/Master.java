@@ -169,7 +169,10 @@ public class Master {
 		
 		if (needVersion) {
 			System.out.println("Tiny Tiny IRC " + getVersion());
-			System.out.println("Copyright (C) 2010 Andrew Dolgov <cthulhoo(at)gmail.com>");
+			
+			int year = Calendar.getInstance().get(Calendar.YEAR);
+			
+			System.out.println("Copyright (C) 2010-"+year+" Andrew Dolgov <cthulhoo(at)gmail.com>");
 			System.exit(0);
 		}
 		
