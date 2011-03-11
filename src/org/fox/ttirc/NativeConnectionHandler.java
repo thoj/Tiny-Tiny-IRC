@@ -4,6 +4,7 @@ import org.schwering.irc.lib.IRCConnection;
 import org.schwering.irc.lib.IRCEventListener;
 import org.schwering.irc.lib.IRCModeParser;
 import org.schwering.irc.lib.IRCUser;
+import org.schwering.irc.lib.SSLIRCConnection;
 
 //import java.security.cert.X509Certificate;
 //import org.schwering.irc.lib.ssl.SSLIRCConnection;
@@ -136,6 +137,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 		String realname;
 		String[] autojoin;
 		String pass;
+		boolean ssl;
 		
 		if (rs.next()) {
 			nick = rs.getString("normal_nick");
@@ -146,6 +148,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			autojoin = rs.getString("autojoin").split(",");
 			lastSentId = rs.getInt("last_sent_id");
 			pass = rs.getString("server_password");
+			ssl = rs.getBoolean("use_ssl");
 		
 			// wtf? no nick?!
 			if (nick.length() == 0) return false;
@@ -183,8 +186,10 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			ps.execute();
 			ps.close();
 			
-			
-			irc = new IRCConnection(host, port, port, pass, nick,	email, realname);
+			if (ssl)
+				irc = new org.schwering.irc.lib.ssl.SSLIRCConnection(host, port, port, pass, nick, email, realname);
+			else
+				irc = new IRCConnection(host, port, port, pass, nick,	email, realname);
 
 			irc.addIRCEventListener(new Listener(connectionId, this, autojoin));
 			irc.setEncoding(encoding);
