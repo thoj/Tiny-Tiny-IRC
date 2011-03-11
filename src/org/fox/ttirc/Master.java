@@ -74,43 +74,8 @@ public class Master {
 	}
 	
 	public synchronized Connection getConnection() {
-	
 		return conn;
-		
-		/*boolean isConnected = false;
-		int connAttempt = 0;
-		
-		while (!isConnected && connAttempt < 20) {
-			
-			try {
-				if (conn != null) {
-					
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				isConnected = false;			
-			}
-			
-			if (!isConnected) {
-				System.out.println("Database connection failed. Retrying...");
-				try {
-					conn = initConnection();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					isConnected = false;
-				}
-			}
-			
-			++connAttempt;
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return conn; */
-	}
+	}		
 	
 	public Connection createConnection() throws SQLException {
 		
@@ -534,8 +499,18 @@ public class Master {
 		
 		while (active) {
 			
-			try {	
-				updateHeartbeat();
+			try {				
+				if (!checkSchema()) {
+					logger.severe("error: Incorrect schema version.");
+					System.exit(5);
+				}
+				
+				if (!checkConnection()) {
+					logger.severe("error: Database connection lost.");
+					System.exit(6);
+				}
+
+				updateHeartbeat();				
 				checkHandlers();				
 			} catch (SQLException e) {
 				logger.severe(e.toString());
@@ -557,6 +532,20 @@ public class Master {
 		}
 	}
 	
+	private boolean checkConnection() {
+		try {
+			Statement st = getConnection().createStatement();
+		   	st.execute("SELECT true");
+		   	st.close();
+		} catch (SQLException e) {
+			logger.warning(e.toString());
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
 	public void finalize() throws Throwable {
 		cleanup();		
 
