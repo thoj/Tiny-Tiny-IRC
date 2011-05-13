@@ -41,11 +41,11 @@ var CS_CONNECTED = 2;
 var CT_CHANNEL = 0;
 var CT_PRIVATE = 1;
 
-var colormap = [ "#00CCCC", "#000000", "#0000CC", "#CC00CC", "#606060", 
-	"green", "#00CC00", "maroon", "navy", "olive", "purple", 
+var colormap = [ "#00CCCC", "#000000", "#0000CC", "#CC00CC", "#606060",
+	"green", "#00CC00", "maroon", "navy", "olive", "purple",
 	"red", "#909090", "teal", "#CCCC00" ]
 
-var commands = [ "/join", "/part", "/nick", "/query", "/quote", "/msg", 
+var commands = [ "/join", "/part", "/nick", "/query", "/quote", "/msg",
 	"/op", "/deop", "/voice", "/devoice", "/ping", "/notice", "/away",
 	"/ctcp" ];
 
@@ -100,7 +100,7 @@ function create_tab_if_needed(chan, connection_id, tab_type) {
 			$(tab_list_id).innerHTML += tab;
 
 			sort_connection_tabs($(tab_list_id));
-			
+
 			var tab = $(tab_id);
 
 			if (tab && tab_type == "C") change_tab(tab);
@@ -140,7 +140,7 @@ function init_second_stage(transport) {
 		if (!handle_error(params, transport)) return false;
 
 		if (!params || params.status != 1) {
-			return fatal_error(14, __("The application failed to initialize."), 
+			return fatal_error(14, __("The application failed to initialize."),
 				transport.responseText);
 		}
 
@@ -188,7 +188,7 @@ function init() {
 		} });
 
 	} catch (e) {
-		exception_error("init", e);		
+		exception_error("init", e);
 	}
 }
 
@@ -244,7 +244,7 @@ function handle_update(transport) {
 
 				var chan = lines[i].channel;
 				var connection_id = lines[i].connection_id;
-		
+
 				//lines[i].message += " [" + lines[i].id + "/" + last_id + "]";
 
 				if (lines[i].message_type == MSGT_EVENT) {
@@ -299,12 +299,12 @@ function timeout() {
 function update(init) {
 	try {
 		var query = "?op=update&last_id=" + last_id;
-	  		
+
 		if (init) query += "&init=" + init;
 
 //		console.log("request update..." + query + " last: " + last_update);
 
-		timeout_id = window.setTimeout("timeout()", 
+		timeout_id = window.setTimeout("timeout()",
 			(update_delay_max * 1000) + 10000);
 
 		new Ajax.Request("backend.php", {
@@ -443,20 +443,20 @@ function update_buffer() {
 		if (nicklists[connection_id]) {
 
 			var nicklist = nicklists[connection_id][channel];
-	
+
 			if (nicklist) {
-	
+
 				$("userlist-list").innerHTML = "";
-	
-				for (var i = 0; i < nicklist.length; i++) {				
-	
+
+				for (var i = 0; i < nicklist.length; i++) {
+
 					var row_class = (i % 2) ? "even" : "odd";
-	
+
 					var nick_image = "<img src=\""+theme_images['user_normal.png']+
 						"\" alt=\"\">";
 
 					var nick = nicklist[i];
-	
+
 					switch (nick.substr(0,1)) {
 					case "@":
 						nick_image = "<img src=\""+theme_images['user_op.png']+"\" alt=\"\">";
@@ -467,12 +467,12 @@ function update_buffer() {
 						nick = nick.substr(1);
 						break;
 					}
-	
+
 					var userhosts = conndata_last[connection_id]["userhosts"];
 					var nick_ext_info = "";
 
 					if (userhosts && userhosts[nick]) {
-						nick_ext_info = userhosts[nick][0] + '@' + 
+						nick_ext_info = userhosts[nick][0] + '@' +
 							userhosts[nick][1] + " <" + userhosts[nick][3] + ">";
 
 						if (userhosts[nick][6] != null) {
@@ -482,22 +482,22 @@ function update_buffer() {
 							var delta = parseInt(ts - parseInt(userhosts[nick][6]));
 
 							if (delta > 0) {
-								nick_ext_info += "\n" + 
+								nick_ext_info += "\n" +
 									__("Last message: %d seconds ago.").replace("%d", delta);
 							}
 						}
-					}					
+					}
 
 /*					if (nick == active_nicks[connection_id]) {
 						nick = "<strong>" + nick + "</strong>";
 					} */
-	
+
 					var tmp_html = "<li class=\""+row_class+"\" " +
-						"title=\"" + nick_ext_info + "\"" + 
+						"title=\"" + nick_ext_info + "\"" +
 					  	"nick=\"" + nick + "\" " +
 						"onclick=\"query_user(this)\">" +
 						nick_image + " " + nick + "</li>";
-	
+
 					$("userlist-list").innerHTML += tmp_html;
 				}
 			} else {
@@ -507,7 +507,7 @@ function update_buffer() {
 
 		if (topics[connection_id] && tab.getAttribute("tab_type") != "P") {
 			var topic = topics[connection_id][channel];
-	
+
 			if (topic) {
 				if ($("topic-input").title != topics[connection_id][channel][0]) {
 					$("topic-input").value = topics[connection_id][channel][0];
@@ -515,14 +515,14 @@ function update_buffer() {
 
 				$("topic-input").disabled = conndata_last[connection_id].status != "2";
 			} else {
-	
+
 				if (tab.getAttribute("tab_type") != "S") {
 					$("topic-input").value = "";
 					$("topic-input").disabled = true;
 
 				} else {
 					if (conndata_last[connection_id].status == CS_CONNECTED) {
-						$("topic-input").value = __("Connected to: ") + 
+						$("topic-input").value = __("Connected to: ") +
 							conndata_last[connection_id]["active_server"];
 						$("topic-input").disabled = true;
 					} else {
@@ -542,7 +542,7 @@ function update_buffer() {
 
 			if (userhosts && userhosts[nick]) {
 				nick_ext_info = userhosts[nick][0] + '@' + userhosts[nick][1];
-			}					
+			}
 
 			$("topic-input").value = __("Conversation with") + " " +
 				tab.getAttribute("channel") + " (" + nick_ext_info + ")";
@@ -561,8 +561,8 @@ function update_buffer() {
 			var nick = active_nicks[connection_id];
 
 			if (nick && conndata_last[connection_id]["userhosts"][nick]) {
-				
-				
+
+
 				if (conndata_last[connection_id]["userhosts"][nick][4] == true) {
 					$("nick").className = "away";
 				} else {
@@ -588,7 +588,7 @@ function update_buffer() {
 				$('connect-btn').disabled = false;
 				$('connect-btn').setAttribute("set_enabled", 0);
 				break;
-		} 
+		}
 
 		$('connect-btn').setAttribute("connection_id", connection_id);
 
@@ -596,7 +596,7 @@ function update_buffer() {
 
 	} catch (e) {
 		exception_error("update_buffer", e);
-	}	
+	}
 }
 
 function change_topic(elem, evt) {
@@ -612,21 +612,21 @@ function change_topic(elem, evt) {
 		if (key == 13) {
 
 			var tab = get_selected_tab();
-	
+
 			if (!tab) return;
-	
+
 			var channel = tab.getAttribute("channel");
 			var connection_id = tab.getAttribute("connection_id")
-	
+
 			if (tab.getAttribute("tab_type") == "S") channel = "---";
 
 			topics[connection_id][channel] = elem.value;
 
-			var query = "?op=set-topic&topic=" + param_escape(elem.value) + 
-				"&chan=" + param_escape(channel) +			
+			var query = "?op=set-topic&topic=" + param_escape(elem.value) +
+				"&chan=" + param_escape(channel) +
 				"&connection=" + param_escape(connection_id) +
 				"&last_id=" + last_id;
-	
+
 			console.log(query);
 
 			show_spinner();
@@ -657,15 +657,15 @@ function send(elem, evt) {
 		if (key == 13) {
 
 			var tab = get_selected_tab();
-	
+
 			if (!tab) return;
-	
+
 			var channel = tab.getAttribute("channel");
-	
+
 			if (tab.getAttribute("tab_type") == "S") channel = "---";
 
-			var query = "?op=send&message=" + param_escape(elem.value) + 
-				"&chan=" + param_escape(channel) +			
+			var query = "?op=send&message=" + param_escape(elem.value) +
+				"&chan=" + param_escape(channel) +
 				"&connection=" + param_escape(tab.getAttribute("connection_id")) +
 				"&last_id=" + last_id + "&tab_type=" + tab.getAttribute("tab_type");
 
@@ -730,8 +730,8 @@ function toggle_connection(elem) {
 
 //		elem.disabled = true;
 
-		var query = "?op=toggle-connection&set_enabled=" + 
-			param_escape(elem.getAttribute("set_enabled")) + 
+		var query = "?op=toggle-connection&set_enabled=" +
+			param_escape(elem.getAttribute("set_enabled")) +
 			"&connection_id=" + param_escape(elem.getAttribute("connection_id"));
 
 		console.log(query);
@@ -739,7 +739,7 @@ function toggle_connection(elem) {
 		show_spinner();
 
 		new Ajax.Request("backend.php", {
-		parameters: query, 
+		parameters: query,
 		onComplete: function (transport) {
 			hide_spinner();
 		} });
@@ -752,7 +752,7 @@ function toggle_connection(elem) {
 function format_message(row_class, param, connection_id) {
 	try {
 
-		var is_hl = param.sender != conndata_last[connection_id].active_nick && 
+		var is_hl = param.sender != conndata_last[connection_id].active_nick &&
 			is_highlight(connection_id, param.message);
 
 		var tmp;
@@ -767,18 +767,18 @@ function format_message(row_class, param, connection_id) {
 		var userhosts = conndata_last[connection_id]["userhosts"];
 
 		if (userhosts && userhosts[param.sender]) {
-			nick_ext_info = userhosts[param.sender][0] + '@' + 
+			nick_ext_info = userhosts[param.sender][0] + '@' +
 				userhosts[param.sender][1] + " <" + userhosts[param.sender][3] + ">";
-		}					
+		}
 
-		if (is_hl) { 
+		if (is_hl) {
 			++new_highlights;
 			if (param.channel != "---" && param.id > last_old_id) {
 				var tab = find_tab(connection_id, param.channel);
 
 				if (notify_events[1] && (tab != get_selected_tab() || !window_active)) {
 					var msg = __("Received highlight on %c by %n: %s");
-				
+
 					msg = msg.replace("%c", param.channel);
 					msg = msg.replace("%n", param.sender);
 					msg = msg.replace("%s", param.message);
@@ -794,7 +794,7 @@ function format_message(row_class, param, connection_id) {
 
 			message = "* " + param.sender + " " + param.message;
 
-			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
+			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
 				param.ts + "</span>" +
 				"<span class='action'>" + message + "</span>";
 
@@ -808,12 +808,12 @@ function format_message(row_class, param, connection_id) {
 				sender_class = 'pvt-sender-out';
 			}
 
-			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
-				param.ts + 
+			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
+				param.ts +
 				"</span> <span class='lt'>-</span><span title=\""+nick_ext_info+"\" " +
 				"class='"+sender_class+"' "+color+">" +
 				param.sender + "</span><span class='gt'>-</span> " +
-				"<span class='message'>" + 
+				"<span class='message'>" +
 				param.message + "</span>";
 
 		} else if (param.sender != "---" && param.message_type != MSGT_SYSTEM) {
@@ -829,17 +829,17 @@ function format_message(row_class, param, connection_id) {
 //			param.message = param.message.replace(/(OO)/g,
 //					"<img src='images/piggie.png' alt='(oo)'>");
 
-			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
-				param.ts + 
+			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
+				param.ts +
 				"</span> <span class='lt'>&lt;</span><span title=\""+nick_ext_info+"\" " +
 				"class='sender' "+color+">" +
 				param.sender + "</span><span class='gt'>&gt;</span> " +
-				"<span class='message'>" + 
+				"<span class='message'>" +
 				param.message + "</span>";
 		} else {
-			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" + 
+			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
 				param.ts + "</span> " +
-				"<span class='sys-message'>" + 
+				"<span class='sys-message'>" +
 				param.message + "</span>";
 		}
 
@@ -873,7 +873,7 @@ function handle_conn_data(conndata) {
 					$("cimg-" + conndata[i].id).src = $("cimg-" + conndata[i].id).src.replace("online", "offline");
 
 				}
-			}			
+			}
 		} else {
 			conndata_last = [];
 		}
@@ -895,7 +895,7 @@ function handle_chan_data(chandata) {
 					var tab_type = "P";
 
 					switch (parseInt(chandata[connection_id][chan].chan_type)) {
-					case 0: 
+					case 0:
 						tab_type = "C";
 						break;
 					case 1:
@@ -908,13 +908,13 @@ function handle_chan_data(chandata) {
 					nicklists[connection_id][chan] = chandata[connection_id][chan]["users"];
 
 					if ((!topics[connection_id][chan] ||
-							!topics[connection_id][chan][0]) && 
+							!topics[connection_id][chan][0]) &&
 							chandata[connection_id][chan]["topic"][0] && tab_type == "C") {
 
 						var line = new Object();
 
 						line.message = __("Topic for %c is: %s").replace("%c", chan);
-						line.message = line.message.replace("%s", 
+						line.message = line.message.replace("%s",
 								rewrite_urls(chandata[connection_id][chan]["topic"][0]));
 						line.message_type = MSGT_SYSTEM;
 						line.ts = make_timestamp();
@@ -942,7 +942,7 @@ function handle_chan_data(chandata) {
 
 function update_title() {
 	try {
-		
+
 		var tab = get_selected_tab();
 
 		if (tab) {
@@ -999,11 +999,11 @@ function send_command(command) {
 
 			if (tab.getAttribute("tab_type") == "S") channel = "---";
 
-			var query = "?op=send&message=" + param_escape(command) + 
+			var query = "?op=send&message=" + param_escape(command) +
 				"&channel=" + param_escape(channel) +
 				"&connection=" + param_escape(tab.getAttribute("connection_id")) +
 				"&last_id=" + last_id;
-	
+
 			console.log(query);
 
 			show_spinner();
@@ -1025,7 +1025,7 @@ function change_nick() {
 	try {
 		var nick = prompt("Enter new nickname:");
 
-		if (nick) send_command("/nick " + nick);		
+		if (nick) send_command("/nick " + nick);
 
 	} catch (e) {
 		exception_error("change_nick", e);
@@ -1074,13 +1074,13 @@ function cleanup_tabs(chandata) {
 			}
 
 			if (tabs[i].getAttribute("tab_type") != "S") {
-				if (!chandata[connection_id] || 
+				if (!chandata[connection_id] ||
 						(chandata[connection_id] && !chandata[connection_id][chan])) {
 
 					console.log("removing unnecessary C/P-tab: " + tabs[i].id);
 
 					var tab_list = $("tabs-" + connection_id);
-					
+
 					if (tab_list) tab_list.removeChild(tabs[i]);
 
 				}
@@ -1118,7 +1118,7 @@ function close_tab(elem) {
 				hide_spinner();
 			} });
 		}
-		
+
 	} catch (e) {
 		exception_error("change_tab", e);
 	}
@@ -1177,11 +1177,11 @@ function handle_event(li_class, connection_id, line) {
 		case "MODE":
 			var mode = params[1];
 			var subject = params[2];
-			
+
 			var msg_type;
 
 			if (mode) {
-				line.message = __("%u has changed mode [%m] on %s").replace("%u", 
+				line.message = __("%u has changed mode [%m] on %s").replace("%u",
 						line.sender);
 				line.message = line.message.replace("%m", mode);
 				line.message = line.message.replace("%s", subject);
@@ -1191,7 +1191,7 @@ function handle_event(li_class, connection_id, line) {
 			} else {
 				line.sender = "---";
 
-				line.message = __("%u has changed mode [%m]").replace("%u", 
+				line.message = __("%u has changed mode [%m]").replace("%u",
 						line.channel);
 				line.message = line.message.replace("%m", subject);
 
@@ -1250,7 +1250,7 @@ function handle_event(li_class, connection_id, line) {
 		case "DISCONNECT":
 			line.message = __("Connection terminated.");
 
-			if (last_id > last_old_id && notify_events[3]) 
+			if (last_id > last_old_id && notify_events[3])
 				notify("Disconnected from server.");
 
 			push_message(connection_id, '---', line);
@@ -1272,7 +1272,7 @@ function handle_event(li_class, connection_id, line) {
 		case "PING_REPLY":
 			var args = params[1];
 
-			line.message = __("Ping reply from %u: %d second(s).").replace("%u", 
+			line.message = __("Ping reply from %u: %d second(s).").replace("%u",
 					line.sender);
 			line.message = line.message.replace("%d", args);
 			line.message_type = MSGT_SYSTEM;
@@ -1305,7 +1305,7 @@ function handle_event(li_class, connection_id, line) {
 		case "CTCP":
 			var command = params[1];
 			var args = params[2];
-			
+
 			line.message = __("Received CTCP %c (%a) from %u").replace("%c", command);
 			line.message = line.message.replace("%a", args);
 			line.message = line.message.replace("%u", line.sender);
@@ -1317,7 +1317,7 @@ function handle_event(li_class, connection_id, line) {
 		case "CTCP_REPLY":
 			var command = params[1];
 			var args = params[2];
-			
+
 			line.message = __("CTCP %c reply from %u: %a").replace("%c", command);
 			line.message = line.message.replace("%a", args);
 			line.message = line.message.replace("%u", line.sender);
@@ -1339,7 +1339,7 @@ function handle_event(li_class, connection_id, line) {
 		case "CONNECT":
 			line.message = __("Connection established.");
 
-			if (last_id > last_old_id && notify_events[3]) 
+			if (last_id > last_old_id && notify_events[3])
 				notify("Connected to server.");
 
 			push_message(connection_id, '---', line);
@@ -1361,7 +1361,7 @@ function handle_event(li_class, connection_id, line) {
 
 			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
 
-			break; 
+			break;
 		case "TWITTER_MSG":
 			var params = line.message.split(":", 3);
 
@@ -1398,7 +1398,7 @@ function toggle_li_class(channel) {
 		} else {
 			li_classes[channel] = "odd";
 		}
-	} 
+	}
 }
 
 function push_message(connection_id, channel, message, message_type) {
@@ -1422,13 +1422,13 @@ function push_message(connection_id, channel, message, message_type) {
 			if (tab && notify_events[2] && (get_selected_tab() != tab || !window_active)) {
 				if (tab.getAttribute("tab_type") == "P" && message.id > last_old_id) {
 					var msg = __("Received new private message from %n: %s");
-					
+
 					msg = msg.replace("%n", message.sender);
 					msg = msg.replace("%s", message.message);
 
 					notify(msg);
 
-				}				
+				}
 			}
 
 			highlight_tab_if_needed(connection_id, channel, message);
@@ -1449,7 +1449,7 @@ function push_message(connection_id, channel, message, message_type) {
 
 					buffers[connection_id][chan].push(tmp_html);
 
-//					highlight_tab_if_needed(connection_id, 
+//					highlight_tab_if_needed(connection_id,
 //						tabs[i].getAttribute("channel"), message);
 				}
 			}
@@ -1526,11 +1526,11 @@ function show_thumbnail(img) {
 	}
 }
 
-function show_preview(img) {
-	try {
-		hide_spinner();
+function resize_preview() {
 
+	try {
 		var vp = document.viewport.getDimensions();
+		var img = $$("#image-preview img")[0];
 
 		var max_width = vp.width/1.5;
 		var max_height = vp.height/1.5;
@@ -1547,14 +1547,25 @@ function show_preview(img) {
 
 		var dp = $("preview-shadow").getDimensions();
 
-		$("preview-shadow").style.left = (vp.width/2 - dp.width/2) + "px";
-		$("preview-shadow").style.top = (vp.height/2 - dp.height/2) + "px";
-		$("preview-shadow").style.width = dp.width;
-		$("preview-shadow").style.height = dp.height;
+		$("preview-shadow").setStyle({
+			left: (vp.width/2 - dp.width/2) + "px",
+			top: (vp.height/2 - dp.height/2) + "px",
+			width: dp.width,
+			height: dp.height,
+		});
 
-		//Effect.Appear("image-preview");
+	} catch (e) {
+		exception_error("resize_preview", e);
+	}
+}
+
+function show_preview(img) {
+	try {
+		hide_spinner();
 
 		Element.show("preview-shadow");
+
+		window.setTimeout("resize_preview()", 1);
 
 	} catch (e) {
 		exception_error("show_preview", e);
@@ -1562,7 +1573,7 @@ function show_preview(img) {
 }
 
 function m_c(elem) {
-	try {	
+	try {
 
 		if (!elem.href.toLowerCase().match("(jpg|gif|png|bmp)$"))
 			return true;
@@ -1572,7 +1583,7 @@ function m_c(elem) {
 
 		show_spinner();
 
-		$("image-preview").innerHTML = "<img onload=\"show_preview(this)\" " + 
+		$("image-preview").innerHTML = "<img onload=\"show_preview(this)\" " +
 			"src=\"" + elem.href + "\"/>";
 
 		return false;
@@ -1583,9 +1594,9 @@ function m_c(elem) {
 }
 
 function m_i(elem) {
-	try {	
+	try {
 
-		if (!elem.href.toLowerCase().match("(jpg|gif|png|bmp)$") || 
+		if (!elem.href.toLowerCase().match("(jpg|gif|png|bmp)$") ||
 				Element.visible("preview-shadow"))
 			return;
 
@@ -1593,7 +1604,7 @@ function m_i(elem) {
 
 			show_spinner();
 
-			$("image-tooltip").innerHTML = "<img onload=\"show_thumbnail(this)\" " + 
+			$("image-tooltip").innerHTML = "<img onload=\"show_thumbnail(this)\" " +
 				"src=\"" + elem.href + "\"/>";
 
 			_tooltip_elem = elem;
@@ -1608,7 +1619,7 @@ function m_i(elem) {
 }
 
 function m_o(elem) {
-	try {	
+	try {
 		hide_spinner();
 
 		window.clearTimeout(elem.getAttribute("timeout"));
@@ -1635,7 +1646,7 @@ function hotkey_handler(e) {
 		} catch (e) {
 
 		}
-	
+
 		if (window.event) {
 			keycode = window.event.keyCode;
 		} else if (e) {
@@ -1647,7 +1658,7 @@ function hotkey_handler(e) {
 		if (keycode == 27) { // escape
 			close_infobox();
 			Element.hide("preview-shadow");
-		} 
+		}
 
 		if (!hotkeys_enabled) {
 			console.log("hotkeys disabled");
@@ -1698,7 +1709,7 @@ function hotkey_handler(e) {
 
 			var real_offset = input_cache.length + input_cache_offset;
 
-			if (input_cache[real_offset]) { 
+			if (input_cache[real_offset]) {
 				elem.value = input_cache[real_offset];
 				elem.setSelectionRange(elem.value.length, elem.value.length);
 			}
@@ -1748,12 +1759,12 @@ function hotkey_handler(e) {
 			}
 
 //			console.log("COMP STR [" + comp_str + "]");
-		
+
 			if (tab) {
 
 				var nicks = get_nick_list(tab.getAttribute("connection_id"),
 							tab.getAttribute("channel"));
-	
+
 				var r = new RegExp(comp_str + "$");
 
 				for (var i = 0; i < nicks.length; i++) {
@@ -1810,7 +1821,7 @@ function push_cache(line) {
 
 		input_cache.push(line);
 
-		while (input_cache.length > 100) 
+		while (input_cache.length > 100)
 			input_cache.shift();
 
 	} catch (e) {
@@ -1827,11 +1838,11 @@ function get_nick_list(connection_id, channel) {
 			var nicklist = nicklists[connection_id][channel];
 
 			if (nicklist) {
-	
-				for (var i = 0; i < nicklist.length; i++) {				
-	
+
+				for (var i = 0; i < nicklist.length; i++) {
+
 					var nick = nicklist[i];
-	
+
 					switch (nick.substr(0,1)) {
 					case "@":
 						nick = nick.substr(1);
@@ -1860,11 +1871,11 @@ function is_highlight(connection_id, message) {
 		if (message.message_type == MSGT_SYSTEM)
 			return false;
 
-		if (message.id <= last_old_id) 
+		if (message.id <= last_old_id)
 			return false;
 
-		if (typeof active_nicks[connection_id] == 'string' && 
-				message.match(active_nicks[connection_id].toUpperCase())) 
+		if (typeof active_nicks[connection_id] == 'string' &&
+				message.match(active_nicks[connection_id].toUpperCase()))
 			return true;
 
 		for (var i = 0; i < highlight_on.length; i++) {
@@ -1889,7 +1900,7 @@ function highlight_tab_if_needed(connection_id, channel, message) {
 
 		if (tab && tab != get_selected_tab()) {
 
-		  if (tab.getAttribute("tab_type") != "S" && 
+		  if (tab.getAttribute("tab_type") != "S" &&
 				  is_highlight(connection_id, message.message)) {
 
 				tab.className = "highlight";
@@ -1920,7 +1931,7 @@ function find_tab(connection_id, channel) {
 			} else {
 				tabs = $("tabs-list").getElementsByTagName("li");
 			}
-	
+
 			for (var i = 0; i < tabs.length; i++) {
 				if (tabs[i].id && tabs[i].id.match("tab-")) {
 					if (tabs[i].getAttribute("channel") == channel) {
@@ -1969,12 +1980,12 @@ function tweet_selection_do() {
 		var text = document.forms['new_tweet_form'].text.value.strip();
 
 		if (text.length > 140) {
-			alert(__("Your message is too long."));	
+			alert(__("Your message is too long."));
 			return;
 		}
 
 		if (text.length == 0) {
-			alert(__("Your message is too short."));	
+			alert(__("Your message is too short."));
 			return;
 		}
 
@@ -2005,7 +2016,7 @@ function twitter_update() {
 			new Ajax.Request("backend.php", {
 				parameters: query,
 				onComplete: function (transport) {
-				
+
 			} });
 		}
 
