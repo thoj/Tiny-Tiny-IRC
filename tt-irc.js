@@ -772,8 +772,8 @@ function format_message(row_class, param, connection_id) {
 		}
 
 		if (is_hl) {
-			++new_highlights;
 			if (param.channel != "---" && param.id > last_old_id) {
+				++new_highlights;
 				var tab = find_tab(connection_id, param.channel);
 
 				if (notify_events[1] && (tab != get_selected_tab() || !window_active)) {
