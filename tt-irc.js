@@ -1462,6 +1462,8 @@ function push_message(connection_id, channel, message, message_type) {
 
 function set_window_active(active) {
 	try {
+		console.log("set_window_active: " + active);
+
 		window_active = active;
 
 		if (active) {
@@ -1470,7 +1472,7 @@ function set_window_active(active) {
 			$("input-prompt").focus();
 		}
 
-		update_title();
+		window.setTimeout("update_title()", 100);
 	} catch (e) {
 		exception_error("window_active", e);
 	}
