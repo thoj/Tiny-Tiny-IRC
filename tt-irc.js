@@ -680,8 +680,8 @@ function send(elem, evt) {
 			new Ajax.Request("backend.php", {
 			parameters: query,
 			onComplete: function (transport) {
-				handle_update(transport);
 				hide_spinner();
+				handle_update(transport);
 			} });
 		}
 
@@ -1011,8 +1011,8 @@ function send_command(command) {
 			new Ajax.Request("backend.php", {
 			parameters: query,
 			onComplete: function (transport) {
-				handle_update(transport);
 				hide_spinner();
+				handle_update(transport);
 			} });
 		}
 
