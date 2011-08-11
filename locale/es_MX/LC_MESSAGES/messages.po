@@ -1,154 +1,165 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Ricardo A. Hermosilla Carrillo <ra.hermosillac@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Tiny Tiny IRC\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-11 13:11+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2011-06-03 15:46+0000\n"
+"Last-Translator: rahermosillac <ra.hermosillac@gmail.com>\n"
+"Language-Team: Spanish (Mexican) (http://www.transifex.net/projects/p/tt-irc/"
+"team/es_MX/)\n"
+"Language: es_MX\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: backend.php:59
 #, php-format
 msgid "Created user %s with password <b>%s</b>."
-msgstr "Ċŗêǟךęď ūṡêѓ ℅ﻱ ẃϊẗḣ ṗǎśśẘ∅řḋ <Ь>℅ﻯ<⁄б>·"
+msgstr "Usuario %s creado con la contraseña <b>%s</b>."
 
 #: backend.php:67
 #, php-format
 msgid "User %s already exists"
-msgstr "Üﻯēŗ ℅ŝ ãḻѓēâðÿ ĕχìﬆš"
+msgstr "El usuario %s ya existe"
 
 #: backend.php:89
 #, php-format
 msgid "Reset password of user %s to <b>%s</b>."
-msgstr "Яėṡẻṫ ρąϟŝŵŏŗ∂ ѳḟ ûŝèŗ ℅š ţö <ﻅ>℅ś<⁄Ѣ>∙"
+msgstr "Contraseña del usuario %s restablecida a <b>%s</b>."
 
 #: backend.php:267
 msgid "[Untitled]"
-msgstr "[Ūתẗỉẗḻẻđ]"
+msgstr "[Sin título]"
 
 #: backend.php:358
 #, php-format
 msgid "Couldn't add server (%s:%d): Invalid syntax."
-msgstr "ҀỏưĺḏŊ‘ṫ ǡḏḑ şéřύęŗ ₍℅ş∶℅δ₎∶ Ì∩νåļϊď ṡỹńךäẋ·"
+msgstr "No se puede añadir el servidor (%s: %d): Sintaxis inválida."
 
 #: backend.php:409 login_form.php:124
 msgid "Default profile"
-msgstr "Ḋėϝåúĺṫ ṗѓﻩﬁḻẻ"
+msgstr "Perfil por defecto"
 
 #: errors.php:3
 msgid "Unknown error"
-msgstr "Ůņĸňѳẇŋ ēṙѓōṟ"
+msgstr "Error desconocido"
 
 #: errors.php:5
 msgid ""
 "This program requires XmlHttpRequest to function properly. Your browser "
 "doesn't seem to support it."
 msgstr ""
+"Este programa requiere XmlHttpRequest para funcionar adecuadamente. Su "
+"navegador no parece cumplir el requisito."
 
 #: errors.php:8
 msgid ""
 "This program requires cookies to function properly. Your browser doesn't "
 "seem to support them."
 msgstr ""
+"Este programa requiere que las cookies estén activadas para funcionar "
+"adecuadamente. Su navegador no parece cumplir el requisito."
 
 #: errors.php:11
 msgid "Backend sanity check failed"
-msgstr "ßâĉĸëńḋ šāŋỉṫỷ ¢Ћęćḵ ḟâĭļèδ"
+msgstr "Fallo al verificar el fin del proceso"
 
 #: errors.php:13
 msgid "Frontend sanity check failed."
-msgstr "℉řóňךẻŊḏ śãמî†ý ¢ħëςǩ ḟǟïľéδ∙"
+msgstr "Fallo al verificar el inicio del proceso"
 
 #: errors.php:15
 msgid ""
 "Incorrect database schema version. &lt;a href='update.php'&gt;Please "
 "update&lt;/a&gt;."
 msgstr ""
+"Versión de esquema de la base de datos incorrecta. &lt;a href='update."
+"php'&gt;Por favor, actualice&lt;/a&gt;."
 
 #: errors.php:17
 msgid "Request not authorized."
-msgstr "Ʀę۹ǔĕﬆ ŋσţ ăüẗḣöṟỉźěð∙"
+msgstr "Solicitud no autorizada."
 
 #: errors.php:19
 msgid "No operation to perform."
-msgstr "Ņò ŏṗèѓªṯϊ∅ת ךō ṕēŗḟōṙḿ∙"
+msgstr "Ninguna operación a realizar."
 
 #: errors.php:23
 msgid "Denied. Your access level is insufficient to access this page."
-msgstr "Ðẽηīě∂· Ŷσŭŗ ă¢¢ëşś ŀẻṽĕḻ įﻱ ĩñśũﬀį¢ĩĕηך ṫö āςćëśş †ĥîś ṗâĝę∙"
+msgstr ""
+"Denegado. Su nivel de acceso es insuficiente para acceder a esta página."
 
 #: errors.php:25
 msgid "Configuration check failed"
-msgstr "Ϛőṉﬁǥùѓǟ†ĩơή ċḩěςĸ ϝảîŀĕð"
+msgstr "Fallo en la verificación de la configuración"
 
 #: errors.php:27
 msgid ""
 "Your version of MySQL is not currently supported. Please see \n"
 "\t\tofficial site for more information."
 msgstr ""
+"Su versión de MySQL no es soportada. Por favor, vea\n"
+"    el sitio oficial para mayor información."
 
 #: errors.php:32
 msgid "SQL escaping test failed, check your database and PHP configuration"
-msgstr "ŠǪĹ ẻŝĉǎṗĭηḡ ẗêﬆ ϝāíľẽḑ، ςẖèćĸ ўôúṟ ðǎťàбăﺉĕ ảתḋ ṖḢṖ ĉ∅Ŋﬁĝџṟąţỉôņ"
+msgstr ""
+"Prueba de escapado SQL fallida, verifique su base de datos y la "
+"configuración de PHP"
 
 #: errors.php:33
 msgid "Backend connection daemon is not running."
-msgstr "Ḇâćĸėñδ ćŏήṅèҁṯìﻩŋ ðǣḿǒή ìŝ ṅ∅ť ŗųמŋīńﻕ∙"
+msgstr "Conexión Daemon backend no está corriendo."
 
 #: errors.php:35 tt-irc.js:143
 msgid "The application failed to initialize."
-msgstr "Ťĥë ǟṗρḻỉçâךǐôמ ϝâĩḻęδ ךσ ǐŉįţĩǡŀỉẑė·"
+msgstr "La aplicación fallo al iniciar."
 
 #: functions.php:151
 msgid "Incorrect username or password"
-msgstr "Ỉ∩ćŏṟřěċŧ ùϟēṟ∩åṁė òṟ ṗảﻯﺉẃøṙḑ"
+msgstr "Usuario o contraseña incorrectos"
 
 #: functions.php:320
 msgid "Session failed to validate (incorrect IP)"
-msgstr "§ĕşϟỉ∅ṅ ḟâìḻẽđ ṯﻩ ϋăḻìđǡẗĕ ₍ĭŉĉøṙѓě¢ṯ ÌṖ₎"
+msgstr "Fallo al validar la sesión (IP Incorrecta)"
 
 #: functions.php:903
 msgid "Default"
-msgstr "Ḋëϝảǔļŧ"
+msgstr "Por defecto"
 
 #: functions.php:990
 msgid "Send Tweet"
-msgstr ""
+msgstr "Enviar Tweet"
 
 #: functions.php:998
 msgid "Your tweet:"
-msgstr ""
+msgstr "Su Tweet:"
 
 #: functions.php:1004
 msgid "Full IRC snippet:"
-msgstr ""
+msgstr "Snippet IRC completo:"
 
 #: functions.php:1013
 msgid "Tweet this!"
-msgstr ""
+msgstr "Tweet"
 
 #: functions.php:1014
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: index.php:64 index.php:68
-#, fuzzy
 msgid "Click to close"
-msgstr "℃ŀīćḵ ךő ėḑìť ūśëř"
+msgstr "Presione para cerrar"
 
 #: index.php:72
 msgid "Loading, please wait..."
-msgstr "Ļőªďíתǧ˛ ρŀẽãśẻ ώåī†·∙·"
+msgstr "Cargando, por favor espere..."
 
 #: index.php:79
 msgid ""
@@ -156,71 +167,73 @@ msgid ""
 "\t\tfor this application to function properly. Please check your\n"
 "\t\tbrowser settings."
 msgstr ""
+"Su navegador no soporta JavaScript, el cual es requerido\n"
+"para que esta aplicación funcione adecuadamente. Por favor\n"
+"verifique la configuración de su navegador."
 
 #: index.php:94
 msgid "Fatal Exception"
-msgstr "℉ăŧàľ Ẽẍçẽρŧīﻩη"
+msgstr "Excepción Fatal"
 
 #: index.php:98
 msgid "Try again"
-msgstr ""
+msgstr "Intentar nuevamente"
 
 #: index.php:111
 msgid "Hello,"
-msgstr "Ήěḻłò،"
+msgstr "Hola,"
 
 #: index.php:113 prefs.php:325
 msgid "Preferences"
-msgstr "Ṗřëḟèŗèήċėś"
+msgstr "Preferencias"
 
 #: index.php:116
 msgid "Users"
-msgstr "Ǔﻱėѓş"
+msgstr "Usuarios"
 
 #: index.php:120
 msgid "Logout"
-msgstr "∟óģσúṯ"
+msgstr "Cerrar Sesión"
 
 #: index.php:169
-#, fuzzy
 msgid "Tweet selected text"
-msgstr "Ďëļè†ě ṡéļęç†ėđ ûśēřś؟"
+msgstr "Tweetear texto seleccionado"
 
 #: index.php:171
 msgid "Tweet"
-msgstr ""
+msgstr "Tweetear"
 
 #: login_form.php:102
 msgid "Login:"
-msgstr "Ł∅ĝϊŋ∶"
+msgstr "Usuario:"
 
 #: login_form.php:106
 msgid "Password:"
-msgstr "Ṗàﻯﻯωǒѓḋ∶"
+msgstr "Contraseña:"
 
 #: login_form.php:111
 msgid "Language:"
-msgstr "Ļăŋĝūąġė∶"
+msgstr "Idioma:"
 
 #: login_form.php:121
 msgid "Profile:"
-msgstr "Ṗѓöﬁḻē∶"
+msgstr "Perfil:"
 
 #: login_form.php:129
 msgid "Log in"
-msgstr "Ḻôḡ ìń"
+msgstr "Iniciar Sesión"
 
 #: login_form.php:133
 msgid "Create new account"
-msgstr "Çѓěą†ẻ ṅẻώ ą¢ςσùη†"
+msgstr "Crear nueva cuenta"
 
 #: prefs.php:7
 msgid "Customize Theme"
-msgstr ""
+msgstr "Personalizar tema"
 
 #: prefs.php:11
 msgid "Custom CSS declarations"
-msgstr ""
+msgstr "Declaraciones CSS personalizadas"
 
 #: prefs.php:17
 #, php-format
@@ -229,246 +242,248 @@ msgid ""
 "with custom CSS declarations here. <a target=\"_blank\" href=\"%s\">This "
 "file</a> can be used as a baseline."
 msgstr ""
+"Usted puede sobreescribir colores, tipos de letras y el diseño de su tema "
+"seleccionado con declaraciones CSS. <a target=\"_blank\" href=\"%s\">Este "
+"archivo</a> puede ser utilizado como base."
 
 #: prefs.php:22
 msgid "Save & Reload"
-msgstr ""
+msgstr "Guardar y Recargar"
 
 #: prefs.php:23 prefs.php:52 prefs.php:146 prefs.php:273
 msgid "Go back"
-msgstr "Ḡѳ ḇáҁǩ"
+msgstr "Ir atrás"
 
 #: prefs.php:37 prefs.php:374 twitter.php:95
 msgid "Register with Twitter"
-msgstr ""
+msgstr "Registrar con Twitter"
 
 #: prefs.php:41 prefs.php:380
 msgid "Authentication"
-msgstr "Ąùţḩëṉ†îćáẗī∅ŋ"
+msgstr "Autenticación"
 
 #: prefs.php:44
 msgid ""
 "You'll need to register with Twitter.com before you'll be able to send "
 "tweets from Tiny Tiny IRC."
 msgstr ""
+"Necesita registrarte con Twitter.com antes de poder enviar Tweets desde Tiny "
+"Tiny IRC."
 
 #: prefs.php:46
 msgid "You have been successfully registered with Twitter.com.."
-msgstr ""
+msgstr "Usted se ha registrado satisfactoriamente con Twitter.com"
 
 #: prefs.php:51
 msgid "Register with Twitter.com"
-msgstr ""
+msgstr "Registrar con Twitter.com"
 
 #: prefs.php:78
 msgid "(connected)"
-msgstr "₍ćôņṅěςťėḏ₎"
+msgstr "(conectado)"
 
 #: prefs.php:106
 msgid "Configure Notifications"
-msgstr ""
+msgstr "Configurar notificaciones"
 
 #: prefs.php:110
 msgid ""
 "Desktop notifications are only shown for events happening in background "
 "channels or when your Tiny Tiny IRC window is unfocused."
 msgstr ""
+"Las notificaciones de Escritorio sólo son mostradas para eventos que ocurren "
+"en segundo plano en canales o cuando Tiny Tiny IRC no está en primer plano."
 
 #: prefs.php:112
 msgid "Show notifications on:"
-msgstr ""
+msgstr "Mostrar notificaciones al:"
 
 #: prefs.php:121
 msgid "Channel highlight"
-msgstr ""
+msgstr "Resaltado del Canal"
 
 #: prefs.php:127
-#, fuzzy
 msgid "Private message"
-msgstr "Ϙџĭך ḿéﻱşåǧè∶"
+msgstr "Mensaje privado"
 
 #: prefs.php:133
-#, fuzzy
 msgid "Connection status change"
-msgstr "Čﻩṉṉẽ¢ŧǐŏń éﬆǟЫíşḩẽđ∙"
+msgstr "Cambio de estado de conexión"
 
 #: prefs.php:143
-#, fuzzy
 msgid "Enable notifications"
-msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
+msgstr "Habilitar notificaciones"
 
 #: prefs.php:145 prefs.php:272 prefs.php:407
 msgid "Save"
-msgstr "Ŝǎϋę"
+msgstr "Guardar"
 
 #: prefs.php:187
 msgid "Edit Connection"
-msgstr "Ēḏϊך Ćﻩηṉẻćṯîò∩"
+msgstr "Editar conexión"
 
 #: prefs.php:191
 msgid "Connection"
-msgstr "Ćőṉņëć†ϊŏή"
+msgstr "Conexión"
 
 #: prefs.php:199
 msgid "Title:"
-msgstr "Ṯįŧłë∶"
+msgstr "Título:"
 
 #: prefs.php:203
-#, fuzzy
 msgid "Server password:"
-msgstr "Ňéẃ ρàﻱšẅöѓ∂∶"
+msgstr "Contraseña del Servidor:"
 
 #: prefs.php:208 prefs.php:341
 msgid "Nickname:"
-msgstr "№ςḵńǡṁë∶"
+msgstr "Nombre de usuario:"
 
 #: prefs.php:212
 msgid "Favorite channels:"
-msgstr "Ḟǎΰŏřǐťé ¢ḧäήŊēļﻱ∶"
+msgstr "Canales favoritos:"
 
 #: prefs.php:216
 msgid "Connect command:"
-msgstr "℃óñŋĕčṯ ҁơḿḿǟמδ∶"
+msgstr "Comando de conexión:"
 
 #: prefs.php:220
 msgid "Character set:"
-msgstr "ϚЋảѓàĉךẽѓ šę†∶"
+msgstr "Conjunto de caracteres:"
 
 #: prefs.php:233
-#, fuzzy
 msgid "Enable connection"
-msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
+msgstr "Habilitar conexión"
 
 #: prefs.php:239
 msgid "Automatically connect"
-msgstr "Åט†ﻩḿăţỉςǎḻļỷ ςơṅṉêćṫ"
+msgstr "Conectar automáticamente"
 
 #: prefs.php:245
 msgid "Stay connected permanently"
-msgstr "Ś†ªý ċôņñẽċṫě∂ ṗéṙṁäŉēήţĺỳ"
+msgstr "Mantener conexión permanente"
 
 #: prefs.php:251
-#, fuzzy
 msgid "Connect using SSL"
-msgstr "Ćőṉņëć†ϊŏή"
+msgstr "Conectar utilizando SSL"
 
 #: prefs.php:261
 msgid "Servers"
-msgstr "Ṡêřṽëṟﻯ"
+msgstr "Servidores"
 
 #: prefs.php:269
 msgid "Add server"
-msgstr "Âḏḑ šẻṟѵëŗ"
+msgstr "Agregar servidor"
 
 #: prefs.php:270 prefs.php:404 users.php:50
 msgid "Delete"
-msgstr "Ðĕĺěŧê"
+msgstr "Borrar"
 
 #: prefs.php:293
 msgid "(active)"
-msgstr "₍åćŧĭύè₎"
+msgstr "(activo)"
 
 #: prefs.php:301
 msgid "Click to edit connection"
-msgstr "Ĉļìčḵ ŧó éðíŧ ҁѳńŊêçťĭﻩŉ"
+msgstr "Presione para editar conexión"
 
 #: prefs.php:334
 msgid "Personal data"
-msgstr "Ṗẽṟšﻩṅâľ δäťª"
+msgstr "Datos personales"
 
 #: prefs.php:337
 msgid "Real name:"
-msgstr "Ʀęảĺ ήǟṁẽ∶"
+msgstr "Nombre Real:"
 
 #: prefs.php:345
 msgid "E-mail:"
-msgstr "ξ―ḿáīľ∶"
+msgstr "E-mail:"
 
 #: prefs.php:349
 msgid "Quit message:"
-msgstr "Ϙџĭך ḿéﻱşåǧè∶"
+msgstr "Mensaje de Salida:"
 
 #: prefs.php:353
 msgid "Highlight on:"
-msgstr ""
+msgstr "Resaltar al:"
 
 #: prefs.php:357
 msgid "Theme:"
-msgstr "Ţẖèṁė∶"
+msgstr "Tema:"
 
 #: prefs.php:362
 msgid "Customize"
-msgstr ""
+msgstr "Personalizar"
 
 #: prefs.php:367
 msgid "Configure desktop notifications"
-msgstr ""
+msgstr "Configurar notificaciones de escritorio"
 
 #: prefs.php:383
 msgid "New password:"
-msgstr "Ňéẃ ρàﻱšẅöѓ∂∶"
+msgstr "Nueva contraseña:"
 
 #: prefs.php:387
 msgid "Confirm:"
-msgstr "Ϛﻩמﬁřṁ∶"
+msgstr "Confirmar:"
 
 #: prefs.php:393
 msgid "Connections"
-msgstr "ĈőňŊèҁŧîōŊﻱ"
+msgstr "Conexiones"
 
 #: prefs.php:402
 msgid "Create connection"
-msgstr "Ĉṟĕàŧè ςǒηŋèҁṫįﻩת"
+msgstr "Crear conexión"
 
 #: prefs.php:408 users.php:53
 msgid "Close"
-msgstr "Ĉŀỏśė"
+msgstr "Cerrar"
 
 #: twitter.php:99
 msgid "Could not connect to Twitter. Refresh the page or try again later."
 msgstr ""
+"No se puede conectar con Twitter. Recargue la página o inténtelo más tarde."
 
 #: twitter.php:103
 msgid "Congratulations! You have successfully registered with Twitter."
-msgstr ""
+msgstr "¡Felicidades! Se ha registrado satisfactoriamente con Twitter."
 
 #: twitter.php:107 twitter.php:119 update.php:90
-#, fuzzy
 msgid "Return to Tiny Tiny IRC"
-msgstr "Ŗēṯŭṟŋ ṫ∅ Ţỉńÿ Ţĩήý Я∬"
+msgstr "Regresar a Tiny Tiny IRC"
 
 #: twitter.php:114
 msgid "Register"
-msgstr ""
+msgstr "Registrar"
 
 #: update.php:16
 msgid "Your access level is insufficient to run this script."
-msgstr "Ύòưř ǡćςĕšϟ ḻẻעẻŀ ỉṡ ĭתϟüﬀïćįĕṉך †ó ṙû∩ ţẖîﺉ ŝςṙįρṯ·"
+msgstr "Su nivel de acceso es insuficiente para correr este script."
 
 #: update.php:41
 msgid "Database Updater"
-msgstr "ḊāṯåЬăϟě Ūṕḏǎťéѓ"
+msgstr "Actualizador de base de datos"
 
 #: update.php:81
 msgid "Could not update database"
-msgstr "Ҁõűłḑ ήóŧ µṗďáṫě ∂áךåьäﺉè"
+msgstr "No se puede actualizar la base de datos"
 
 #: update.php:84
 msgid "Could not find necessary schema file, need version:"
-msgstr "Çỏטłð ňỏŧ ﬁṅḑ ńẻҁęşﻯªřÿ ṡςĥėṁã ﬁļè‚ ňĕẽḑ ṽĕѓšỉóň∶"
+msgstr ""
+"No se puede encontrar el archivo de esquema necesario, es necesario la "
+"versión:"
 
 #: update.php:85
 msgid ", found: "
-msgstr "، ḟøüŉḏ∶ "
+msgstr ", actual: "
 
 #: update.php:88
-#, fuzzy
 msgid "Tiny Tiny IRC database is up to date."
-msgstr "Ṫỉηγ Ṯîńẙ Ŗ∬ ḋàťáьàﻱĕ īﺉ űρ ṫö δąṯé∙"
+msgstr "La base de datos de Tiny Tiny IRC está actualizada."
 
 #: update.php:98
 msgid "Please backup your database before proceeding."
-msgstr "Ṗľĕªŝë ъªćǩüṗ ỷǒūѓ ḏáךǡЪªϟę ъẽḟσṟě ṕṙôςẻẽḋîñḡ∙"
+msgstr "Por favor, haga un respaldo de la base de datos antes de proceder."
 
 #: update.php:100
 #, php-format
@@ -476,31 +491,33 @@ msgid ""
 "Your Tiny Tiny RSS database needs update to the latest version (<b>%d</b> to "
 "<b>%d</b>)."
 msgstr ""
+"La base de datos de Tiny Tiny RSS necesita estar en la última versión (<b>"
+"%d</b> a <b>%d</b>)."
 
 #: update.php:114
 msgid "Perform updates"
-msgstr "Ṗêřḟǒṟṁ ũṗδáẗęş"
+msgstr "Realizar actualizaciones"
 
 #: update.php:119
 msgid "Performing updates..."
-msgstr "Ṗéŗḟôṟṁĭŋğ טṕḑǟṯèﻯ∙··"
+msgstr "Realizando actualizaciones..."
 
 #: update.php:125
 #, php-format
 msgid "Updating to version %d..."
-msgstr "Úṗḋãẗîņﻕ ťő ϋẻřﻱĭòń ℅ḋ··∙"
+msgstr "Actualizando a la versión %d..."
 
 #: update.php:138
 msgid "Checking version... "
-msgstr "ĆЋéçḱĭ∩ǥ νëřśĭøη··∙ "
+msgstr "Verificando versión... "
 
 #: update.php:144
 msgid "OK!"
-msgstr "ŌĶ¡"
+msgstr "Ok!"
 
 #: update.php:146
 msgid "ERROR!"
-msgstr "ЄŖƦǑŘ¡"
+msgstr "¡ERROR!"
 
 #: update.php:154
 #, php-format
@@ -508,221 +525,215 @@ msgid ""
 "Finished. Performed <b>%d</b> update(s) up to schema\n"
 "\t\t\tversion <b>%d</b>."
 msgstr ""
+"Finalizado. <b>%d</b> actualizacion(es) realizada(s) al esquema\n"
+"con versión <b>%d</b>."
 
 #: update.php:158
 msgid "Return to Tiny Tiny RSS"
-msgstr "Ŗēṯŭṟŋ ṫ∅ Ţỉńÿ Ţĩήý Я∬"
+msgstr "Regresar a Tiny Tiny RSS"
 
 #: users.php:20
 msgid "Click to edit user"
-msgstr "℃ŀīćḵ ךő ėḑìť ūśëř"
+msgstr "Presione para editar el usuario"
 
 #: users.php:35
 msgid "Edit Users"
-msgstr "ﻉḑĭṫ Üśẻѓś"
+msgstr "Editar usuarios"
 
 #: users.php:46
 msgid "Add user"
-msgstr "Åḋď ûśẽŗ"
+msgstr "Agregar usuario"
 
 #: users.php:48
 msgid "Reset password"
-msgstr "Яėšẽŧ ρǡššŵ∅ŗ∂"
+msgstr "Restablecer contraseña"
 
 #: prefs.js:111
 msgid "Delete selected connections? Active connections will not be deleted."
-msgstr "Ðêļëṯě śěŀęĉṫé∂ ċōņήëĉךỉóŉṡ؟ Âĉṯíѵẻ ċơŋńëćťïõ∩ś ẃǐĺľ ∩ǒŧ ьẽ ḑèļėťēď∙"
+msgstr ""
+"¿Eliminar las conexiones seleccionadas? Las conexiones activas no serán "
+"eliminadas."
 
 #: prefs.js:134
 msgid "Please select some connections to delete."
-msgstr "Ṗĺẻǎśẻ ﺉẽŀèćŧ ŝőḿę ćőňńèċťî∅ņŝ ťǒ ðẻŀẻťė·"
+msgstr "Por favor, selecione algunas conexiones para eliminar."
 
 #: prefs.js:145
 msgid "Title for a new connection:"
-msgstr "Ťíťĺë ḟσṟ ā מëω ċôńṉëċṯíỏŋ∶"
+msgstr "Título de la nueva conexión:"
 
 #: prefs.js:201
 msgid "Delete selected servers?"
-msgstr "Ḑĕłëṫě ﻱẽḻêς†ẻđ ŝěṟΰėŗﺉ¿"
+msgstr "¿Eliminar servidores seleccionados?"
 
 #: prefs.js:227
 msgid "Please select some servers to delete."
-msgstr "Ṗḻēåﺉė ﻱëŀė¢ŧ ﻯöḿê ṡèѓύėṟş †σ δèłěŧė∙"
+msgstr "Por favor, seleccione algunos servidores para eliminar."
 
 #: prefs.js:238
 msgid "Server:Port (e.g. irc.example.org:6667):"
-msgstr "∫ėṟϋèŗ∶Ṗõṙṫ ₍è∙ğ∙ įŗċ∙ęχâḿρĺè·öṟğ∶6667₎∶"
+msgstr "Servidor:Puerto (p.e. irc.ejemplo.org:6667)"
 
 #: prefs.js:330
 msgid "Your browser doesn't seem to support desktop notifications."
-msgstr ""
+msgstr "Su navegador no parece soportar las notificaciones de escritorio."
 
 #: tt-irc.js:87
 msgid "Close this tab"
-msgstr "Ҁłőṡê ךḣϊṡ ẗáѢ"
+msgstr "Cerrar esta pestaña"
 
 #: tt-irc.js:486
 msgid "Last message: %d seconds ago."
-msgstr ""
+msgstr "Último mensaje: %d segundos atrás."
 
 #: tt-irc.js:525
 msgid "Connected to: "
-msgstr "Ҁ∅ńṅëčṯë∂ ṯŏ∶ "
+msgstr "Conectado a: "
 
 #: tt-irc.js:529 tt-irc.js:535
 msgid "Disconnected."
-msgstr "ḎïﺉҁôמŊèҁ†ëδ·"
+msgstr "Desconectado."
 
 #: tt-irc.js:547
 msgid "Conversation with"
-msgstr "Çó∩ύẽṙϟªṫǐѳñ ẅǐťḣ"
+msgstr "Conversación con"
 
 #: tt-irc.js:577
 msgid "Connect"
-msgstr "ĈσņŊẻçך"
+msgstr "Conectar"
 
 #: tt-irc.js:582
 msgid "Connecting..."
-msgstr "Ҁőηņĕĉţįṅğ∙∙∙"
+msgstr "Conectando..."
 
 #: tt-irc.js:587
 msgid "Disconnect"
-msgstr "Ðỉşċô∩ŉęċţ"
+msgstr "Desconectar"
 
 #: tt-irc.js:780
 msgid "Received highlight on %c by %n: %s"
-msgstr ""
+msgstr "Resaltado recibido en %c por %n: %s"
 
 #: tt-irc.js:916
 msgid "Topic for %c is: %s"
-msgstr ""
+msgstr "Topic para %c es: %s"
 
 #: tt-irc.js:949
 msgid "Tiny Tiny IRC [%a @ %b / %c]"
-msgstr "Ṯïŋÿ Ţỉńÿ ÏṞĆ [℅à @ ℅ѣ ⁄ ℅¢]"
+msgstr "Tiny Tiny IRC [%a @ %b / %c]"
 
 #: tt-irc.js:979 tt-irc.js:983
 msgid "Tiny Tiny IRC"
-msgstr "Ţϊηý Ṫì∩ỷ ΊŘČ"
+msgstr "Tiny Tiny IRC"
 
 #: tt-irc.js:1103
 msgid "Close this tab?"
-msgstr "Ċŀōṡĕ †ḧîϟ ţäь؟"
+msgstr "¿Cerrar esta pestaña?"
 
 #: tt-irc.js:1134
 msgid "Start conversation with %s?"
-msgstr "Śẗåṙ† ¢ѳņעėřϟàṯīσń ŵì†ḧ ℅ş؟"
+msgstr "¿Iniciar conversación con %s?"
 
 #: tt-irc.js:1170
 msgid "%u has changed the topic to: %s"
-msgstr "℅û ħąﻯ ςẖäṅﻕĕď ṫĥè ẗﻩṕíč ẗø∶ ℅ϟ"
+msgstr "%u ha cambiado el topic a: %s"
 
 #: tt-irc.js:1184
 msgid "%u has changed mode [%m] on %s"
-msgstr "℅ų ḧáš ҁĥâŉǥęď ṁöðè [℅ṁ] öň ℅ϟ"
+msgstr "%u ha cambiado los modos del canal %s [%m]"
 
 #: tt-irc.js:1194
 msgid "%u has changed mode [%m]"
-msgstr "℅ũ ḧãṡ čЋă∩ḡéđ ḿ∅ḑě [℅ḿ]"
+msgstr "%u ha cambiado el modo [%m]"
 
 #: tt-irc.js:1208
 msgid "%u has been kicked from %c by %n (%m)"
-msgstr "℅∪ ẖāﺉ Ъèëṉ ḱìҁǩěḋ ḟṟﻩḿ ℅ς Ъŷ ℅ŉ ₍℅ṁ₎"
+msgstr "%u ha sido kickeado desde %c por %n (%m)"
 
 #: tt-irc.js:1222
 msgid "%u has left %c (%m)"
-msgstr "℅ű ĥǟϟ ĺėḟṯ ℅¢ ₍℅ṁ₎"
+msgstr "%u se ha ido de %c (%m)"
 
 #: tt-irc.js:1233
 msgid "%u (%h) has joined %c"
-msgstr "℅ũ ₍℅ḣ₎ Ћāﻱ ﺫѳïŉèð ℅ҁ"
+msgstr "%u (%h) ha entrado a %c"
 
 #: tt-irc.js:1244
 msgid "%u has quit IRC (%s)"
-msgstr "℅ũ ḣąś ۹∪ĩ† ÏṞČ ₍℅ŝ₎"
+msgstr "%u ha cerrado IRC (%s)"
 
 #: tt-irc.js:1251
 msgid "Connection terminated."
-msgstr "Ĉѳŋņêċťïỏṅ ẗèřḿìṉǡṯẻδ∙"
+msgstr "Conexión terminada."
 
 #: tt-irc.js:1259
 msgid "Requesting connection..."
-msgstr "Ṙé¶µėﬆĭṉǥ ¢ǒŋמëҁţìőη·∙·"
+msgstr "Solicitando conexión..."
 
 #: tt-irc.js:1267
 msgid "Connecting to %s:%d..."
-msgstr "℃ﻩñמëĉţīηǥ ṫѳ ℅ϟ∶℅δ∙∙∙"
+msgstr "Conectando a %s:%d"
 
 #: tt-irc.js:1275
 msgid "Ping reply from %u: %d second(s)."
-msgstr "Ṗǐñģ ṟèρłγ ḟŗﻩḿ ℅ŭ∶ ℅δ ŝėċǒṅδ₍ṡ₎∙"
+msgstr "Respuesta Ping desde %u: %d segundo(s)."
 
 #: tt-irc.js:1309
-#, fuzzy
 msgid "Received CTCP %c (%a) from %u"
-msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
+msgstr "CTCP Recibido %c (%a) desde %u"
 
 #: tt-irc.js:1321
-#, fuzzy
 msgid "CTCP %c reply from %u: %a"
-msgstr "Ṗǐñģ ṟèρłγ ḟŗﻩḿ ℅ŭ∶ ℅δ ŝėċǒṅδ₍ṡ₎∙"
+msgstr "Respuesta CTCP %c desde %u: %a"
 
 #: tt-irc.js:1333
 msgid "Received ping (%s) from %u"
-msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
+msgstr "Ping recibido (%s) desde %u"
 
 #: tt-irc.js:1340
 msgid "Connection established."
-msgstr "Čﻩṉṉẽ¢ŧǐŏń éﬆǟЫíşḩẽđ∙"
+msgstr "Conexión establecida."
 
 #: tt-irc.js:1348
 msgid "Unknown command: /%s."
-msgstr ""
+msgstr "Comando desconocido: /%s"
 
 #: tt-irc.js:1358
 msgid "%u is now known as %n"
-msgstr "℅ũ ǐﻱ ŋõẇ ĸמѳẘň ãś ℅ñ"
+msgstr "%u ahora se llama %n"
 
 #: tt-irc.js:1376
 msgid "%s (via %l)"
-msgstr ""
+msgstr "%s (vía %l)"
 
 #: tt-irc.js:1424
-#, fuzzy
 msgid "Received new private message from %n: %s"
-msgstr "Ʀė¢ẽĭΰéď ṗĭṅģ ₍℅ﻯ₎ ḟѓõṁ ℅ů"
+msgstr "Nuevo mensaje privado recibido desde %n: %s"
 
 #: tt-irc.js:1985
 msgid "Your message is too long."
-msgstr ""
+msgstr "Su mensaje es demasiado largo."
 
 #: tt-irc.js:1990
 msgid "Your message is too short."
-msgstr ""
+msgstr "Su mensaje es demasiado corto."
 
 #: users.js:19
 msgid "Login for a new user:"
-msgstr "Ľóǵìń ḟơř ǟ ήêẘ ūşéѓ∶"
+msgstr "Usuario:"
 
 #: users.js:52
 msgid "Delete selected users?"
-msgstr "Ďëļè†ě ṡéļęç†ėđ ûśēřś؟"
+msgstr "¿Eliminar usuarios seleccionados?"
 
 #: users.js:75
 msgid "Please select some users to delete."
-msgstr "Ṗłėǎšě šêĺẻĉ† şõḿè ùśêṙﻯ ṫō đéłėťė∙"
+msgstr "Por favor, seleccione algunos usuarios para eliminar."
 
 #: users.js:89
-#, fuzzy
 msgid "Reset password of selected user?"
-msgstr "Ďëļè†ě ṡéļęç†ėđ ûśēřś؟"
+msgstr "¿Restablecer contraseña para el usuario seleccionado?"
 
 #: users.js:109
 msgid "Please select one user to reset password."
-msgstr "Ṗĺěảﺉê śěłėčṫ ŏŊẻ űśěṟ ṫó ѓęﻯĕť ρâﻯṡωòŗ∂·"
-
-#~ msgid "Close this window"
-#~ msgstr "℃ḻòšē ẗḩĭš ẇïŉðõώ"
-
-#~ msgid "Start conversation"
-#~ msgstr "∫ţàřך ćöṉύēṙϟªţįôη"
+msgstr "Por favor, seleccione algunos usuarios para restablecer contraseña."

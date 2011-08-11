@@ -26,8 +26,9 @@
 
 	function get_translations() {
 		$tr = array(
-					"auto"  => "Detect automatically",					
-					"en_US" => "English", 
+					"auto"  => "Detect automatically",
+					"en_US" => "English",
+					"es_MX" => "Spanish (Mexican)",
 					"xx_XX" => "Bork bork bork!");
 
 		return $tr;
@@ -38,7 +39,7 @@
 		require_once "lib/gettext/gettext.inc";
 
 		function startup_gettext() {
-	
+
 			# Get locale from Accept-Language header
 			$lang = al2gt(array_keys(get_translations()), "text/html");
 
@@ -46,7 +47,7 @@
 				$lang = _TRANSLATION_OVERRIDE_DEFAULT;
 			}
 
-			if ($_COOKIE["ttirc_lang"] && $_COOKIE["ttirc_lang"] != "auto") {				
+			if ($_COOKIE["ttirc_lang"] && $_COOKIE["ttirc_lang"] != "auto") {
 				$lang = $_COOKIE["ttirc_lang"];
 			}
 
@@ -96,7 +97,7 @@
 			if (DB_TYPE == "mysql") {
 			print mysql_error();
 		}
-		// PG seems to display its own errors just fine by default.		
+		// PG seems to display its own errors just fine by default.
 			die("Connection failed.");
 		}
 
@@ -129,7 +130,7 @@
 
 			$login_action = $_POST["login_action"];
 
-			# try to authenticate user if called from login form			
+			# try to authenticate user if called from login form
 			if ($login_action == "do_login") {
 				$login = $_POST["login"];
 				$password = $_POST["password"];
@@ -159,19 +160,19 @@
 				/* bump login timestamp */
 
 				if (get_schema_version($link) >= 3) {
-					db_query($link, "UPDATE ttirc_users SET last_login = NOW(), 
-				  		twitter_last_id = NULL WHERE id = " . 
+					db_query($link, "UPDATE ttirc_users SET last_login = NOW(),
+				  		twitter_last_id = NULL WHERE id = " .
 						$_SESSION["uid"]);
 				}
 
 				if ($_SESSION["language"] && SESSION_COOKIE_LIFETIME > 0) {
-					setcookie("ttirc_lang", $_SESSION["language"], 
+					setcookie("ttirc_lang", $_SESSION["language"],
 						time() + SESSION_COOKIE_LIFETIME);
 				}
 
 				/* Enable automatic connections */
 
-				db_query($link, "UPDATE ttirc_connections SET enabled = true 
+				db_query($link, "UPDATE ttirc_connections SET enabled = true
 					WHERE auto_connect = true AND owner_uid = " . $_SESSION["uid"]);
 
 				initialize_user_prefs($link, $_SESSION["uid"]);
@@ -179,10 +180,10 @@
 /*				$tmp_result = db_query($link, "SELECT id FROM ttirc_connections
 					WHERE status != ".CS_DISCONNECTED." AND owner_uid = " .
 					$_SESSION["uid"]);
-	
+
 				while ($conn = db_fetch_assoc($tmp_result)) {
 					push_message($link, $conn['id'], "---",
-						"Accepted connection from " . $_SERVER["REMOTE_ADDR"], 
+						"Accepted connection from " . $_SERVER["REMOTE_ADDR"],
 						true);
 				} */
 			}
@@ -212,7 +213,7 @@
 				$sel = " selected";
 			 else
 			 	$sel = "";
-			
+
 			print "<option$sel>$v</option>";
 		}
 		print "</select>";
@@ -225,7 +226,7 @@
 				$sel = 'selected="selected"';
 			 else
 			 	$sel = "";
-			
+
 			print "<option $sel value=\"$v\">".$values[$v]."</option>";
 		}
 
@@ -248,7 +249,7 @@
 			$pwd_hash2 = encrypt_password($password, $login);
 			$login = db_escape_string($login);
 
-			if (defined('ALLOW_REMOTE_USER_AUTH') && ALLOW_REMOTE_USER_AUTH 
+			if (defined('ALLOW_REMOTE_USER_AUTH') && ALLOW_REMOTE_USER_AUTH
 					&& $_SERVER["REMOTE_USER"] && $login != "admin") {
 
 				$login = db_escape_string($_SERVER["REMOTE_USER"]);
@@ -265,23 +266,23 @@
 			}
 
 			$result = db_query($link, $query);
-	
+
 			if (db_num_rows($result) == 1) {
 				$_SESSION["uid"] = db_fetch_result($result, 0, "id");
 				$_SESSION["name"] = db_fetch_result($result, 0, "login");
 				$_SESSION["access_level"] = db_fetch_result($result, 0, "access_level");
-	
-				db_query($link, "UPDATE ttirc_users SET last_login = NOW() WHERE id = " . 
+
+				db_query($link, "UPDATE ttirc_users SET last_login = NOW() WHERE id = " .
 					$_SESSION["uid"]);
-	
+
 				$_SESSION["ip_address"] = $_SERVER["REMOTE_ADDR"];
 				$_SESSION["pwd_hash"] = db_fetch_result($result, 0, "pwd_hash");
-	
+
 				initialize_user_prefs($link, $_SESSION["uid"]);
-	
+
 				return true;
 			}
-	
+
 			return false;
 
 		} else {
@@ -290,9 +291,9 @@
 			$_SESSION["name"] = "admin";
 
 			$_SESSION["ip_address"] = $_SERVER["REMOTE_ADDR"];
-	
+
 			initialize_user_prefs($link, $_SESSION["uid"]);
-	
+
 			return true;
 		}
 	}
@@ -309,7 +310,7 @@
 	}
 
 	function validate_session($link) {
-		if (SINGLE_USER_MODE) { 
+		if (SINGLE_USER_MODE) {
 			return true;
 		}
 
@@ -328,7 +329,7 @@
 
 		if ($_SESSION["uid"]) {
 
-			$result = db_query($link, 
+			$result = db_query($link,
 				"SELECT pwd_hash FROM ttirc_users WHERE id = '".$_SESSION["uid"]."'");
 
 			$pwd_hash = db_fetch_result($result, 0, "pwd_hash");
@@ -416,19 +417,19 @@
 
 	function format_warning($msg, $id = "") {
 		global $link;
-		return "<div class=\"warning\" id=\"$id\"> 
+		return "<div class=\"warning\" id=\"$id\">
 			<img src=\"".theme_image($link, "images/sign_excl.png")."\">$msg</div>";
 	}
 
 	function format_notice($msg) {
 		global $link;
-		return "<div class=\"notice\" id=\"$id\"> 
+		return "<div class=\"notice\" id=\"$id\">
 			<img src=\"".theme_image($link, "images/sign_info.png")."\">$msg</div>";
 	}
 
 	function format_error($msg) {
 		global $link;
-		return "<div class=\"error\" id=\"$id\"> 
+		return "<div class=\"error\" id=\"$id\">
 			<img src=\"".theme_image($link, "images/sign_excl.png")."\">$msg</div>";
 	}
 
@@ -449,7 +450,7 @@
 		$args = func_get_args();
 		return vsprintf(__(array_shift($args)), $args);
 	}
-	
+
 	function _debug($msg) {
 		$ts = strftime("%H:%M:%S", time());
 		if (function_exists('posix_getpid')) {
@@ -479,7 +480,7 @@
 	function make_lockfile($filename) {
 		$fp = fopen(LOCK_DIRECTORY . "/$filename", "w");
 
-		if (flock($fp, LOCK_EX | LOCK_NB)) {		
+		if (flock($fp, LOCK_EX | LOCK_NB)) {
 			fwrite($fp, posix_getpid() . "\n");
 			return $fp;
 		} else {
@@ -509,7 +510,7 @@
 		$arguments = trim($keywords[2]);
 
 		if ($command == "j") $command = "join";
-		
+
 		if ($command == "me") {
 			$command = "action";
 			push_message($link, $connection_id, $channel,
@@ -531,7 +532,7 @@
 				channel = '$arguments' AND connection_id = '$connection_id'");
 
 			if (db_num_rows($result) == 0) {
-				db_query($link, "INSERT INTO ttirc_channels 
+				db_query($link, "INSERT INTO ttirc_channels
 					(channel, connection_id, chan_type) VALUES
 					('$arguments', '$connection_id', '".CT_PRIVATE."')");
 			}
@@ -540,7 +541,7 @@
 
 			break;
 		case "part":
-			
+
 			if (!$arguments) $arguments = $channel;
 
 			db_query($link, "BEGIN");
@@ -573,7 +574,7 @@
 	}
 
 
-	function push_message($link, $connection_id, $channel, $message, 
+	function push_message($link, $connection_id, $channel, $message,
 		$incoming = false, $message_type = MSGT_PRIVMSG, $from_nick = false) {
 
 		if (!$message) return false;
@@ -590,9 +591,9 @@
 
 		//$message = db_escape_string($message);
 
-		$result = db_query($link, "INSERT INTO ttirc_messages 
+		$result = db_query($link, "INSERT INTO ttirc_messages
 			(incoming, connection_id, channel, sender, message, message_type) VALUES
-			($incoming, $connection_id, '$channel', '$my_nick', '$message', 
+			($incoming, $connection_id, '$channel', '$my_nick', '$message',
 			'$message_type')");
 	}
 
@@ -603,7 +604,7 @@
 			connection_id = ttirc_connections.id AND
 			message_type != ".MSGT_COMMAND." AND
 			ts > NOW() - INTERVAL '15 minutes' AND
-			ttirc_messages.id > '$last_id' AND 
+			ttirc_messages.id > '$last_id' AND
 			owner_uid = ".$_SESSION["uid"]);
 
 		return db_fetch_result($result, 0, "cl");
@@ -617,11 +618,11 @@
 			FROM ttirc_messages, ttirc_connections WHERE
 			connection_id = ttirc_connections.id AND
 			message_type != ".MSGT_COMMAND." AND
-			((ts > NOW() - INTERVAL '15 minutes' AND 
+			((ts > NOW() - INTERVAL '15 minutes' AND
 				message_type != ".MSGT_PRIVATE_PRIVMSG.") OR
-			(ts > NOW() - INTERVAL '5 hours' AND 
+			(ts > NOW() - INTERVAL '5 hours' AND
 				message_type = ".MSGT_PRIVATE_PRIVMSG.")) AND
-			ttirc_messages.id > '$last_id' AND 
+			ttirc_messages.id > '$last_id' AND
 			owner_uid = ".$_SESSION["uid"]." ORDER BY ttirc_messages.id LIMIT 50");
 
 		$lines = array();
@@ -648,8 +649,8 @@
 		$result = db_query($link, "SELECT nicklist,channel,connection_id,
 			chan_type,topic,
 			topic_owner,".SUBSTRING_FOR_DATE."(topic_set,1,16) AS topic_set
-			FROM ttirc_channels, ttirc_connections 
-			WHERE connection_id = ttirc_connections.id AND 
+			FROM ttirc_channels, ttirc_connections
+			WHERE connection_id = ttirc_connections.id AND
 			$active_chan_qpart
 			owner_uid = ".$_SESSION["uid"]);
 
@@ -677,7 +678,7 @@
 			title,userhosts
 			FROM ttirc_connections
 			WHERE visible = true AND owner_uid = ".$_SESSION["uid"]);
-	
+
 		$conn = array();
 
 		while ($line = db_fetch_assoc($result)) {
@@ -704,7 +705,7 @@
 			return false;
 		}
 	}
-	
+
 	function bool_to_sql_bool($s) {
 		if ($s) {
 			return "true";
@@ -745,7 +746,7 @@
 		}
 
 		if ($error_code != 0) {
-			print json_encode(array("error" => $error_code, 
+			print json_encode(array("error" => $error_code,
 				"errormsg" => $ERRORS[$error_code]));
 			return false;
 		} else {
@@ -812,14 +813,14 @@
 		db_query($link, "BEGIN");
 
 		$result = db_query($link, "SELECT pref_name,def_value FROM ttirc_prefs");
-		
-		$u_result = db_query($link, "SELECT pref_name 
+
+		$u_result = db_query($link, "SELECT pref_name
 			FROM ttirc_user_prefs WHERE owner_uid = '$uid' $profile_qpart");
 
 		$active_prefs = array();
 
 		while ($line = db_fetch_assoc($u_result)) {
-			array_push($active_prefs, $line["pref_name"]);			
+			array_push($active_prefs, $line["pref_name"]);
 		}
 
 		while ($line = db_fetch_assoc($result)) {
@@ -828,12 +829,12 @@
 
 				if (get_schema_version($link) < 63) {
 					db_query($link, "INSERT INTO ttirc_user_prefs
-						(owner_uid,pref_name,value) VALUES 
+						(owner_uid,pref_name,value) VALUES
 						('$uid', '".$line["pref_name"]."','".$line["def_value"]."')");
 
 				} else {
 					db_query($link, "INSERT INTO ttirc_user_prefs
-						(owner_uid,pref_name,value, profile) VALUES 
+						(owner_uid,pref_name,value, profile) VALUES
 						('$uid', '".$line["pref_name"]."','".$line["def_value"]."', $profile)");
 				}
 
@@ -853,14 +854,14 @@
 	function make_password($length = 8) {
 
 		$password = "";
-		$possible = "0123456789abcdfghjkmnpqrstvwxyzABCDFGHJKMNPQRSTVWXYZ"; 
-		
-   	$i = 0; 
-    
-		while ($i < $length) { 
+		$possible = "0123456789abcdfghjkmnpqrstvwxyzABCDFGHJKMNPQRSTVWXYZ";
+
+   	$i = 0;
+
+		while ($i < $length) {
 			$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-        
-			if (!strstr($password, $char)) { 
+
+			if (!strstr($password, $char)) {
 				$password .= $char;
 				$i++;
 			}
@@ -873,7 +874,7 @@
 
 		$urls = null;
 
-		$result = preg_replace("/(([a-z]+):\/\/[^ ]+)/i", 
+		$result = preg_replace("/(([a-z]+):\/\/[^ ]+)/i",
 			"<a target=\"_blank\" onclick=\"return m_c(this)\" onmouseover=\"m_i(this)\" onmouseout=\"m_o(this)\" href=\"\\1\">\\1</a>", $line);
 
 		return $result;
@@ -900,7 +901,7 @@
 
 		print "<select name=\"theme\">";
 		print "<option value=''>".__('Default')."</option>";
-		print "<option disabled>--------</option>";				
+		print "<option disabled>--------</option>";
 
 		foreach ($themes as $t) {
 			$base = $t['base'];
@@ -947,7 +948,7 @@
 
 	function get_self_url_prefix() {
 		$url_path = "";
-	
+
 		if ($_SERVER['HTTPS'] != "on") {
 			$url_path = "http://";
 		} else {
@@ -982,16 +983,16 @@
 		} else {
 			$tweet = $text;
 		}
-	
+
 		$counter = 140 - mb_strlen($tweet, 'utf-8');
 
 		?>
 		<div id="infoBoxTitle"><?php echo __("Send Tweet") ?></div>
 		<div class="infoBoxContents">
 			<div id="mini-notice" style='display : none'>&nbsp;</div>
-	
+
 			<form id="new_tweet_form" onsubmit="return false;">
-	
+
 			<input type="hidden" name="op" value="send-tweet"/>
 
 			<div class="dlgSec"><?php echo __("Your tweet:") ?></div>
@@ -1012,11 +1013,11 @@
 				<button type="submit" onclick="tweet_selection_do()"><?php echo __('Tweet this!') ?></button>
 				<button type="submit" onclick="close_infobox()"><?php echo __('Cancel') ?></button></div>
 			</div>
-	
+
 			</form>
-	
+
 		</div>
-	
+
 		<?php
 
 	}
@@ -1031,13 +1032,13 @@
 
 	function twitter_send_update($link, $text) {
 
-		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users 
+		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users
 			WHERE id = ".$_SESSION['uid']);
 
 		$access_token = json_decode(db_fetch_result($result, 0, 'twitter_oauth'), true);
 
 		if ($access_token) {
-	
+
 			/* Create a TwitterOauth object with consumer/user tokens. */
 			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
@@ -1053,19 +1054,19 @@
 		$result = db_query($link, "SELECT COUNT(*) AS cid FROM ttirc_users
 			WHERE twitter_oauth IS NOT NULL AND twitter_oauth != '' AND
 			id = " . $_SESSION['uid']);
-	
+
 		return db_fetch_result($result, 0, "cid") != 0;
 	}
 
 	function get_twitter_lines($link, $connection_id) {
 
-		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users 
+		$result = db_query($link, "SELECT twitter_oauth FROM ttirc_users
 			WHERE id = ".$_SESSION['uid']);
 
 		$access_token = json_decode(db_fetch_result($result, 0, 'twitter_oauth'), true);
 
 		if ($access_token && CONSUMER_KEY != '') {
-	
+
 			/* Create a TwitterOauth object with consumer/user tokens. */
 			$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
@@ -1099,22 +1100,22 @@
 				foreach ($result as $line) {
 
 					if ($since_id) {
-						$message = 'TWITTER_MSG:' . $line['id_str'] . 
+						$message = 'TWITTER_MSG:' . $line['id_str'] .
 							':' . $line['user']['screen_name'] . ':' . $line['text'];
 
 						push_message($link, $connection_id, '---', $message,
 							true, MSGT_EVENT, $line['user']['screen_name']);
-	
+
 						++$lines;
 					}
 
 					$id_str = db_escape_string($line['id_str']);
 
-					db_query($link, "UPDATE ttirc_users 
+					db_query($link, "UPDATE ttirc_users
 						SET twitter_last_id = '$id_str' WHERE id = " . $_SESSION['uid']);
 				}
 			}
-			
+
 			return $lines;
 		}
 
