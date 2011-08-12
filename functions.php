@@ -29,6 +29,7 @@
 					"auto"  => "Detect automatically",
 					"en_US" => "English",
 					"es_MX" => "Spanish (Mexican)",
+					"fr_FR" => "Français",
 					"xx_XX" => "Bork bork bork!");
 
 		return $tr;

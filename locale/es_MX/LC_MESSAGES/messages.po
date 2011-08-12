@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tiny Tiny IRC\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-11 13:11+0400\n"
+"POT-Creation-Date: 2011-08-12 17:08+0400\n"
 "PO-Revision-Date: 2011-06-03 15:46+0000\n"
 "Last-Translator: rahermosillac <ra.hermosillac@gmail.com>\n"
 "Language-Team: Spanish (Mexican) (http://www.transifex.net/projects/p/tt-irc/"
@@ -121,35 +121,35 @@ msgstr "Conexión Daemon backend no está corriendo."
 msgid "The application failed to initialize."
 msgstr "La aplicación fallo al iniciar."
 
-#: functions.php:151
+#: functions.php:152
 msgid "Incorrect username or password"
 msgstr "Usuario o contraseña incorrectos"
 
-#: functions.php:320
+#: functions.php:321
 msgid "Session failed to validate (incorrect IP)"
 msgstr "Fallo al validar la sesión (IP Incorrecta)"
 
-#: functions.php:903
+#: functions.php:904
 msgid "Default"
 msgstr "Por defecto"
 
-#: functions.php:990
+#: functions.php:991
 msgid "Send Tweet"
 msgstr "Enviar Tweet"
 
-#: functions.php:998
+#: functions.php:999
 msgid "Your tweet:"
 msgstr "Su Tweet:"
 
-#: functions.php:1004
+#: functions.php:1005
 msgid "Full IRC snippet:"
 msgstr "Snippet IRC completo:"
 
-#: functions.php:1013
+#: functions.php:1014
 msgid "Tweet this!"
 msgstr "Tweet"
 
-#: functions.php:1014
+#: functions.php:1015
 msgid "Cancel"
 msgstr "Cancelar"
 
