@@ -19,6 +19,7 @@ var highlight_on = [];
 var notify_events = [];
 var theme_images = [];
 var update_delay_max = 0;
+var theme = "";
 
 var twitter_id = false;
 var timeout_id = false;
@@ -149,6 +150,7 @@ function init_second_stage(transport) {
 		theme_images = params.images;
 
 		update_delay_max = params.update_delay_max;
+		theme = params.theme;
 
 		Element.hide("overlay");
 
@@ -718,7 +720,8 @@ function change_tab(elem) {
 
 		update_buffer();
 
-		$("input-prompt").focus();
+		if (theme != "tablet")
+			$("input-prompt").focus();
 
 	} catch (e) {
 		exception_error("change_tab", e);
@@ -1469,7 +1472,9 @@ function set_window_active(active) {
 		if (active) {
 			new_messages = 0;
 			new_highlights = 0;
-			$("input-prompt").focus();
+
+			if (theme != "tablet")
+				$("input-prompt").focus();
 		}
 
 		window.setTimeout("update_title()", 100);

@@ -3,7 +3,7 @@
 
 	if (get_magic_quotes_gpc()) {
 		function stripslashes_deep($value) {
-			$value = is_array($value) ? 
+			$value = is_array($value) ?
 				array_map('stripslashes_deep', $value) : stripslashes($value);
 				return $value;
 		}
@@ -14,16 +14,16 @@
 		$_REQUEST = array_map('stripslashes_deep', $_REQUEST);
 	}
 
-	require_once "functions.php"; 
+	require_once "functions.php";
 	require_once "sessions.php";
 	require_once "db-prefs.php";
 	require_once "sanity_check.php";
-	require_once "version.php"; 
+	require_once "version.php";
 	require_once "config.php";
 	require_once "prefs.php";
 	require_once "users.php";
 
-	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);	
+	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	$dt_add = get_script_dt_add();
 
@@ -59,8 +59,8 @@
 				$rv[0] = T_sprintf("Created user %s with password <b>%s</b>.",
 					$login, $tmp_password);
 
-				db_query($link, "INSERT INTO ttirc_users 
-					(login, pwd_hash, email, nick, realname) 
+				db_query($link, "INSERT INTO ttirc_users
+					(login, pwd_hash, email, nick, realname)
 					VALUES
 					('$login', '$pwd_hash', '$login@localhost', '$login', '$login')");
 			} else {
@@ -85,8 +85,8 @@
 			db_query($link, "UPDATE ttirc_users SET pwd_hash = '$pwd_hash'
 				WHERE id = '$id'");
 
-			print json_encode(array("message" => 
-				T_sprintf("Reset password of user %s to <b>%s</b>.", $login, 
+			print json_encode(array("message" =>
+				T_sprintf("Reset password of user %s to <b>%s</b>.", $login,
 					$tmp_password)));
 		}
 
@@ -159,7 +159,7 @@
 
 				if ($tab_type == "P") {
 					foreach ($lines as $line)
-						push_message($link, $connection_id, $chan, $line, false, 
+						push_message($link, $connection_id, $chan, $line, false,
 							MSGT_PRIVATE_PRIVMSG);
 				} else {
 					foreach ($lines as $line)
@@ -188,7 +188,7 @@
 
 		if (!$init) {
 			$sleep_start = time();
-			while (time() - $sleep_start < UPDATE_DELAY_MAX && 
+			while (time() - $sleep_start < UPDATE_DELAY_MAX &&
 					!num_new_lines($link, $last_id)) {
 
 				sleep(1);
@@ -243,6 +243,7 @@
 			$rv["images"][$img] = theme_image($link, "images/$img");
 		}
 
+		$rv["theme"] = get_pref($link, "USER_THEME");
 		$rv["update_delay_max"] = UPDATE_DELAY_MAX;
 
 		print json_encode($rv);
@@ -308,12 +309,12 @@
 		set_pref($link, "HIGHLIGHT_ON", $highlight_on);
 
 		db_query($link, "UPDATE ttirc_users SET realname = '$realname',
-			quit_message = '$quit_message', 
+			quit_message = '$quit_message',
 			email = '$email',
 			nick = '$nick' WHERE id = " . $_SESSION["uid"]);
 
 		if ($new_password != $confirm_password) {
-			print json_encode(array("error" => "Passwords do not match."));		
+			print json_encode(array("error" => "Passwords do not match."));
 		}
 
 		if ($confirm_password == $new_password && $new_password) {
@@ -423,7 +424,7 @@
 
 	case "toggle-connection":
 		$connection_id = (int) db_escape_string($_REQUEST["connection_id"]);
-		
+
 		$status = bool_to_sql_bool(db_escape_string($_REQUEST["set_enabled"]));
 
 		db_query($link, "UPDATE ttirc_connections SET enabled = '$status'

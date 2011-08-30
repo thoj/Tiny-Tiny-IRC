@@ -1,0 +1,167 @@
+body {
+	background : #f0f0f0;
+}
+
+button {
+	padding : 5px 10px 5px 10px;
+	border : 1px solid #e0e0e0;
+	color : gray;
+	font-weight : bold;
+	background : white;
+	cursor : pointer;
+	font-family : "Segoe UI", Tahoma, sans-serif;
+}
+
+#actions a {
+	font-family : "Segoe UI", Tahoma, sans-serif;
+	display : block;
+	border : 1px solid #e0e0e0;
+	color : gray;
+	font-weight : bold;
+	background : #f0f0f0;
+	text-align : center;
+	padding : 5px 10px 5px 10px;
+	background : white;
+}
+
+#header img {
+	display : none;
+}
+
+div.topLinks {
+	color : #e0e0e0;
+}
+
+div.topLinks a, span.hello {
+	color : gray;
+	font-size : 14px;
+}
+
+div#tweet-button {
+	margin-top : 0px;
+}
+
+div#tweet-button button {
+	width : 90%;
+}
+
+#header {
+	height : 20px;
+}
+
+#content {
+	border-width : 0px 0px 0px 3px;
+	border-color : #e0e0e0;
+	padding : 0px;
+	top : 33px;
+	right : 0px;
+	bottom : 0px;
+	background : white;
+}
+
+#tabs-list li div.indented {
+	padding : 0px;
+}
+
+#tabs-list li {
+	font-size : 14px;
+	font-weight : bold;
+	color : gray;
+	padding : 10px;
+	border-width : 0px 0px 2px 0px;
+	border-style : solid;
+	border-color : #e0e0e0;
+	position : static;
+}
+
+#tabs-list li.selected {
+	border-width : 0px 0px 2px 0px;
+	border-color : #e0e0e0;
+	background : white;
+	color : black;
+	font-weight : bold;
+}
+
+#topic {
+	left : 0px;
+	right : 0px;
+}
+
+input:disabled {
+	background : white;
+	color : #404040;
+}
+
+#topic div.wrapper {
+	border-width : 0px 0px 3px 0px;
+	border-style : solid;
+	border-color : #e0e0e0;
+}
+
+#input {
+	left : 0px;
+	bottom : 0px;
+	right : 151px;
+}
+
+#nick { 
+	display : none;
+}
+
+#input div.wrapper {
+	border-width : 3px 0px 0px 0px;
+	border-style : solid;
+	border-color : #e0e0e0;
+}
+
+#log {	
+	border-width : 0px;
+	border-color : #88b0f0;
+	border-style : solid;
+	background : white;
+	position : absolute;
+	top : 35px;
+	right : 155px;
+	left : 0px;
+	bottom : 35px;
+	overflow : auto;
+}
+
+#log .even, #log .odd {
+	background : white;
+	border-width : 0px;
+}
+
+#userlist-list li.odd, #userlist-list li.even, #userlist-list li.oddHL, #userlist-list li.evenHL {
+	padding : 10px;
+	font-size : 14px;
+	font-weight : bold;
+	color : gray;
+	border-width : 0px 0px 2px 0px;
+	border-color : #e0e0e0;
+	border-style : solid;
+}
+
+#userlist-list li:last-child {
+	border-width : 0px;
+}
+
+#connect {
+	top : 0px;
+	margin : 0px;
+	bottom : 0px;
+}
+
+#sidebar {
+	border-width : 0px 0px 0px 3px;
+	border-style : solid;
+	border-color : #e0e0e0;
+	overflow : hidden;
+	background : #f0f0f0;
+}
+
+#userlist {
+	overflow : hidden;
+}
+
+

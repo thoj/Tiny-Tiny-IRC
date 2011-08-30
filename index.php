@@ -1,11 +1,11 @@
 <?php
-	require_once "functions.php"; 
+	require_once "functions.php";
 	require_once "sessions.php";
 	require_once "sanity_check.php";
-	require_once "version.php"; 
+	require_once "version.php";
 	require_once "config.php";
 
-	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);	
+	$link = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 	login_sequence($link);
 
@@ -14,9 +14,9 @@
 	no_cache_incantation();
 
 	header('Content-Type: text/html; charset=utf-8');
-	
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -60,11 +60,11 @@
 </head>
 <body class="main">
 
-<div id="image-tooltip" onclick="Element.hide(this)" 
+<div id="image-tooltip" onclick="Element.hide(this)"
 	title="<?php echo __("Click to close") ?>" style="display : none"></div>
 
 <div id="preview-shadow" style="display : none"  onclick="Element.hide(this)">
-<div id="image-preview" 
+<div id="image-preview"
 	title="<?php echo __("Click to close") ?>"></div></div>
 
 <div id="overlay" style="display : block">
@@ -81,7 +81,7 @@
 		browser settings.")) ?></p>
 	</noscript>
 	</div>
-</div> 
+</div>
 
 <div id="dialog_overlay" style="display : none"> </div>
 
@@ -103,12 +103,12 @@
 <div id="header">
 	<div class="topLinks" id="topLinks">
 
-	<img id="spinner" style="display : none" 
+	<img id="spinner" style="display : none"
 		alt="spinner" title="Loading..."
 		src="<?php echo theme_image($link, 'images/indicator_tiny.gif') ?>"/>
 
 	<?php if (!SINGLE_USER_MODE) { ?>
-			<?php echo __('Hello,') ?> <b><?php echo $_SESSION["name"] ?></b> |
+			<span class="hello"><?php echo __('Hello,') ?> <b><?php echo $_SESSION["name"] ?></b></span> |
 	<?php } ?>
 	<a href="#" onclick="show_prefs()"><?php echo __('Preferences') ?></a>
 
@@ -122,7 +122,7 @@
 
 	</div>
 
-	<img src="<?php echo theme_image($link, 'images/logo.png') ?>" alt="Tiny Tiny IRC"/>	
+	<img src="<?php echo theme_image($link, 'images/logo.png') ?>" alt="Tiny Tiny IRC"/>
 </div>
 
 <!-- <div id="actions">
@@ -151,14 +151,14 @@
 
 <div id="content">
 	<div id="topic"><div class="wrapper">
-		<input disabled onkeypress="change_topic(this, event)" 
+		<input disabled onkeypress="change_topic(this, event)"
 			id="topic-input" value=""></div>
 	</div>
-	<div id="log"><ul id="log-list"></ul></div>	
+	<div id="log"><ul id="log-list"></ul></div>
 
 	<div id="sidebar">&nbsp;</div>
 
-	<div id="connect"><button onclick="toggle_connection(this)" 
+	<div id="connect"><button onclick="toggle_connection(this)"
 		id="connect-btn">Connect</button></div>
 
 	<div id="userlist">
@@ -166,8 +166,8 @@
 
 		<?php if (CONSUMER_KEY != '' && twitter_configured($link)) { ?>
 
-		<div title="<?php echo __('Tweet selected text') ?>" 
-			id="tweet-button"><button href="#" 
+		<div title="<?php echo __('Tweet selected text') ?>"
+			id="tweet-button"><button href="#"
 				onclick="tweet_selection()"><?php echo __('Tweet') ?></button></div>
 
 		<?php } ?>
@@ -176,7 +176,7 @@
 	<div id="nick" onclick="change_nick()"></div>
 
 	<div id="input"><div class="wrapper">
-		<input disabled="true" rows="1" id="input-prompt" 
+		<input disabled="true" rows="1" id="input-prompt"
 			onkeypress="send(this, event)"/>
 		<div class="autocomplete" id="input-suggest" style="display:none"></div>
 	</div></div>
