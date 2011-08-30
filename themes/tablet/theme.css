@@ -12,6 +12,14 @@ button {
 	font-family : "Segoe UI", Tahoma, sans-serif;
 }
 
+#actions {
+	top : -5px;
+}
+
+#tabs {
+	top : 65px;
+}
+
 #actions a {
 	font-family : "Segoe UI", Tahoma, sans-serif;
 	display : block;
