@@ -132,6 +132,10 @@ input:disabled {
 	border-width : 0px;
 }
 
+#log .evenHL, #log .oddHL {
+	border-width : 0px;
+}
+
 #userlist-list li.odd, #userlist-list li.even, #userlist-list li.oddHL, #userlist-list li.evenHL {
 	padding : 10px;
 	font-size : 14px;
