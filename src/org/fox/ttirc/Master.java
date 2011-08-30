@@ -422,7 +422,7 @@ public class Master {
 					logger.info("Sleeping to prevent flood...");
 
 					try {
-						Thread.sleep(2000);
+						Thread.sleep(10000);
 					} catch (InterruptedException ie) {
 						//
 					}
