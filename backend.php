@@ -29,7 +29,7 @@
 
 	no_cache_incantation();
 
-	header('Content-Type: text/html; charset=utf-8');
+	header('Content-Type: text/plain; charset=utf-8');
 
 	$op = $_REQUEST["op"];
 
@@ -296,6 +296,7 @@
 		$email = db_escape_string($_REQUEST["email"]);
 		$theme = db_escape_string($_REQUEST["theme"]);
 		$highlight_on = db_escape_string($_REQUEST["highlight_on"]);
+		$hide_join_part = bool_to_sql_bool(db_escape_string($_REQUEST["hide_join_part"]));
 
 		$theme_changed = false;
 
@@ -311,6 +312,7 @@
 		db_query($link, "UPDATE ttirc_users SET realname = '$realname',
 			quit_message = '$quit_message',
 			email = '$email',
+			hide_join_part = $hide_join_part,
 			nick = '$nick' WHERE id = " . $_SESSION["uid"]);
 
 		if ($new_password != $confirm_password) {

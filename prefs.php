@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	
+
 	function css_editor($link) {
 		$user_css = get_pref($link, "USER_STYLESHEET");
 	?>
@@ -61,7 +61,7 @@
 		$result = db_query($link, "SELECT ttirc_servers.*,
 				status,active_server
 			FROM ttirc_servers,ttirc_connections
-			WHERE connection_id = '$id' AND 
+			WHERE connection_id = '$id' AND
 			connection_id = ttirc_connections.id AND
 			owner_uid = " . $_SESSION["uid"]);
 
@@ -73,12 +73,12 @@
 
 			$id = $line['id'];
 
-			if ($line['status'] != CS_DISCONNECTED && 
+			if ($line['status'] != CS_DISCONNECTED &&
 					$line['server'] . ':' . $line['port'] == $line['active_server']) {
 				$connected = __("(connected)");
 			} else {
 				$connected = '';
-			}			
+			}
 
 			print "<li id='S-$id' class='$row_class' server_id='$id'>";
 			print "<input type='checkbox' onchange='select_row(this)'
@@ -101,7 +101,7 @@
 		foreach ($notify_on as $no) {
 			$nev_checked[$no] = "checked";
 		}
-	?> 
+	?>
 
 	<div id="infoBoxTitle"><?php echo __("Configure Notifications") ?></div>
 	<div class="infoBoxContents">
@@ -116,25 +116,25 @@
 		<input type="hidden" name="op" value="prefs-save-notify"/>
 
 		<div class="dlgSecCont">
-			<input name="notify_event[]" <?php echo $nev_checked[1] ?> 
+			<input name="notify_event[]" <?php echo $nev_checked[1] ?>
 				id="n_highlight" type="checkbox" value="1">
 				<label for="n_highlight"><?php echo __('Channel highlight') ?>
 					</label>
 			<br clear='left'/>
 
-			<input name="notify_event[]" <?php echo $nev_checked[2] ?> 
+			<input name="notify_event[]" <?php echo $nev_checked[2] ?>
 				id="n_privmsg" type="checkbox" value="2">
 				<label for="n_privmsg"><?php echo __('Private message') ?>
 					</label>
 			<br clear='left'/>
 
-			<input name="notify_event[]" <?php echo $nev_checked[3] ?> 
+			<input name="notify_event[]" <?php echo $nev_checked[3] ?>
 				id="n_connstat" type="checkbox" value="3">
 				<label for="n_connstat"><?php echo __('Connection status change') ?>
 					</label>
 			<br clear='left'/>
 
-		</div>	
+		</div>
 
 		</form>
 
@@ -201,7 +201,7 @@
 			<br clear='left'/>
 
 			<label class='fixed'><?php echo __('Server password:') ?></label>
-			<input name="server_password" size="30" type="password" 
+			<input name="server_password" size="30" type="password"
 				value="<?php echo $line['server_password'] ?>">
 			<br clear='left'/>
 
@@ -228,13 +228,13 @@
 		<div class="dlgSec">Options</div>
 
 		<div class="dlgSecCont">
-			<input name="visible" <?php echo $visible_checked ?> 
+			<input name="visible" <?php echo $visible_checked ?>
 				id="pr_visible" type="checkbox" value="1">
 				<label for="pr_visible"><?php echo __('Enable connection') ?>
 					</label>
 			<br clear='left'/>
 
-			<input name="auto_connect" <?php echo $auto_connect_checked ?> 
+			<input name="auto_connect" <?php echo $auto_connect_checked ?>
 				id="pr_auto_connect" type="checkbox" value="1">
 				<label for="pr_auto_connect"><?php echo __('Automatically connect') ?>
 					</label>
@@ -246,7 +246,7 @@
 					</label>
 			<br clear='left'/>
 
-			<input name="use_ssl" <?php echo $use_ssl_checked ?> 
+			<input name="use_ssl" <?php echo $use_ssl_checked ?>
 				id="pr_use_ssl" type="checkbox" value="1">
 				<label for="pr_use_ssl"><?php echo __('Connect using SSL') ?>
 					</label>
@@ -319,6 +319,12 @@
 	$email = db_fetch_result($result, 0, "email");
 	$quit_message = db_fetch_result($result, 0, "quit_message");
 
+	if (sql_bool_to_bool(db_fetch_result($result, 0, "hide_join_part"))) {
+		$hide_join_part_checked = 'checked';
+	} else {
+		$hide_join_part_checked = '';
+	}
+
 	$highlight_on = get_pref($link, "HIGHLIGHT_ON");
 ?>
 
@@ -357,7 +363,6 @@
 			<label class="fixed"><?php echo __('Theme:') ?></label>
 			<?php print_theme_select($link); ?>
 			&nbsp;
-
 			<a href="#" onclick="customize_css()">
 				<?php echo __("Customize") ?></a>
 
@@ -374,6 +379,14 @@
 			<a href="#" onclick="configure_twitter()"><?php echo __('Register with Twitter') ?></a>
 
 			<?php } ?>
+
+			<br clear='left'/>
+
+			<label class="fixed"><?php echo __('Other options') ?></label>
+			<input name="hide_join_part" <?php echo $hide_join_part_checked ?>
+				id="pr_hide_join_part" type="checkbox" value="1">
+				<label for="pr_hide_join_part"><?php echo __('Hide auxiliary channel messages') ?>
+					</label>
 
 		</div>
 

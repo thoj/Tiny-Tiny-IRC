@@ -14,7 +14,7 @@ public class Master {
 	private final int configVersion = 3;
 	private final String lockFileName = "master.lock";
 	
-	private final int schemaVersion = 5;
+	private final int schemaVersion = 6;
 	
 	protected Preferences prefs;
 	protected boolean active;

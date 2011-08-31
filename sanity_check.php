@@ -1,13 +1,13 @@
 <?php
 	require_once "functions.php";
 
-	define('SCHEMA_VERSION', 5);
+	define('SCHEMA_VERSION', 6);
 	define('EXPECTED_CONFIG_VERSION', 2);
 
-	$err_msg = ""; 
+	$err_msg = "";
 
 	if (!file_exists("config.php")) {
-		print "<b>Fatal Error</b>: You forgot to copy 
+		print "<b>Fatal Error</b>: You forgot to copy
 		<b>config.php-dist</b> to <b>config.php</b> and edit it.\n";
 		exit;
 	}

@@ -30,6 +30,7 @@ create table ttirc_users (id serial not null primary key,
 	nick varchar(120) not null,
 	heartbeat timestamp default null,
 	quit_message varchar(120) not null default '',
+	hide_join_part boolean not null default false,
 	realname varchar(120) not null,
 	twitter_oauth text default null,
 	twitter_last_id text default null,
@@ -84,14 +85,14 @@ create table ttirc_messages(id serial not null primary key,
 	channel varchar(120) not null,
 	connection_id integer not null references ttirc_connections(id) ON DELETE CASCADE);
 
-create table ttirc_prefs_types (id integer not null primary key, 
+create table ttirc_prefs_types (id integer not null primary key,
 	type_name varchar(100) not null);
 
 insert into ttirc_prefs_types (id, type_name) values (1, 'bool');
 insert into ttirc_prefs_types (id, type_name) values (2, 'string');
 insert into ttirc_prefs_types (id, type_name) values (3, 'integer');
 
-create table ttirc_prefs_sections (id integer not null primary key, 
+create table ttirc_prefs_sections (id integer not null primary key,
 	section_name varchar(100) not null);
 
 insert into ttirc_prefs_sections (id, section_name) values (1, 'General');
@@ -127,7 +128,7 @@ create table ttirc_user_prefs (
 create index ttirc_user_prefs_owner_uid_index on ttirc_user_prefs(owner_uid);
 
 create table ttirc_sessions (id varchar(250) unique not null primary key,
-	data text,	
+	data text,
 	expire integer not null);
 
 create index ttirc_sessions_expire_index on ttirc_sessions(expire);
@@ -142,5 +143,5 @@ create table ttirc_snippets(id serial not null primary key,
 
 create table ttirc_version (schema_version int not null);
 
-insert into ttirc_version values (5);
+insert into ttirc_version values (6);
 

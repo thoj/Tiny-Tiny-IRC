@@ -940,7 +940,13 @@
 			$notify_events[$no] = true;
 		}
 
+		$result = db_query($link, "SELECT hide_join_part FROM ttirc_users
+			WHERE id = " . $_SESSION["uid"]);
+
+		$hide_join_part = sql_bool_to_bool(db_fetch_result($result, 0, "hide_join_part"));
+
 		$rv = array(
+			"hide_join_part" => $hide_join_part,
 			"highlight_on" => explode(",", get_pref($link, "HIGHLIGHT_ON")),
 			"notify_events" => $notify_events);
 

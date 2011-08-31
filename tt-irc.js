@@ -20,6 +20,7 @@ var notify_events = [];
 var theme_images = [];
 var update_delay_max = 0;
 var theme = "";
+var hide_join_part = false;
 
 var twitter_id = false;
 var timeout_id = false;
@@ -229,6 +230,7 @@ function handle_update(transport) {
 			}
 
 			notify_events = params.notify_events;
+			hide_join_part = params.hide_join_part;
 		}
 
 		last_update = new Date();
@@ -1219,6 +1221,8 @@ function handle_event(li_class, connection_id, line) {
 			break;
 
 		case "PART":
+			if (hide_join_part) return;
+
 			var nick = params[1];
 			var message = params[2];
 
@@ -1230,6 +1234,8 @@ function handle_event(li_class, connection_id, line) {
 
 			break;
 		case "JOIN":
+			if (hide_join_part) return;
+
 			var nick = params[1];
 			var host = params[2];
 
@@ -1242,6 +1248,8 @@ function handle_event(li_class, connection_id, line) {
 
 			break;
 		case "QUIT":
+			if (hide_join_part) return;
+
 			var quit_msg = line.message.replace("QUIT:", "");
 
 			line.message = __("%u has quit IRC (%s)").replace("%u", line.sender);
@@ -1352,6 +1360,8 @@ function handle_event(li_class, connection_id, line) {
 			push_message(connection_id, "---", line, MSGT_PRIVMSG);
 			break;
 		case "NICK":
+			if (hide_join_part) return;
+
 			var new_nick = params[1];
 
 			if (buffers[connection_id] && buffers[connection_id][line.sender]) {
