@@ -385,7 +385,7 @@
 			<label class="fixed"><?php echo __('Other options') ?></label>
 			<input name="hide_join_part" <?php echo $hide_join_part_checked ?>
 				id="pr_hide_join_part" type="checkbox" value="1">
-				<label for="pr_hide_join_part"><?php echo __('Hide auxiliary channel messages') ?>
+				<label for="pr_hide_join_part"><?php echo __('Do not highlight tab on auxiliary messages') ?>
 					</label>
 
 		</div>

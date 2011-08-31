@@ -1221,8 +1221,6 @@ function handle_event(li_class, connection_id, line) {
 			break;
 
 		case "PART":
-			if (hide_join_part) return;
-
 			var nick = params[1];
 			var message = params[2];
 
@@ -1230,12 +1228,10 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%c", line.channel);
 			line.message = line.message.replace("%m", message);
 
-			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
+			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 
 			break;
 		case "JOIN":
-			if (hide_join_part) return;
-
 			var nick = params[1];
 			var host = params[2];
 
@@ -1244,7 +1240,7 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%h", host);
 			line.message_type = MSGT_SYSTEM;
 
-			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
+			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 
 			break;
 		case "QUIT":
@@ -1256,7 +1252,7 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%s", quit_msg);
 			line.message_type = MSGT_SYSTEM;
 
-			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
+			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 			break;
 		case "DISCONNECT":
 			line.message = __("Connection terminated.");
@@ -1360,8 +1356,6 @@ function handle_event(li_class, connection_id, line) {
 			push_message(connection_id, "---", line, MSGT_PRIVMSG);
 			break;
 		case "NICK":
-			if (hide_join_part) return;
-
 			var new_nick = params[1];
 
 			if (buffers[connection_id] && buffers[connection_id][line.sender]) {
@@ -1372,7 +1366,7 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%n", new_nick);
 			line.message_type = MSGT_SYSTEM;
 
-			push_message(connection_id, line.channel, line, MSGT_PRIVMSG);
+			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 
 			break;
 		case "TWITTER_MSG":
@@ -1414,8 +1408,10 @@ function toggle_li_class(channel) {
 	}
 }
 
-function push_message(connection_id, channel, message, message_type) {
+function push_message(connection_id, channel, message, message_type, no_tab_hl) {
 	try {
+		if (no_tab_hl == undefined) no_tab_hl = false;
+
 		if (!message_type) message_type = MSGT_PRIVMSG;
 
 		if (!buffers[connection_id]) buffers[connection_id] = [];
@@ -1444,7 +1440,8 @@ function push_message(connection_id, channel, message, message_type) {
 				}
 			}
 
-			highlight_tab_if_needed(connection_id, channel, message);
+			if (!no_tab_hl)
+				highlight_tab_if_needed(connection_id, channel, message);
 
 		} else {
 			var tabs = get_all_tabs(connection_id);
