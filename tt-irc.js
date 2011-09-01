@@ -43,6 +43,8 @@ var CS_CONNECTED = 2;
 var CT_CHANNEL = 0;
 var CT_PRIVATE = 1;
 
+var tabhl_disable_initial = true;
+
 var colormap = [ "#00CCCC", "#000000", "#0000CC", "#CC00CC", "#606060",
 	"green", "#00CC00", "maroon", "navy", "olive", "purple",
 	"red", "#909090", "teal", "#CCCC00" ]
@@ -1240,6 +1242,8 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%h", host);
 			line.message_type = MSGT_SYSTEM;
 
+			tabhl_disable_initial = false;
+
 			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 
 			break;
@@ -1440,7 +1444,7 @@ function push_message(connection_id, channel, message, message_type, no_tab_hl) 
 				}
 			}
 
-			if (!no_tab_hl)
+			if (!no_tab_hl && !tabhl_disable_initial)
 				highlight_tab_if_needed(connection_id, channel, message);
 
 		} else {
