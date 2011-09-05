@@ -611,11 +611,11 @@
 		return db_fetch_result($result, 0, "cl");
 	}
 
-	function get_new_lines($link, $last_id) {
+	function get_new_lines($link, $last_id, $rewrite_urls = true) {
 
 		$result = db_query($link, "SELECT ttirc_messages.id,
 			message_type, sender, channel, connection_id, incoming,
-			message, ".SUBSTRING_FOR_DATE."(ts,12,8) AS ts
+			message, ".SUBSTRING_FOR_DATE."(ts,1,19) AS ts
 			FROM ttirc_messages, ttirc_connections WHERE
 			connection_id = ttirc_connections.id AND
 			message_type != ".MSGT_COMMAND." AND
@@ -629,7 +629,9 @@
 		$lines = array();
 
 		while ($line = db_fetch_assoc($result)) {
-			$line["message"] = rewrite_urls(htmlspecialchars($line["message"]));
+			if ($rewrite_urls) {
+				$line["message"] = rewrite_urls(htmlspecialchars($line["message"]));
+			}
 			$line["sender_color"] = color_of($line["sender"]);
 			$line["incoming"] = sql_bool_to_bool($line["incoming"]);
 			array_push($lines, $line);

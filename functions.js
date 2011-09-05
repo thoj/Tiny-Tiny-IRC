@@ -27,19 +27,19 @@ function exception_error(location, e, ext_info) {
 	try {
 
 		var ebc = $("xebContent");
-	
+
 		if (ebc) {
-	
+
 			Element.show("dialog_overlay");
 			Element.show("errorBoxShadow");
-	
+
 			if (ext_info) {
 				if (ext_info.responseText) {
 					ext_info = ext_info.responseText;
 				}
 			}
-	
-			ebc.innerHTML = 
+
+			ebc.innerHTML =
 				"<div><b>Error message:</b></div>" +
 				"<pre>" + msg + "</pre>";
 
@@ -50,7 +50,7 @@ function exception_error(location, e, ext_info) {
 
 			ebc.innerHTML += "<div><b>Stack trace:</b></div>" +
 				"<textarea readonly=\"1\">" + e.stack + "</textarea>";
-	
+
 		} else {
 			alert(msg);
 		}
@@ -67,8 +67,8 @@ function format_exception_error(location, e) {
 
 	if (e.fileName) {
 		var base_fname = e.fileName.substring(e.fileName.lastIndexOf("/") + 1);
-	
-		msg = "Exception: " + e.name + ", " + e.message + 
+
+		msg = "Exception: " + e.name + ", " + e.message +
 			"\nFunction: " + location + "()" +
 			"\nLocation: " + base_fname + ":" + e.lineNumber;
 
@@ -94,14 +94,14 @@ function enable_hotkeys() {
 
 function param_escape(arg) {
 	if (typeof encodeURIComponent != 'undefined')
-		return encodeURIComponent(arg);	
+		return encodeURIComponent(arg);
 	else
 		return escape(arg);
 }
 
 function param_unescape(arg) {
 	if (typeof decodeURIComponent != 'undefined')
-		return decodeURIComponent(arg);	
+		return decodeURIComponent(arg);
 	else
 		return unescape(arg);
 }
@@ -116,32 +116,9 @@ function toggle_debug() {
 	}
 }
 
-function debug(msg) {
-
-	if (debug_last_class == "even") {
-		debug_last_class = "odd";
-	} else {
-		debug_last_class = "even";
-	}
-
-	var c = $('debug_output');
-	if (c && Element.visible(c)) {
-		while (c.lastChild != 'undefined' && c.childNodes.length > 100) {
-			c.removeChild(c.lastChild);
-		}
-	
-		var ts = make_timestamp();
-		c.innerHTML = "<li class=\"" + debug_last_class + "\"><span class=\"debugTS\">[" + ts + "]</span> " + 
-			msg + "</li>" + c.innerHTML;
-	}
-
-//	if (window.console && console.log) 
-//		console.log("[" + make_timestamp() + "] " + msg);
-}
-
 function getURLParam(param){
 	return String(window.location.href).parseQuery()[param];
-} 
+}
 
 function leading_zero(p) {
 	var s = String(p);
@@ -176,27 +153,27 @@ function closeInfoBox(cleanup) {
 	} catch (e) {
 		exception_error("closeInfoBox", e);
 	}
-	
+
 	return false;
 }
 
 function fatal_error(code, msg, ext_info) {
-	try {	
+	try {
 
 		if (!ext_info) ext_info = "N/A";
 
 		if (code == 6) {
-			window.location.href = "index.php";			
+			window.location.href = "index.php";
 		} else if (code == 5) {
 			window.location.href = "update.php";
 		} else {
-	
+
 			if (msg == "") msg = "Unknown error";
 
 			var ebc = $("xebContent");
-	
+
 			if (ebc) {
-	
+
 				Element.show("dialog_overlay");
 				Element.show("errorBoxShadow");
 
@@ -205,8 +182,8 @@ function fatal_error(code, msg, ext_info) {
 						ext_info = ext_info.responseText;
 					}
 				}
-	
-				ebc.innerHTML = 
+
+				ebc.innerHTML =
 					"<div><b>Error message:</b></div>" +
 					"<pre>" + msg + " (" + code + ")" + "</pre>" +
 					"<div><b>Additional information:</b></div>" +
@@ -222,11 +199,11 @@ function fatal_error(code, msg, ext_info) {
 function infobox_callback2(transport) {
 	try {
 		var box = $('infoBox');
-		
+
 		Element.show("dialog_overlay");
 
-		if (box) {			
-			box.innerHTML=transport.responseText;			
+		if (box) {
+			box.innerHTML=transport.responseText;
 			Element.show("infoBoxShadow");
 		}
 
@@ -250,7 +227,7 @@ function close_infobox(cleanup) {
 	} catch (e) {
 		exception_error("closeInfoBox", e);
 	}
-	
+
 	return false;
 }
 
@@ -268,8 +245,8 @@ function hide_spinner() {
 	try {
 
 		if (spinner_refs > 0) spinner_refs--;
-		
-		if (!spinner_refs) 
+
+		if (!spinner_refs)
 			Element.hide($("spinner"));
 
 	} catch (e) {
@@ -283,10 +260,10 @@ function sort_connection_tabs(node) {
 		var list = node.getElementsByTagName("li");
 
 		for (i = 0; i < list.length; i++) {
-	
-			for (j = i+1; j < list.length; j++) {			
 
-				if (list[i].getAttribute("channel") > list[j].getAttribute("channel")) {	
+			for (j = i+1; j < list.length; j++) {
+
+				if (list[i].getAttribute("channel") > list[j].getAttribute("channel")) {
 					tempnode_i = list[i].cloneNode(true);
 					tempnode_j = list[j].cloneNode(true);
 					node.replaceChild(tempnode_i, list[j]);
@@ -321,16 +298,16 @@ function mini_error(msg) {
 }
 
 function set_cookie(name, value, lifetime, path, domain, secure) {
-	
+
 	var d = false;
-	
+
 	if (lifetime) {
 		d = new Date();
 		d.setTime(d.getTime() + (lifetime * 1000));
 	}
 
 	console.log("setCookie: " + name + " => " + value + ": " + d);
-	
+
 	int_set_cookie(name, value, d, path, domain, secure);
 
 }
@@ -351,7 +328,7 @@ function del_cookie(name, path, domain) {
 		";expires=Thu, 01-Jan-1970 00:00:01 GMT";
 	}
 }
-		
+
 
 function get_cookie(name) {
 
@@ -372,8 +349,10 @@ function get_cookie(name) {
 	return unescape(dc.substring(begin + prefix.length, end));
 }
 
-function make_timestamp() {
-	var d = new Date();
+
+function make_timestamp(d) {
+
+	if (!d) d = new Date();
 
   	return leading_zero(d.getHours()) + ":" + leading_zero(d.getMinutes()) +
 			":" + leading_zero(d.getSeconds());
@@ -409,7 +388,7 @@ function notify_enable() {
 
 function notify(msg) {
 	try {
-		if (window.webkitNotifications && 
+		if (window.webkitNotifications &&
 				window.webkitNotifications.checkPermission() == 0) {
 
 			var notification = webkitNotifications.createNotification(
@@ -430,3 +409,4 @@ function notify(msg) {
 		exception_error("notify", e);
 	}
 }
+

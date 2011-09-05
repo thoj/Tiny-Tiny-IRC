@@ -13,22 +13,22 @@
 	ini_set("session.gc_maxlifetime", SESSION_EXPIRE_TIME);
 
 	function ttirc_open ($s, $n) {
-	
+
 		global $session_connection;
-		
+
 		$session_connection = db_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		
+
 		return true;
 	}
 
 	function ttirc_read ($id){
-	
-		global $session_connection,$session_read;					 
+
+		global $session_connection,$session_read;
 
 		$query = "SELECT data FROM ttirc_sessions WHERE id='$id'";
 
 		$res = db_query($session_connection, $query);
-		
+
 		if (db_num_rows($res) != 1) {
 		 	return "";
 		} else {
@@ -39,65 +39,69 @@
 	}
 
 	function ttirc_write ($id, $data) {
- 
-		if (! $data) { 
-			return false; 
+
+		if (! $data) {
+			return false;
 		}
-		
+
 		global $session_connection, $session_read, $session_expire;
-		
+
 		$expire = time() + $session_expire;
-		
+
 		$data = db_escape_string(base64_encode($data), $session_connection);
-		
+
 		if ($session_read) {
-		 	$query = "UPDATE ttirc_sessions SET data='$data', 
-					expire='$expire' WHERE id='$id'"; 
+		 	$query = "UPDATE ttirc_sessions SET data='$data',
+					expire='$expire' WHERE id='$id'";
 		} else {
 		 	$query = "INSERT INTO ttirc_sessions (id, data, expire)
 					VALUES ('$id', '$data', '$expire')";
 		}
-		
+
 		db_query($session_connection, $query);
 		return true;
 	}
 
 	function ttirc_close () {
-	
+
 		global $session_connection;
-		
+
 		db_close($session_connection);
-		
+
 		return true;
 	}
 
 	function ttirc_destroy ($id) {
-	
+
 		global $session_connection;
 
 		$query = "DELETE FROM ttirc_sessions WHERE id = '$id'";
-		
+
 		db_query($session_connection, $query);
-		
+
 		return true;
 	}
 
 	function ttirc_gc ($expire) {
-	
+
 		global $session_connection;
-		
+
 		$query = "DELETE FROM ttirc_sessions WHERE expire < " . time();
-		
+
 		db_query($session_connection, $query);
 	}
 
 	if (DATABASE_BACKED_SESSIONS) {
-		session_set_save_handler("ttirc_open", 
-			"ttirc_close", "ttirc_read", "ttirc_write", 
+		session_set_save_handler("ttirc_open",
+			"ttirc_close", "ttirc_read", "ttirc_write",
 			"ttirc_destroy", "ttirc_gc");
 	}
 
 	session_set_cookie_params(SESSION_COOKIE_LIFETIME);
+
+	if ($_REQUEST["sid"]) {
+		session_id($_REQUEST["sid"]);
+	}
 
 	session_start();
 ?>

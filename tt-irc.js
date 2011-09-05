@@ -21,6 +21,7 @@ var theme_images = [];
 var update_delay_max = 0;
 var theme = "";
 var hide_join_part = false;
+var startup_date;
 
 var twitter_id = false;
 var timeout_id = false;
@@ -42,8 +43,6 @@ var CS_CONNECTED = 2;
 
 var CT_CHANNEL = 0;
 var CT_PRIVATE = 1;
-
-var tabhl_disable_initial = true;
 
 var colormap = [ "#00CCCC", "#000000", "#0000CC", "#CC00CC", "#606060",
 	"green", "#00CC00", "maroon", "navy", "olive", "purple",
@@ -155,6 +154,8 @@ function init_second_stage(transport) {
 		update_delay_max = params.update_delay_max;
 		theme = params.theme;
 
+		startup_date = new Date();
+
 		Element.hide("overlay");
 
 		$("input-prompt").value = "";
@@ -252,6 +253,8 @@ function handle_update(transport) {
 				var connection_id = lines[i].connection_id;
 
 				//lines[i].message += " [" + lines[i].id + "/" + last_id + "]";
+
+				lines[i].ts = new Date(lines[i].ts)
 
 				if (lines[i].message_type == MSGT_EVENT) {
 					handle_event(li_classes[chan], connection_id, lines[i]);
@@ -816,7 +819,7 @@ function format_message(row_class, param, connection_id) {
 			}
 
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
-				param.ts +
+				make_timestamp(param.ts) +
 				"</span> <span class='lt'>-</span><span title=\""+nick_ext_info+"\" " +
 				"class='"+sender_class+"' "+color+">" +
 				param.sender + "</span><span class='gt'>-</span> " +
@@ -837,7 +840,7 @@ function format_message(row_class, param, connection_id) {
 //					"<img src='images/piggie.png' alt='(oo)'>");
 
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
-				param.ts +
+				make_timestamp(param.ts) +
 				"</span> <span class='lt'>&lt;</span><span title=\""+nick_ext_info+"\" " +
 				"class='sender' "+color+">" +
 				param.sender + "</span><span class='gt'>&gt;</span> " +
@@ -845,7 +848,7 @@ function format_message(row_class, param, connection_id) {
 				param.message + "</span>";
 		} else {
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
-				param.ts + "</span> " +
+				make_timestamp(param.ts) + "</span> " +
 				"<span class='sys-message'>" +
 				param.message + "</span>";
 		}
@@ -924,7 +927,7 @@ function handle_chan_data(chandata) {
 						line.message = line.message.replace("%s",
 								rewrite_urls(chandata[connection_id][chan]["topic"][0]));
 						line.message_type = MSGT_SYSTEM;
-						line.ts = make_timestamp();
+						line.ts = new Date();
 						line.id = last_id;
 						line.force_display = 1;
 
@@ -1242,8 +1245,6 @@ function handle_event(li_class, connection_id, line) {
 			line.message = line.message.replace("%h", host);
 			line.message_type = MSGT_SYSTEM;
 
-			tabhl_disable_initial = false;
-
 			push_message(connection_id, line.channel, line, MSGT_PRIVMSG, hide_join_part);
 
 			break;
@@ -1444,7 +1445,7 @@ function push_message(connection_id, channel, message, message_type, no_tab_hl) 
 				}
 			}
 
-			if (!no_tab_hl && !tabhl_disable_initial)
+			if (!no_tab_hl && message.ts > startup_date)
 				highlight_tab_if_needed(connection_id, channel, message);
 
 		} else {

@@ -33,7 +33,7 @@
 
 	$op = $_REQUEST["op"];
 
-	if (!$_SESSION["uid"] && $op != "fetch-profiles") {
+	if (!$_SESSION["uid"] && $op != "fetch-profiles" && $op != "login") {
 		print json_encode(array("error" => 6));
 		return;
 	} else if ($_SESSION["uid"]) {
@@ -149,6 +149,7 @@
 		$chan = db_escape_string($_REQUEST["chan"]);
 		$connection_id = db_escape_string($_REQUEST["connection"]);
 		$tab_type = db_escape_string($_REQUEST["tab_type"]);
+		$send_only = $_REQUEST["send_only"] == "true";
 
 		if ($message && valid_connection($link, $connection_id)) {
 			if (strpos($message, "/") === 0) {
@@ -174,17 +175,20 @@
 			}
 		}
 
-		$lines = get_new_lines($link, $last_id);
-		$conn = get_conn_info($link);
-		$chandata = get_chan_data($link, false);
-		$params = get_misc_params($link);
+		if (!$send_only) {
+			$lines = get_new_lines($link, $last_id);
+			$conn = get_conn_info($link);
+			$chandata = get_chan_data($link, false);
+			$params = get_misc_params($link);
 
-		print json_encode(array($conn, $lines, $chandata, $params));
+			print json_encode(array($conn, $lines, $chandata, $params));
+		}
 		break;
 
 	case "update":
 		$last_id = (int) db_escape_string($_REQUEST["last_id"]);
 		$init = db_escape_string($_REQUEST["init"]);
+		$rewrite_urls = $_REQUEST["rewrite_urls"] != "false";
 
 		if (!$init) {
 			$sleep_start = time();
@@ -195,7 +199,7 @@
 			}
 		}
 
-		$lines = get_new_lines($link, $last_id);
+		$lines = get_new_lines($link, $last_id, $rewrite_urls);
 		$conn = get_conn_info($link);
 		$chandata = get_chan_data($link, false);
 		$params = get_misc_params($link);
@@ -219,6 +223,31 @@
 		$params = get_misc_params($link);
 
 		print json_encode(array($conn, $lines, $chandata, $params));
+
+		break;
+
+	case "login":
+		$login = db_escape_string($_REQUEST["user"]);
+		$password = db_escape_string($_REQUEST["password"]);
+
+		$result = db_query($link, "SELECT id FROM ttirc_users WHERE login = '$login'");
+
+		if (db_num_rows($result) != 0) {
+			$uid = db_fetch_result($result, 0, "id");
+		} else {
+			$uid = 0;
+		}
+
+		if (!$uid) {
+			print json_encode(array("error" => 6));
+			return;
+		}
+
+		if (authenticate_user($link, $login, $password)) {
+			print json_encode(array("sid" => session_id(), "version" => VERSION));
+		} else {
+			print json_encode(array("error" => 6));
+		}
 
 		break;
 
