@@ -805,7 +805,7 @@ function format_message(row_class, param, connection_id) {
 			message = "* " + param.sender + " " + param.message;
 
 			tmp = "<li class=\""+row_class+"\"><span class='timestamp'>" +
-				make_timestamp(param.ts) + "</span>" +
+				make_timestamp(param.ts) + "</span> " +
 				"<span class='action'>" + message + "</span>";
 
 		} else if (param.message_type == MSGT_NOTICE) {
