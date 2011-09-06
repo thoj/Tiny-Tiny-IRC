@@ -1249,8 +1249,6 @@ function handle_event(li_class, connection_id, line) {
 
 			break;
 		case "QUIT":
-			if (hide_join_part) return;
-
 			var quit_msg = line.message.replace("QUIT:", "");
 
 			line.message = __("%u has quit IRC (%s)").replace("%u", line.sender);
