@@ -852,7 +852,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 					onCtcpReply(target, user, ctcpParts[0].toUpperCase(), "");
 				
 			} else {			
-				if (target.equals(irc.getNick())) {
+				if (target.equals(irc.getNick()) || target.equals("AUTH")) {
 					
 					// server notice
 					if (user.getNick().equals(irc.getHost())) {
