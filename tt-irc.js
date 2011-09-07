@@ -933,6 +933,18 @@ function handle_chan_data(chandata) {
 
 						push_message(connection_id, chan, line, MSGT_PRIVMSG);
 
+						line.message = __("Topic for %c set by %n at %d").replace("%c", chan);
+						line.message = line.message.replace("%n",
+								rewrite_urls(chandata[connection_id][chan]["topic"][1]));
+						line.message = line.message.replace("%d",
+								rewrite_urls(chandata[connection_id][chan]["topic"][2]));
+						line.message_type = MSGT_SYSTEM;
+						line.ts = new Date();
+						line.id = last_id;
+						line.force_display = 1;
+
+						push_message(connection_id, chan, line, MSGT_PRIVMSG);
+
 						update_buffer();
 
 					}
