@@ -945,11 +945,13 @@ function handle_chan_data(chandata) {
 
 						push_message(connection_id, chan, line, MSGT_PRIVMSG);
 
+						topics[connection_id][chan] = chandata[connection_id][chan]["topic"];
+
 						update_buffer();
 
+					} else {
+						topics[connection_id][chan] = chandata[connection_id][chan]["topic"];
 					}
-
-					topics[connection_id][chan] = chandata[connection_id][chan]["topic"];
 				}
 			}
 		}
