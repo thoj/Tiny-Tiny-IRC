@@ -254,7 +254,8 @@ function handle_update(transport) {
 
 				//lines[i].message += " [" + lines[i].id + "/" + last_id + "]";
 
-				lines[i].ts = new Date(lines[i].ts)
+				lines[i].ts = lines[i].ts.replace(/\-/g, '/');
+				lines[i].ts = new Date(Date.parse(lines[i].ts));
 
 				if (lines[i].message_type == MSGT_EVENT) {
 					handle_event(li_classes[chan], connection_id, lines[i]);
