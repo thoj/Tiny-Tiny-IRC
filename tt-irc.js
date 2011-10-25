@@ -1500,6 +1500,8 @@ function set_window_active(active) {
 			new_messages = 0;
 			new_highlights = 0;
 
+			$("log").scrollTop = $("log").scrollHeight;
+
 			if (theme != "tablet")
 				$("input-prompt").focus();
 		}
