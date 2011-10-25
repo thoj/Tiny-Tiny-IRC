@@ -687,6 +687,10 @@ function send(elem, evt) {
 
 			show_spinner();
 
+			new_messages = 0;
+			new_highlights = 0;
+			window_active = true;
+
 			new Ajax.Request("backend.php", {
 			parameters: query,
 			onComplete: function (transport) {
