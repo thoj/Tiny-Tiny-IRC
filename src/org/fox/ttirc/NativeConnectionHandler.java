@@ -543,7 +543,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				sleep(1000);
+				sleep(250);
 			}
 			
 
