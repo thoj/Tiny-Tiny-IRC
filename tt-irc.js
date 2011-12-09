@@ -173,6 +173,8 @@ function init_second_stage(transport) {
 
 		twitter_id = window.setTimeout("twitter_update()", 10000);
 
+		window.setTimeout("title_timeout()", 1000);
+
 	} catch (e) {
 		exception_error("init_done", e);
 	}
@@ -2068,5 +2070,15 @@ function twitter_update() {
 
 	} catch (e) {
 		exception_error("twitter_update", e);
+	}
+}
+
+function title_timeout() {
+	try {
+		update_title();
+
+		window.setTimeout('title_timeout()', 2000);
+	} catch (e) {
+		exception_error("title_timeout", e);
 	}
 }
