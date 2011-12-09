@@ -993,8 +993,9 @@ function update_title() {
 					}
 				}
 
-				$("favicon").href = $("favicon").href.replace("favicon",
-						"favicon_active");
+				if ($("favicon").href.indexOf("active") == -1)
+					$("favicon").href = $("favicon").href.replace("favicon",
+							"favicon_active");
 
 			} else {
 				if (window.fluid) {
