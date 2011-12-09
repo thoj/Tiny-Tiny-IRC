@@ -990,10 +990,18 @@ function update_title() {
 						window.fluid.dockBadge = new_messages;
 					}
 				}
+
+				$("favicon").href = $("favicon").href.replace("favicon",
+						"favicon_active");
+
 			} else {
 				if (window.fluid) {
 					window.fluid.dockBadge = "";
 				}
+
+				$("favicon").href = $("favicon").href.replace("favicon_active",
+						"favicon");
+
 			}
 
 

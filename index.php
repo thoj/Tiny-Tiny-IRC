@@ -24,7 +24,7 @@
 
 	<link rel="stylesheet" type="text/css" href="tt-irc.css?<?php echo $dt_add ?>"/>
 
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+	<link id="favicon" rel="shortcut icon" type="image/png" href="images/favicon.png"/>
 
 	<script type="text/javascript" charset="utf-8" src="localized_js.php?<?php echo $dt_add ?>"></script>
 	<script type="text/javascript" src="lib/prototype.js"></script>
