@@ -599,18 +599,24 @@
 		//$message = db_escape_string($message);
 
 		$result = db_query($link, "INSERT INTO ttirc_messages
-			(incoming, connection_id, channel, sender, message, message_type) VALUES
+			(incoming, connection_id, channel, sender, message, message_type, ts) VALUES
 			($incoming, $connection_id, '$channel', '$my_nick', '$message',
-			'$message_type')");
+			'$message_type', NOW())");
 	}
 
 	function num_new_lines($link, $last_id) {
 
+		if (DB_TYPE == "pgsql") {
+			$interval = "ts > NOW() - INTERVAL '15 minutes'";
+		} else {
+			$interval = "ts > DATE_SUB(NOW(), INTERVAL 15 MINUTE)";
+		}
+
+
 		$result = db_query($link, "SELECT COUNT(*) AS cl
 			FROM ttirc_messages, ttirc_connections WHERE
 			connection_id = ttirc_connections.id AND
-			message_type != ".MSGT_COMMAND." AND
-			ts > NOW() - INTERVAL '15 minutes' AND
+			message_type != ".MSGT_COMMAND." AND $interval AND
 			ttirc_messages.id > '$last_id' AND
 			owner_uid = ".$_SESSION["uid"]);
 
@@ -619,16 +625,25 @@
 
 	function get_new_lines($link, $last_id, $rewrite_urls = true) {
 
+		if (DB_TYPE == "pgsql") {
+			$interval = "((ts > NOW() - INTERVAL '15 minutes' AND
+				message_type != ".MSGT_PRIVATE_PRIVMSG.") OR
+			(ts > NOW() - INTERVAL '5 hours' AND
+				message_type = ".MSGT_PRIVATE_PRIVMSG."))";
+		} else {
+			$interval = "((ts > DATE_SUB(NOW(), INTERVAL 15 MINUTE) AND
+				message_type != ".MSGT_PRIVATE_PRIVMSG.") OR
+			(ts > DATE_SUB(NOW(), INTERVAL 5 HOUR) AND
+				message_type = ".MSGT_PRIVATE_PRIVMSG."))";
+		}
+
+
 		$result = db_query($link, "SELECT ttirc_messages.id,
 			message_type, sender, channel, connection_id, incoming,
 			message, ".SUBSTRING_FOR_DATE."(ts,1,19) AS ts
 			FROM ttirc_messages, ttirc_connections WHERE
 			connection_id = ttirc_connections.id AND
-			message_type != ".MSGT_COMMAND." AND
-			((ts > NOW() - INTERVAL '15 minutes' AND
-				message_type != ".MSGT_PRIVATE_PRIVMSG.") OR
-			(ts > NOW() - INTERVAL '5 hours' AND
-				message_type = ".MSGT_PRIVATE_PRIVMSG.")) AND
+			message_type != ".MSGT_COMMAND." AND $interval AND
 			ttirc_messages.id > '$last_id' AND
 			owner_uid = ".$_SESSION["uid"]." ORDER BY ttirc_messages.id LIMIT 50");
 
