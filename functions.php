@@ -15,6 +15,12 @@
 
 	define('SINGLE_USER_MODE', false);
 
+	if (DB_TYPE == 'mysql') {
+		define('DB_KEY_FIELD', 'param');
+	} else {
+		define('DB_KEY_FIELD', 'key');
+	}
+
 	$url_regex = "((((new|(ht|f)tp)s?://)?([a-zA-Z+0-9_-]+:[a-zA-Z+0-9_-]+\\@)?((www|ftp|[a-zA-Z+0-9]+(-\\+[a-zA-Z+0-9])*)\\.)?)([a-zA-Z+0-9]+(\\-+[a-zA-Z+0-9]+)*\\.)+[a-zA-Z+]{2,7}(:\\d+)?(/~[a-zA-Z+0-9_%\\-]+)?(/[a-zA-Z+0-9_%.-]+(?=/))*(/[a-zA-Z+0-9_%-]+(\\.[a-zA-Z+0-9]+)?(\\#[a-zA-Z+0-9_.]+)?)*(\\?([a-zA-Z+0-9_.%-]+)=[a-zA-Z+0-9_.%/-]*)?(&([a-zA-Z+0-9_.%-]+)=[a-zA-Z+0-9_.%/-]*)*/?)";
 
 
@@ -740,7 +746,7 @@
 		}
 
 		$result = db_query($link, "SELECT value FROM ttirc_system WHERE
-			key = 'MASTER_RUNNING'");
+			".DB_KEY_FIELD." = 'MASTER_RUNNING'");
 
 		$master_running = db_fetch_result($result, 0, "value") == "true";
 
@@ -975,7 +981,7 @@
 
 		$key = db_escape_string(sha1(uniqid(rand(), true)));
 
-		$result = db_query($link, "INSERT INTO ttirc_snippets (snippet, owner_uid, created, key)
+		$result = db_query($link, "INSERT INTO ttirc_snippets (snippet, owner_uid, created, ".DB_KEY_FIELD.")
 			VALUES ('$text', '".$_SESSION['uid']."', NOW(), '$key')");
 
 		return $key;
