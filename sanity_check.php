@@ -22,6 +22,10 @@
 		$err_msg = "config: LOCK_DIRECTORY doesn't exist or isn't a directory.\n";
 	}
 
+	if (DATABASE_BACKED_SESSIONS && DB_TYPE == "mysql") {
+		$err_msg = "config: DATABASE_BACKED_SESSIONS are currently broken with MySQL";
+	}
+
 
 	if ($err_msg) {
 		print "<b>Fatal Error</b>: $err_msg\n";
