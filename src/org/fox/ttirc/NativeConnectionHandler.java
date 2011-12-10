@@ -1,5 +1,6 @@
 package org.fox.ttirc;
 
+import org.fox.ttirc.Master.DbType;
 import org.schwering.irc.lib.IRCConnection;
 import org.schwering.irc.lib.IRCEventListener;
 import org.schwering.irc.lib.IRCModeParser;
@@ -13,6 +14,7 @@ import org.schwering.irc.lib.SSLIRCConnection;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.nio.channels.*;
 import java.sql.*;
 import java.util.*;
@@ -101,8 +103,19 @@ public class NativeConnectionHandler extends ConnectionHandler {
 
 	
 	public String[] getRandomServer() throws SQLException {
+		String random = null;
+		
+		switch (master.getDbType()) {
+		case MYSQL:
+			random = "RAND()";
+			break;
+		case PGSQL:
+			random = "RANDOM()";
+			break;
+		}
+		
 		PreparedStatement ps = getConnection().prepareStatement("SELECT server,port FROM ttirc_servers " +
-				"WHERE connection_id = ? ORDER BY RANDOM()");
+				"WHERE connection_id = ? ORDER BY " + random);
 				
 		ps.setInt(1, connectionId);
 		ps.execute();
@@ -219,8 +232,8 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			PreparedStatement ps;
 
 			ps = getConnection().prepareStatement("INSERT INTO ttirc_messages " +
-					"(incoming, connection_id, channel, sender, message, message_type) " +
-					" VALUES (?, ?, ?, ?, ?, ?)");
+					"(incoming, connection_id, channel, sender, message, message_type, ts) " +
+					" VALUES (?, ?, ?, ?, ?, ?, NOW())");
 			
 			ps.setBoolean(1, true);
 			ps.setInt(2, this.connectionId);
@@ -429,10 +442,21 @@ public class NativeConnectionHandler extends ConnectionHandler {
 		int tmpLastSentId = lastSentId;
 
 		try {
-		
+
+			String interval = null;
+			
+			switch (master.getDbType()) {
+			case MYSQL:
+				interval = "ts > DATE_SUB(NOW(), INTERVAL 1 YEAR) AND ";
+				break;
+			case PGSQL:
+				interval = "ts > NOW() - INTERVAL '1 year' AND ";
+				break;
+			}
+			
 			PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM ttirc_messages " +
 					"WHERE incoming = false AND " +
-					"ts > NOW() - INTERVAL '1 year' AND " +
+					interval +
 					"connection_id = ? AND " +
 					"id > ? ORDER BY id");
 			
@@ -505,10 +529,22 @@ public class NativeConnectionHandler extends ConnectionHandler {
 	}
 
 	public void disconnectIfDisabled() throws SQLException {
+		String interval = null;
+		
+		switch (master.getDbType()) {
+		case MYSQL:
+            interval = "(heartbeat > DATE_SUB(NOW(), INTERVAL 10 MINUTE) OR permanent = true) AND ";
+			break;
+		case PGSQL:
+            interval = "(heartbeat > NOW() - INTERVAL '10 minutes' OR permanent = true) AND ";
+            break;
+		}
+		
+		
 		PreparedStatement ps = getConnection().prepareStatement("SELECT enabled " +
             "FROM ttirc_connections, ttirc_users " +
             "WHERE owner_uid = ttirc_users.id AND " +
-            "(heartbeat > NOW() - INTERVAL '10 minutes' OR permanent = true) AND " +
+            interval +
             "ttirc_connections.id = ?");
 		
 		ps.setInt(1, connectionId);
@@ -651,8 +687,8 @@ public class NativeConnectionHandler extends ConnectionHandler {
 		if (!rs.next()) {
 			ps.close();
 			
-			ps = getConnection().prepareStatement("INSERT INTO ttirc_channels (channel, connection_id, chan_type)" +
-					"VALUES (?, ?, ?)");
+			ps = getConnection().prepareStatement("INSERT INTO ttirc_channels (channel, connection_id, chan_type, topic, topic_owner, topic_set, nicklist)" +
+					"VALUES (?, ?, ?, '', '', NOW(), '')");
 			ps.setString(1, channel);
 			ps.setInt(2, connectionId);
 			ps.setInt(3, chanType);
