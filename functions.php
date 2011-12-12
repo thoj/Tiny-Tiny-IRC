@@ -564,7 +564,7 @@
 						channel = '$arguments' AND connection_id = '$connection_id'");
 				} else {
 					push_message($link, $connection_id, $channel,
-						"$command:$arguments", false, MSGT_COMMAND);
+						"$command $arguments", false, MSGT_COMMAND);
 				}
 			}
 
@@ -573,7 +573,7 @@
 			break;
 		default:
 			push_message($link, $connection_id, $channel,
-				"$command:$arguments", false, MSGT_COMMAND);
+				"$command $arguments", false, MSGT_COMMAND);
 			break;
 		}
 
