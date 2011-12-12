@@ -309,7 +309,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 	}
 
 	public void handleCommand(String chan, String message) {
-		String[] command = message.split(":", 2);
+		String[] command = message.split(" ", 2);
 		
 		if (command.length != 2) {
 			logger.info("[" + connectionId + "] Incorrect command syntax: " + message);
@@ -1032,13 +1032,6 @@ public class NativeConnectionHandler extends ConnectionHandler {
 			handler.extnickinfo.remove(user.getNick());
 		}
 
-		// TODO: better implementation
-		public String parseCommand(String rawCmd) {
-			rawCmd = rawCmd.substring(1);
-			rawCmd = rawCmd.replace(' ', ':');
-			return rawCmd;			
-		}
-		
 		@Override
 		public void onRegistered() {
 			
@@ -1069,7 +1062,7 @@ public class NativeConnectionHandler extends ConnectionHandler {
 				
 				for (String cmd : connectCmd)
 					if (cmd.length() > 0)
-							handleCommand("", parseCommand(cmd));
+							handleCommand("", cmd);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
